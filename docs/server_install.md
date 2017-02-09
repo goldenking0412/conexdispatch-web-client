@@ -11,7 +11,7 @@
 
 ## Kin Server ##
 1. Download Kin API Server [latest release](https://github.com/kintoday/kin-api-server/releases/latest).
-2. Follow the instructions in `config.js`, to configure the API server for your particular setup
+2. Follow the instructions in [`config.js`](https://github.com/KinToday/kin-api-server/blob/master/src/api_server/config.js) and [`secrets.js`](https://github.com/KinToday/kin-api-server/blob/master/src/api_server/secrets.js), to configure the API server for your particular setup
 3. Install Kin's dependencies via `npm`
 ~~~~~
 $ npm install
@@ -31,7 +31,7 @@ $ pm2 start pm.json
 
 ## Kin Client ##
 1. Download Kin Web Client [latest release](https://github.com/kintoday/kin-api-server/releases/latest).
-2. Follow the instructions In `config.js`, to configure the client for your particular setup
+2. Follow the instructions in [`config.js`](https://github.com/KinToday/kin-web-client/blob/master/src/client/config.js), to configure the client for your particular setup
 3. Install Kin's dependencies via `npm`
 ~~~~~
 $ npm install
