@@ -4,18 +4,40 @@
  * Apache 2.0 Licensed
  */
 
+
+ /*
+  * Rollbar is used to gather information on crashes and exceptions, in a custom
+  * setup, you can either ignore this, or add your own if you want to gather
+  * data about where Kin's failing in your setup ;)
+  */
 export const ROLLBAR_PUBLIC_TOKEN = '';
 export const ROLLBAR_CODE_VERSION = 0.1;
 
+
+/*
+ * Public token used to display Google Maps for your events' locations
+ *
+ * https://console.developers.google.com/projectselector/apis/credentials
+ */
 export const GMAP_PUBLIC_TOKEN = '';
 
-export const EVENTS_NS = 'kin';
 
+/*
+ * API hostname reachable from the client
+ *
+ * e.g.: kin.today
+ */
 export const API_HOSTNAME = {
     dev: '',
     test: 'placeholder',
     prod: '',
 }[KIN_ENV_NAME];
+
+
+/*
+ * In a typical setup, you can ignore the rest of this file
+ */
+export const EVENTS_NS = 'kin';
 
 export const rollbar_config = {
     accessToken: ROLLBAR_PUBLIC_TOKEN,
