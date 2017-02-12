@@ -7,6 +7,7 @@
 **Requirements**
 * A server / VPS / host
 * A domain name + SSL cert for that domain. (see [Let's Encrypt](https://letsencrypt.org/) for an open CA)
+* A running Redis instance
 * (some) understanding of [Kin's stack](architecture.md)
 
 ## Kin Server ##
