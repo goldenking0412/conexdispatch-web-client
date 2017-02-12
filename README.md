@@ -17,6 +17,8 @@ Kin Calendar is an **opinionated open source calendar** focusing on being simple
 
 Kin is **opinionated**, what this means is that **UX matters a lot**. Before coding anything, you should discuss it in the issue tracker. Once a core team member gives you a **go**, any robust, properly tested PR for it will be accepted.
 
+[Setting up a Kin dev setup Guide](docs/dev_setup.md)
+
 ## License ##
 
 [Apache 2.0](LICENSE)
