@@ -52,7 +52,7 @@ export default class SourceLayersListItem extends React.Component {
         })();
 
         const loading_spinner_classes = classnames(
-            'loading',
+            'loader-spinner',
             { hide: this.props.loaded === this.props.selected }
         );
 

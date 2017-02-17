@@ -408,9 +408,9 @@ export default class Calendar {
     _event_render(fc_event, $elem, view) {
         $elem.attr('data-id', fc_event.id);
         if (fc_event.syncing === true) {
-            $elem.prepend('<div class="loading"></div>');
+            $elem.prepend('<div class="loader-spinner"></div>');
         } else {
-            $elem.find('.loading').remove();
+            $elem.find('.loader-spinner').remove();
         }
         if (!fc_event.allDay && !fc_event.selected && view.name === 'month') {
             $elem.css('background', 'inherit');

@@ -27,7 +27,7 @@ class SourceLayersList extends React.Component {
             { hide: this.props.status !== 'disconnected' }
         );
         const loading_spinner_classes = classnames(
-            'loading',
+            'loader-spinner',
             { hide: this.props.loaded || this.props.status === 'disconnected' }
         );
         const collapser_classes = classnames(
