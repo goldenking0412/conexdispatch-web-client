@@ -56,6 +56,10 @@
                 height: 100vh;
                 text-align: center;
                 color: #C1344B;
+                display: none;
+            }
+            .loader.show {
+                display: block;
             }
             .loader .loader-spinner {
                 margin: 20vh auto 0rem auto;
@@ -73,7 +77,7 @@
         </style>
     </head>
     <body>
-        <div class="loader">
+        <div class="loader root-loader show">
             <div class="loader-spinner"></div>
         </div>
         <div class="message-popup-stack">

@@ -462,9 +462,9 @@ export const ATTENDEE_BG_COLORS = [
 
 
 export function template_hide_loader_spinners() {
-    const loader_elements = document.getElementsByClassName('loader');
+    const loader_elements = document.getElementsByClassName('root-loader');
     for (let i = 0; i < loader_elements.length; i += 1) {
-        loader_elements[i].style.display = 'none';
+        loader_elements[i].classList.remove('show');
     }
 }
 
