@@ -41,7 +41,7 @@
 
 ## Kin Client ##
 
-1. Fork [KinToday/kin-api-server](https://github.com/KinToday/kin-web-client) and fetch your fork locally.
+1. Fork [KinToday/kin-web-client](https://github.com/KinToday/kin-web-client) and fetch your fork locally.
 2. Follow the instructions in [`config.js`](https://github.com/KinToday/kin-web-client/blob/master/src/client/config.js), to configure the client for your particular setup
 3. Install Kin's dependencies via `npm`
 
