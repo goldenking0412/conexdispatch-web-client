@@ -24,7 +24,11 @@ const _event_to_redux = (timezone, event) => {
 
     _.forEach(['start', 'end'], (prop) => {
         if (!_.isEmpty(event[prop])) {
-            event[prop] = moment(event[prop].date_time || event[prop].date).tz(timezone);
+            if (!_.isEmpty(event[prop].date)) {
+                event[prop] = moment(event[prop].date);
+            } else {
+                event[prop] = moment(event[prop].date_time).tz(timezone);
+            }
         } else {
             event[prop] = null;
         }
