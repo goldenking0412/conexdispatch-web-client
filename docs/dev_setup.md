@@ -76,12 +76,12 @@ $ NODE_ENV=dev gulp test-watch
 
 #### Linux / Mac OS X ####
 
+This uses `dev.kin.today` as a domain name.
 ~~~~
-$ DOMAIN_NAME='dev.kin.today'
+$ mkdir -p certs
 $ openssl genrsa -out ./certs/localhost-key.pem 2048
-$ openssl req -new -key localhost-key.pem -out localhost.csr -nodes -subj '/CN=$DOMAIN_NAME'
-$ openssl x509 -in localhost-cert.pem -text
-$ echo "0.0.0.0 dev.kin.today" >> /etc/hosts
+$ openssl req -new -x509 -sha256 -days 365 -key ./certs/localhost-key.pem -out ./certs/localhost-cert.pem -nodes -subj '/CN=dev.kin.today'
+$ sudo echo "0.0.0.0 dev.kin.today" >> /etc/hosts
 ~~~~
 
 #### Windows ####
