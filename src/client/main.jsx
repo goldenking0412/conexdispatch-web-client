@@ -4,7 +4,6 @@
  * Apache 2.0 Licensed
  */
 
-
 import bluebird from 'bluebird';
 import moment from 'moment-timezone';
 import querystring from 'querystring';
@@ -32,6 +31,7 @@ import { async_load_user } from './actions/user';
 
 import reducer from './reducers';
 
+window.Promise = bluebird;
 window.Perf = Perf;
 
 

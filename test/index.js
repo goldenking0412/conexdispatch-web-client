@@ -5,6 +5,11 @@
  */
 
 
+const bluebird = require('bluebird');
+
+window.Promise = bluebird;
+
+
 // require all modules ending in ".test" from the
 // current directory and all subdirectories
 const tests_context = require.context('.', true, /\.test$/);
