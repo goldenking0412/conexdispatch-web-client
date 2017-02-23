@@ -30,7 +30,10 @@ const config = function(options) {
             rules: [
                 {
                     test: /\.jsx?$/,
-                    include: path.join(__dirname, 'src'),
+                    include: [
+                        path.join(__dirname, 'src'),
+                        path.join(__dirname, 'test'),
+                    ],
                     exclude: [
                         path.join(__dirname, 'node_modules'),
                         path.join(__dirname, 'src/client/rollbar.umd.nojson.min.js'),
@@ -40,7 +43,10 @@ const config = function(options) {
                 },
                 {
                     test: /\.jsx?$/,
-                    include: path.join(__dirname, 'src'),
+                    include: [
+                        path.join(__dirname, 'src'),
+                        path.join(__dirname, 'test'),
+                    ],
                     exclude: path.join(__dirname, 'node_modules'),
                     use: [
                         {

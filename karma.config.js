@@ -8,32 +8,40 @@
 var webpack_config = require('./webpack.config.js')({
     env: 'test',
 });
+webpack_config.devtool = 'inline-source-map';
+
 
 module.exports = function(config) {
     config.set({
         frameworks: ['mocha', 'sinon-chai'],
         reporters: ['mocha', 'coverage'],
-        browsers: ['Chrome'],
+        browsers: ['PhantomJS'],
 
         files: [
             './test/index.js',
         ],
 
         preprocessors: {
-            './test/index.js': ['webpack'],
+            './test/index.js': ['webpack', 'sourcemap'],
         },
 
         webpack: webpack_config,
         webpackMiddleware: {
-            noInfo: true
+            noInfo: true,
+        },
+
+        phantomjsLauncher: {
+            // Have phantomjs exit if a ResourceError is encountered (useful if karma exits without killing phantom)
+            exitOnResourceError: true,
         },
 
         plugins: [
-            'karma-chrome-launcher',
             'karma-coverage',
             'karma-mocha',
             'karma-mocha-reporter',
+            'karma-phantomjs-launcher',
             'karma-sinon-chai',
+            'karma-sourcemap-loader',
             'karma-webpack',
         ],
     });
