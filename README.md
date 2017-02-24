@@ -1,5 +1,7 @@
 # Kin Calendar #
 
+[![Build Status](https://travis-ci.org/KinToday/kin-web-client.svg?branch=master)](https://travis-ci.org/KinToday/kin-web-client)
+
 Kin Calendar is an **opinionated open source calendar** focusing on being simple and connected to as many providers of time information as possible (Google Calendar, Office365, Trello, Todoist, Facebook, Github, Meetup, Eventbrite, Wunderlist ... )
 
 ## Reporting bugs ##
