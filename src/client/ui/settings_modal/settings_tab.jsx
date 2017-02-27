@@ -28,7 +28,7 @@ export default class SettingsModalSettingsTab extends React.Component {
         const $button = $(this.refresh_button);
         $button.addClass('disabled');
         this.props
-            .dispatch(async_refresh_layers())
+            .dispatch(async_refresh_layers(false))
             .then(() => {
                 $button.removeClass('disabled');
             })

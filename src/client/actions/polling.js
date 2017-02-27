@@ -16,13 +16,22 @@ import { async_load_events } from './events';
 const POLLING_LOOP_STEP = 5 * 60;
 
 
-export const async_refresh_layers = () => {
+export const async_refresh_layers = (jitter = true) => {
     return (dispatch, get_state) => {
         const state = get_state();
 
         const promises = flow(
             filter('selected'),
-            map(layer => dispatch(async_load_events(layer.id)))
+            map((layer) => {
+                if (jitter) {
+                     // ±25% of the loop time, in seconds
+                    const delay = Math.random() * POLLING_LOOP_STEP * 0.25;
+                    return bluebird.delay(delay * 1000).then(() => {
+                        return dispatch(async_load_events(layer.id));
+                    });
+                }
+                return dispatch(async_load_events(layer.id));
+            })
         )(state.layers);
 
         return bluebird.all(promises);
