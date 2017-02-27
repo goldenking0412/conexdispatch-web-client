@@ -6,7 +6,9 @@
 
 
 import bluebird from 'bluebird';
-import _ from 'lodash';
+import filter from 'lodash/fp/filter';
+import flow from 'lodash/fp/flow';
+import map from 'lodash/fp/map';
 
 import { async_load_events } from './events';
 
@@ -17,12 +19,11 @@ const POLLING_LOOP_STEP = 5 * 60;
 export const async_refresh_layers = () => {
     return (dispatch, get_state) => {
         const state = get_state();
-        const promises = [];
 
-        _(state.layers).filter('selected').forEach((layer) => {
-            const promise = dispatch(async_load_events(layer.id));
-            promises.push(promise);
-        });
+        const promises = flow(
+            filter('selected'),
+            map(layer => dispatch(async_load_events(layer.id)))
+        )(state.layers);
 
         return bluebird.all(promises);
     };
@@ -32,7 +33,7 @@ export const async_refresh_layers = () => {
 let _polling_interval_id = null;
 export const start_polling_loop = () => {
     return (dispatch) => {
-        if (!_.isNull(_polling_interval_id)) {
+        if (_polling_interval_id !== null) {
             console.warn('Bowing out from starting polling daemon, one is already running');
             return;
         }
