@@ -5,7 +5,7 @@
 * List the gulp tasks used for a complete dev flow (building, testing ... )
 
 **Requirements**
-* Git, Node.js, Redis installed
+* Git, Node.js, [Redis](#docker-redis)
 * [SSL cert for a domain resolving to your local host](#local-cert).
 * (some) understanding of [Kin's stack](architecture.md)
 
@@ -69,6 +69,13 @@ Auto-run tests when any test file or application file has been  updated:
 ~~~~
 $ NODE_ENV=dev gulp test-watch
 ~~~~
+
+### Docker Redis ###
+
+~~~
+$ docker pull redis
+$ docker run -d -p 6390:6379 redis
+~~~
 
 ### Local cert ###
 
