@@ -81,7 +81,7 @@ This uses `dev.kin.today` as a domain name.
 $ mkdir -p certs
 $ openssl genrsa -out ./certs/localhost-key.pem 2048
 $ openssl req -new -x509 -sha256 -days 365 -key ./certs/localhost-key.pem -out ./certs/localhost-cert.pem -nodes -subj '/CN=dev.kin.today'
-$ sudo echo "0.0.0.0 dev.kin.today" >> /etc/hosts
+$ echo "0.0.0.0 dev.kin.today" | sudo tee -a /etc/hosts
 ~~~~
 
 #### Windows ####
