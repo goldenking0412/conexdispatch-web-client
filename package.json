@@ -107,5 +107,10 @@
         "jsx": true
       }
     }
+  },
+  "scripts": {
+    "test": "NODE_ENV=dev gulp test",
+    "test-watch": "NODE_ENV=dev gulp test-watch",
+    "watch:dev": "NODE_ENV=dev gulp webpack-dev-server"
   }
 }
