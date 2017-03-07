@@ -18,25 +18,22 @@
     $ npm install
     ~~~~~
 
-4. Build the server code (creates links in `servers/` pointing at sources in `src/`)
+4. Build the server code (creates links in `servers/` pointing at sources in `src/`, creates the [`PM2` process file](http://pm2.keymetrics.io/docs/usage/application-declaration/))
 
     ~~~~
-    $ NODE_ENV=dev gulp servers
+    $ npm run build:dev
     ~~~~
 
-5. Launch the application via `PM2`:
+5. Launch the application through `PM2`:
 
     ~~~~
-    # Create the application file
-    $ NODE_ENV=dev gulp pm
-    # Launch it via pm2
-    $ pm2 start pm.json
+    $ npm run start
     ~~~~
 
-6. If you want to gracefully reload the app when making changes, you can run:
+6. To gracefully reload the app when making file changes, you can run:
 
     ~~~~
-    $ NODE_ENV=dev gulp watch
+    $ npm run watch:dev
     ~~~~
 
 ## Kin Client ##
@@ -52,7 +49,7 @@
 4. Launch Webpack's dev server via:
 
     ~~~~
-    $ NODE_ENV=dev gulp webpack-dev-server
+    $ npm run watch:dev
     ~~~~
 
 ## Misc. ##
@@ -63,11 +60,11 @@
 
 Run tests one time:
 ~~~~
-$ NODE_ENV=dev gulp test
+$ npm test
 ~~~~
 Auto-run tests when any test file or application file has been  updated:
 ~~~~
-$ NODE_ENV=dev gulp test-watch
+$ npm test-watch
 ~~~~
 
 ### Docker Redis ###
