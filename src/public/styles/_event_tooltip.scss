@@ -303,40 +303,40 @@ $react-dates-color-text-focus: $white;
 
             &[data-direction='left'] {
                 &.subtooltip-enter {
-                    left: -$tooltip-width;
-                    transition: left $anim-duration $anim-easing;
+                    transform: translateX(-100%);
 
                     &.subtooltip-enter-active {
-                        left: 0;
+                        transform: translateX(0);
+                        transition: transform $anim-duration $anim-easing;
                     }
                 }
 
                 &.subtooltip-leave {
-                    left: 0;
-                    transition: left $anim-duration $anim-easing;
+                    transform: translateX(0);
 
                     &.subtooltip-leave-active {
-                        left: -$tooltip-width;
+                        transform: translateX(-100%);
+                        transition: transform $anim-duration $anim-easing;
                     }
                 }
             }
 
             &[data-direction='right'] {
                 &.subtooltip-enter {
-                    right: -$tooltip-width;
-                    transition: right $anim-duration $anim-easing;
+                    transform: translateX(100%);
 
                     &.subtooltip-enter-active {
-                        right: 0;
+                        transform: translateX(0);
+                        transition: transform $anim-duration $anim-easing;
                     }
                 }
 
                 &.subtooltip-leave {
-                    right: 0;
-                    transition: right $anim-duration $anim-easing;
+                    transform: translateX(0);
 
                     &.subtooltip-leave-active {
-                        right: -$tooltip-width;
+                        transform: translateX(100%);
+                        transition: transform $anim-duration $anim-easing;
                     }
                 }
             }
