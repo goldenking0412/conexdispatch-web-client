@@ -270,8 +270,11 @@ $react-dates-color-text-focus: $white;
         select {
             background: transparent;
             -webkit-appearance: none;
-            cursor: pointer;
             line-height: 1.2rem;
+
+            &:not([disabled]) {
+                cursor: pointer;
+            }
         }
 
         label,
@@ -336,12 +339,6 @@ $react-dates-color-text-focus: $white;
                         right: -$tooltip-width;
                     }
                 }
-            }
-
-            footer {
-                position: absolute;
-                bottom: 0;
-                width: 100%;
             }
 
             form {

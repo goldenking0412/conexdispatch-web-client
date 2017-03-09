@@ -62,7 +62,6 @@ class EventTooltip extends React.Component {
                         return (
                             <EditableEventTooltip
                               event={this.props.event}
-                              layer={this.props.layer}
                               {...this.props.selected_event}
                             />
                         );

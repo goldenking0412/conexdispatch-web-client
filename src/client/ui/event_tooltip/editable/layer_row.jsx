@@ -19,9 +19,6 @@ export default class LayerRow extends React.Component {
     }
 
     render() {
-        if (!this.props.creating) {
-            return null;
-        }
         const [source_id, ] = split_merged_id(this.props.layer_id); // eslint-disable-line array-bracket-spacing
         const selected_layer = _.get(this.props, ['create_able_sources', source_id, 'layers', this.props.layer_id], null);
         const layer_row_style = {
@@ -42,6 +39,7 @@ export default class LayerRow extends React.Component {
                       onChange={this.props.on_change}
                       onFocus={this.props.on_focus}
                       autoFocus={this.props.focused}
+                      disabled={!this.props.creating}
                     >
                         {_.map(this.props.create_able_sources, (source) => {
                             const { provider_name } = split_source_id(source.id);

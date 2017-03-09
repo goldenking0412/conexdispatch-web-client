@@ -9,7 +9,7 @@ import classnames from 'classnames';
 import React from 'react';
 import _ from 'lodash';
 
-import { event_prop_type, expanded_source_prop_type, layer_prop_type } from '../../../prop_types';
+import { event_prop_type, expanded_source_prop_type } from '../../../prop_types';
 import AttendeeRow from './attendee_row';
 import DatesRow from './dates_row';
 import DescriptionRow from './description_row';
@@ -64,9 +64,6 @@ export default class MainSubTooltip extends React.Component {
         // TODO: incorporate this in the layerRow?
         const header_style = {
             background: 'white',
-            borderBottom: (!this.props.creating ? (
-                `3px solid ${_.get(this.props.layer, 'color', 'transparent')}`
-            ) : '0px'),
         };
         const is_title_focused = this.props.focused_input === 'title';
         return (
@@ -152,7 +149,6 @@ MainSubTooltip.propTypes = {
 
     // TODO: add a "strict" prop type with every field required? + add `layer_id`
     event: event_prop_type,
-    layer: layer_prop_type,
 
     create_able_sources: React.PropTypes.objectOf(expanded_source_prop_type),
     focused_input: React.PropTypes.string,
