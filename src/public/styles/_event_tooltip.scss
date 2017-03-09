@@ -41,9 +41,14 @@ $react-dates-color-text-focus: $white;
 .DateRangePicker__picker {
     border: 1px solid $light-gray;
     box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+    margin-left: 15px;
 }
 
-.CalendarMonth__caption {
+.kin-tooltip.event-tooltip .edit-tooltip input.DateInput__input {
+    height: 100%;
+}
+
+.CalendarMonth--horizontal .CalendarMonth__caption {
     margin-top: 0;
     padding-top: 10px;
     padding-bottom: 20px;

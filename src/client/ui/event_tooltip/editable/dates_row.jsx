@@ -33,24 +33,28 @@ export default class DatesRow extends React.Component {
         // This is separated from `on_dates_change` to preserve times and
         // convert from `react-dates`'s naming: `startDate`, `endDate` to our
         // internal: `start`, `end`.
-        if (!_.isNil(dates.startDate) && this.props.start !== null) {
-            dates.startDate.set({
-                hour: this.props.start.get('hour'),
-                minute: this.props.start.get('minute'),
-            });
+        function _normalized_date(new_date, date_prop) {
+            if (_.isNil(new_date)) {
+                // No need to copy it, it's null / undefined
+                return new_date;
+            }
+
+            // make sure we'll not mutate react-date's moments
+            const date = moment(new_date);
+            if (date_prop !== null) {
+                date.set({
+                    hour: date_prop.get('hour'),
+                    minute: date_prop.get('minute'),
+                });
+            }
+            return date;
         }
 
-        if (!_.isNil(dates.endDate) && this.props.end !== null) {
-            dates.endDate.set({
-                hour: this.props.end.get('hour'),
-                minute: this.props.end.get('minute'),
-            });
-        }
-
-        this._on_dates_change({
-            start: dates.startDate,
-            end: dates.endDate,
-        });
+        const normalized_dates = {
+            start: _normalized_date(dates.startDate, this.props.start),
+            end: _normalized_date(dates.endDate, this.props.end),
+        };
+        this._on_dates_change(normalized_dates);
     }
 
     _on_dates_change(dates_patch) {
@@ -100,6 +104,7 @@ export default class DatesRow extends React.Component {
             displayFormat: user_config.date_format,
             focusedInput: this.state.focused_input,
             horizontalMargin: 100,
+            initialVisibleMonth: null,
             isOutsideRange: () => false,
             minimumNights: 0,
             numberOfMonths: 1,
