@@ -228,21 +228,23 @@ class EditableEventTooltip extends React.Component {
 
     render() {
         return (
-            <ReactCSSTransitionGroup
-              component="div"
-              className="edit-tooltip"
-              transitionName="subtooltip"
-              transitionEnterTimeout={250}
-              transitionLeaveTimeout={250}
-            >
-                <div
-                  className="subtooltip"
-                  key={this.state.subtooltip}
-                  data-direction={this.state.subtooltip === 'main' ? 'left' : 'right'}
+            <div className="edit-tooltip">
+                <ReactCSSTransitionGroup
+                  component="div"
+                  className="subtooltip-wrapper"
+                  transitionName="subtooltip"
+                  transitionEnterTimeout={250}
+                  transitionLeaveTimeout={250}
                 >
-                    {this._render_subtooltip()}
-                </div>
-            </ReactCSSTransitionGroup>
+                    <div
+                      className="subtooltip"
+                      key={this.state.subtooltip}
+                      data-direction={this.state.subtooltip === 'main' ? 'left' : 'right'}
+                    >
+                        {this._render_subtooltip()}
+                    </div>
+                </ReactCSSTransitionGroup>
+            </div>
         );
     }
 }

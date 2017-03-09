@@ -251,9 +251,15 @@ $react-dates-color-text-focus: $white;
         $tooltip-height: 430px;
 
         position: relative;
-        width: $tooltip-width;
         height: $tooltip-height;
-        overflow: hidden;
+        overflow-y: visible;
+
+        .subtooltip-wrapper {
+            position: relative;
+            width: $tooltip-width;
+            height: 120%;
+            overflow-x: hidden;
+        }
 
         input,
         select {
