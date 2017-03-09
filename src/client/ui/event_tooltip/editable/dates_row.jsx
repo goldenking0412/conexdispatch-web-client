@@ -103,7 +103,6 @@ export default class DatesRow extends React.Component {
         const date_range_picker_props = {
             displayFormat: user_config.date_format,
             focusedInput: this.state.focused_input,
-            horizontalMargin: 100,
             initialVisibleMonth: null,
             isOutsideRange: () => false,
             minimumNights: 0,
