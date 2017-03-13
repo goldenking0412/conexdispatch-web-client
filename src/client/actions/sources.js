@@ -8,8 +8,9 @@
 import 'whatwg-fetch';
 import _ from 'lodash';
 
-import { api_url, fetch_options, fetch_check, location_redirect,
-         split_source_id } from '../utils';
+import { api_url, fetch_check, fetch_check_simple_status,
+    fetch_check_advanced_status, fetch_options, location_redirect,
+    split_source_id } from '../utils';
 
 
 export const add_sources = (sources) => {
@@ -40,7 +41,9 @@ export const delete_sources = (ids) => {
 export const async_load_sources = () => {
     return (dispatch) => {
         return fetch(api_url('/sources'), fetch_options())
-            .then(_.partial(fetch_check, dispatch))
+            .then(fetch_check)
+            .catch(fetch_check_simple_status)
+            .catch(_.partial(fetch_check_advanced_status, dispatch))
             .then((json_res) => {
                 _.forEach(json_res.sources, (source) => {
                     source.loaded = false; // eslint-disable-line no-param-reassign
@@ -55,7 +58,9 @@ export const async_deauth_source = (source_id) => {
     return (dispatch) => {
         const { provider_name } = split_source_id(source_id);
         return fetch(api_url(`/source/${provider_name}/deauth/${source_id}`), fetch_options())
-            .then(_.partial(fetch_check, dispatch))
+            .then(fetch_check)
+            .catch(fetch_check_simple_status)
+            .catch(_.partial(fetch_check_advanced_status, dispatch))
             .then((res_json) => {
                 location_redirect(res_json.redirect);
             });

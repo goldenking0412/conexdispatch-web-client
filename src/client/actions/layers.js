@@ -8,7 +8,8 @@
 import 'whatwg-fetch';
 import _ from 'lodash';
 
-import { api_url, fetch_check, fetch_error, fetch_options } from '../utils';
+import { api_url, fetch_check, fetch_check_simple_status,
+    fetch_check_advanced_status, fetch_error, fetch_options } from '../utils';
 import { async_load_events, deselect_event } from './events';
 import { patch_source } from './sources';
 
@@ -37,7 +38,9 @@ export const async_load_layers = (source_id) => {
             api_url(`/sources/${escape(source_id)}/layers`),
             fetch_options()
         )
-            .then(_.partial(fetch_check, dispatch))
+            .then(fetch_check)
+            .catch(fetch_check_simple_status)
+            .catch(_.partial(fetch_check_advanced_status, dispatch))
             .then((json_res) => {
                 _.forEach(json_res.layers, (layer) => {
                     layer.loaded = false; // eslint-disable-line no-param-reassign
@@ -63,7 +66,9 @@ const async_patch_layer = (layer_id, layer_patch) => {
                 body: JSON.stringify(layer_patch),
             })
         )
-            .then(_.partial(fetch_check, dispatch))
+            .then(fetch_check)
+            .catch(fetch_check_simple_status)
+            .catch(_.partial(fetch_check_advanced_status, dispatch))
             .then((json_res) => {
                 console.log('synced patch `%o` for layer `%s` status: `%s`',
                             layer_patch, layer_id, json_res);

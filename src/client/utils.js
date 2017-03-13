@@ -284,26 +284,34 @@ export function fetch_options(overrides = {}, include_token = true) {
 }
 
 
-export function fetch_check(dispatch, response) {
+export function fetch_check(response) {
     if (response.ok) {
         return response.json();
     }
 
     const error = new Error(response.statusText || response.status);
     error.response = response;
+    throw error;
+}
 
-    switch (response.status) {
+
+export function fetch_check_simple_status(error) {
+    switch (error.response.status) { // eslint-disable-line default-case
     case 401:
         if (user_config.authenticated) {
-            // Reload if there is a change of state
             user_config.token = null;
         }
         location_redirect('./auth.html');
-        throw error;
-    case 400:
-    case 404:
-        return response
-            .json()
+        break;
+    }
+    throw error;
+}
+
+
+export function fetch_check_advanced_status(dispatch, error) {
+    const status = error.response.status;
+    if (status === 400 || status === 404) {
+        return error.response.json()
             .then((res) => {
                 const code = _.get(res, 'code', 0);
                 const source_id = _.get(res, ['params', 'source_id']);
@@ -313,16 +321,14 @@ export function fetch_check(dispatch, response) {
                         status: 'disconnected',
                     }));
                     break;
-
                 case 40: // Source not found
                     dispatch(delete_sources([source_id]));
                     break;
                 }
                 throw error;
             });
-    default:
-        throw error;
     }
+    throw error;
 }
 
 

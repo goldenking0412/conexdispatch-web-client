@@ -9,11 +9,9 @@ import React from 'react';
 import _ from 'lodash';
 
 import { attendee_prop_type } from '../../../prop_types';
-import {
-    api_url, fetch_check, fetch_options, split_merged_id,
-
-    ATTENDEE_BG_COLORS, hash_code, rsvp_icons,
-} from '../../../utils';
+import { api_url, fetch_check, fetch_check_simple_status, fetch_options,
+    split_merged_id, ATTENDEE_BG_COLORS, hash_code,
+    rsvp_icons } from '../../../utils';
 import DetailsSubTooltip from './details_sub_tooltip';
 
 
@@ -99,7 +97,8 @@ export default class AttendeeSubTooltip extends React.Component {
                 { input }
             );
             fetch(url, fetch_options())
-                .then(_.partial(fetch_check, {}))
+                .then(fetch_check)
+                .catch(fetch_check_simple_status)
                 .then((json_res) => {
                     this.setState({
                         results: _.get(json_res, 'contacts', []),

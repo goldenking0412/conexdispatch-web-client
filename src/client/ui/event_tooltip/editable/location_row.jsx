@@ -9,7 +9,8 @@ import classnames from 'classnames';
 import React from 'react';
 import _ from 'lodash';
 
-import { api_url, fetch_check, fetch_options, split_merged_id } from '../../../utils';
+import { api_url, fetch_check, fetch_check_simple_status, fetch_options,
+    split_merged_id } from '../../../utils';
 
 
 export default class LocationRow extends React.Component {
@@ -78,7 +79,8 @@ export default class LocationRow extends React.Component {
                 }
             );
             fetch(url, fetch_options())
-                .then(_.partial(fetch_check, {}))
+                .then(fetch_check)
+                .catch(fetch_check_simple_status)
                 .then((json_res) => {
                     this.setState({
                         results: _.map(_.get(json_res, 'places', []), 'description'),

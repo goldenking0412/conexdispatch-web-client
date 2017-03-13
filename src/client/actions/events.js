@@ -10,7 +10,8 @@ import bluebird from 'bluebird';
 import moment from 'moment-timezone';
 import _ from 'lodash';
 
-import { api_url, fetch_options, fetch_check, user_config } from '../utils';
+import { api_url, fetch_check, fetch_check_simple_status,
+    fetch_check_advanced_status, fetch_options, user_config } from '../utils';
 import { patch_layer } from './layers';
 import { toggle_color_picker_tooltip } from './ui';
 
@@ -148,7 +149,9 @@ export const async_load_events = (layer_id) => {
             api_url(`/layers/${escape(layer_id)}/events`, qs),
             fetch_options()
         )
-            .then(_.partial(fetch_check, dispatch))
+            .then(fetch_check)
+            .catch(fetch_check_simple_status)
+            .catch(_.partial(fetch_check_advanced_status, dispatch))
             .then((json_res) => {
                 const redux_events = _(json_res.events)
                     .filter(event => event.status !== 'cancelled')
@@ -194,7 +197,9 @@ export const async_create_event = (layer_id, event, notify_attendees = false) =>
                 body: JSON.stringify(event),
             })
         )
-            .then(_.partial(fetch_check, dispatch))
+            .then(fetch_check)
+            .catch(fetch_check_simple_status)
+            .catch(_.partial(fetch_check_advanced_status, dispatch))
             .then((json_res) => {
                 // TODO: handle error smoothly
                 const state = get_state();
@@ -230,7 +235,9 @@ export const async_save_event = (event_id, event_patch, notify_attendees = false
                 body: JSON.stringify(event_patch),
             })
         )
-            .then(_.partial(fetch_check, dispatch))
+            .then(fetch_check)
+            .catch(fetch_check_simple_status)
+            .catch(_.partial(fetch_check_advanced_status, dispatch))
             .then((json_res) => {
                 const redux_event = _event_to_redux(user_config.timezone, json_res.event);
                 dispatch(add_events([redux_event]));
@@ -261,7 +268,9 @@ export const async_delete_event = (event_id) => {
                     }),
                 })
             )
-                .then(_.partial(fetch_check, dispatch))
+                .then(fetch_check)
+                .catch(fetch_check_simple_status)
+                .catch(_.partial(fetch_check_advanced_status, dispatch))
                 .then(() => {
                     dispatch(deselect_event());
                     dispatch(delete_events([event_id]));
