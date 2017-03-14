@@ -143,8 +143,13 @@ class CalendarToolbar extends React.Component {
 
         const target = (this.props.timezone_tooltip_show) ? this._timezone_tooltip_target : null;
 
+        const toolbar_classes = classnames(
+            'calendar-toolbar',
+            { margin: !this.props.sidebar.show }
+        );
+
         return (
-            <div className="calendar-toolbar">
+            <div className={toolbar_classes}>
                 <div className="float-left">
                     <button
                       className="button calendar-toolbar__timezone"
@@ -214,6 +219,9 @@ CalendarToolbar.propTypes = {
         })
     }),
     timezone_tooltip_show: React.PropTypes.bool,
+    sidebar: React.PropTypes.shape({
+        show: React.PropTypes.bool,
+    }),
 };
 
 
@@ -221,6 +229,7 @@ function map_state_props(state) {
     return {
         full_calendar: state.ui.full_calendar,
         timezone_tooltip_show: state.ui.timezone_selector_tooltip.show,
+        sidebar: state.ui.sidebar,
     };
 }
 

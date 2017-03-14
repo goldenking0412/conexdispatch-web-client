@@ -34,6 +34,14 @@ export function update_full_calendar_view(view) {
 }
 
 
+export function toggle_sidebar(toggle = null) {
+    return {
+        type: 'TOGGLE_SIDEBAR',
+        toggle
+    };
+}
+
+
 export function get_full_calendar_view($calendar = $('#calendar')) {
     const view = $calendar.fullCalendar('getView');
     const start = view.intervalStart;

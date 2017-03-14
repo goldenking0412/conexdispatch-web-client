@@ -5,13 +5,14 @@
  */
 
 
+import classnames from 'classnames';
 import React from 'react';
 import { connect } from 'react-redux';
 
 import { EVENTS_NS } from '../config';
-import { user_config } from '../utils';
 
 import { deselect_event } from '../actions/events';
+import { toggle_sidebar } from '../actions/ui';
 import CalendarToolbar from './calendar_toolbar';
 import EventTooltip from './event_tooltip/base';
 import SettingsModal from './settings_modal/base';
@@ -28,7 +29,6 @@ class App extends React.Component {
 
     componentDidMount() {
         $(document).on(`keydown.${EVENTS_NS}`, this.keydown_handler);
-        this._update_sidebar();
     }
 
     componentWillUnMount() {
@@ -48,23 +48,22 @@ class App extends React.Component {
 
     toggle_sidebar(event) {
         event.preventDefault();
-        const collapsed = user_config.is_collapsed('kin:menu');
-        user_config.set_collapsed('kin:menu', !collapsed);
-        this._update_sidebar();
-    }
-
-    _update_sidebar() {
-        const collapsed = user_config.is_collapsed('kin:menu');
-        $('aside').toggle(!collapsed);
-        $('.content').toggleClass('margin', !collapsed);
-        $('.calendar-toolbar').toggleClass('margin', collapsed);
+        this.props.dispatch(toggle_sidebar(!this.props.sidebar.show));
     }
 
     render() {
+        const content_classes = classnames(
+            'content',
+            { margin: this.props.sidebar.show }
+        );
+        const aside_classes = classnames(
+            { show: this.props.sidebar.show }
+        );
+
         return (
             <div>
                 <div className="logo" onClick={this.toggle_sidebar} />
-                <aside>
+                <aside className={aside_classes}>
                     <div>
                         <a
                           href="#settings-modal"
@@ -78,7 +77,7 @@ class App extends React.Component {
                     <SourcesList />
                 </aside>
 
-                <div className="content margin">
+                <div className={content_classes}>
                     <EventTooltip />
                     <SettingsModal />
                     <CalendarToolbar />
@@ -91,8 +90,18 @@ class App extends React.Component {
 
 App.propTypes = {
     dispatch: React.PropTypes.func,
+    sidebar: React.PropTypes.shape({
+        show: React.PropTypes.bool,
+    }),
 };
 
 
-const AppContainer = connect()(App);
+function map_state_props(state) {
+    return {
+        sidebar: state.ui.sidebar,
+    };
+}
+
+
+const AppContainer = connect(map_state_props)(App);
 export default AppContainer;

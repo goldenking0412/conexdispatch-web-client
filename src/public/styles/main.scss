@@ -127,11 +127,16 @@ footer .button {
 $sidebar-width: 250px;
 
 aside {
+    display: none;
     float: left;
     width: $sidebar-width;
     height: 100vh;
     background: $light-gray;
     overflow: auto;
+
+    &.show {
+        display: block;
+    }
 }
 
 .content {

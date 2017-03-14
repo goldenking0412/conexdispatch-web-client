@@ -90,10 +90,6 @@ export default class Calendar {
         this._store = store;
         this._$calendar = this._create_fullcalendar($parent);
 
-        // Ugly ass solution to make sure we have the fc-toolbar in the right state
-        const collapsed = user_config.is_collapsed('kin:menu');
-        $('.fc-toolbar').toggleClass('margin', collapsed);
-
         this._update_view_switch();
         $parent.data('calendar', this);
 
@@ -103,6 +99,10 @@ export default class Calendar {
     middleware(store) {
         return next => (action) => {
             const state = store.getState();
+
+            if (action.type === 'TOGGLE_SIDEBAR') {
+                setImmediate(this.resize.bind(this));
+            }
 
             if (action.type === 'ADD_EVENTS') {
                 if (action.creating) {
