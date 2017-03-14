@@ -8,6 +8,9 @@
 import React from 'react';
 
 
+const left_chevron = require('../../../../public/imgs/icons/left_chevron.png');
+
+
 export default class DetailsSubTooltip extends React.Component {
     constructor() {
         super();
@@ -34,8 +37,13 @@ export default class DetailsSubTooltip extends React.Component {
                       tabIndex={0}
                     >
                         <div className="float-left">
-                            <span className="fa fa-chevron-left" />
+                            <img
+                              className="chevron-icon"
+                              src={left_chevron}
+                              alt="Left chevron icon"
+                            />
                         </div>
+
                         {this.props.title}
                     </h5>
                 </header>
