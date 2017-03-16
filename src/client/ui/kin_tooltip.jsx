@@ -11,6 +11,20 @@ import React from 'react';
 import _ from 'lodash';
 
 
+const DEFAULT_TOOLTIP_OPTIONS = {
+    placement: 'bottom',
+    modifiers: {
+        arrow: {
+            element: '.tooltip-arrow',
+        },
+        flip: {
+            boundariesElement: 'window',
+            padding: 20,
+        },
+    },
+};
+
+
 class KinTooltip extends React.Component {
     constructor() {
         super();
@@ -34,10 +48,12 @@ class KinTooltip extends React.Component {
             this._tooltip.destroy();
         }
 
+        const tooltip_options = _.merge({}, DEFAULT_TOOLTIP_OPTIONS, this.props.tooltip_options);
+
         this._tooltip = new Popper(
             this.props.target,
             this._tooltip_root,
-            this.props.tooltip_options
+            tooltip_options
         );
     }
 
@@ -83,12 +99,7 @@ class KinTooltip extends React.Component {
 
 KinTooltip.defaultProps = {
     overlay_classes: [],
-    tooltip_options: {
-        placement: 'bottom',
-        boundariesPadding: 20,
-        boundariesElement: 'window',
-        arrowElement: '.tooltip-arrow',
-    },
+    tooltip_options: {},
     root_classes: [],
 };
 

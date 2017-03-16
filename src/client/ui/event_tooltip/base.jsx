@@ -43,12 +43,11 @@ class EventTooltip extends React.Component {
 
     render() {
         const target = document.querySelector(`.fc-event[data-id="${this.props.selected_event.id}"]`);
+
         const tooltip_options = {
             placement: 'right',
-            boundariesPadding: 20,
-            boundariesElement: 'window',
-            arrowElement: '.tooltip-arrow',
         };
+
         return (
             <KinTooltip
               on_close={this._deselect_event}
