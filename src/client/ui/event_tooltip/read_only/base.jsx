@@ -37,10 +37,7 @@ class ReadOnlyEventTooltip extends React.Component {
     }
 
     double_click_handler(event) {
-        const $header = $(event.target).closest('.title-header');
-        if ($header.length > 0) {
-            this.props.toggle_edit_mode(event);
-        }
+        this.props.toggle_edit_mode(event);
     }
 
     save_rsvp(response_status) {
