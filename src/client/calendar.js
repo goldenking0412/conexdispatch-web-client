@@ -27,7 +27,8 @@ function _layer_to_fc_event_source(layer) {
     const fc_event_source = {
         id: layer.id,
         color: shift_lum(layer.color, 85),
-        textColor: shift_lum(layer.color, 25),
+        textColor: shift_lum(layer.color, 10),
+        borderColor: shift_lum(layer.color, 70),
         editable: _.get(layer, ['acl', 'edit'], false),
     };
     return fc_event_source;
