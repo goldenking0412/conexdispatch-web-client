@@ -36,7 +36,7 @@ if (ALLOWED_ENVS.indexOf(env_name) != -1) {
 /**
  * Globbing expressions
  */
-const client_files = 'src/client/**/*.js';
+const client_files = 'src/client/**/*.js?(x)';
 const test_files = 'test/**/*.js';
 
 
