@@ -1,6 +1,8 @@
 language: node_js
 node_js:
     - "node"
-script: gulp test
+script:
+    - gulp lint
+    - gulp test
 env:
     - NODE_ENV=dev
