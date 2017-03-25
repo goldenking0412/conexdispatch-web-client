@@ -194,9 +194,6 @@ export default class Calendar {
                 },
             ]
         );
-        this._$calendar.fullCalendar('option', {
-            selectable: false,
-        });
     }
 
     _reducer_deselect_event(state) {
@@ -217,9 +214,6 @@ export default class Calendar {
 
             this.patch_events([fc_event_update]);
         }
-        this._$calendar.fullCalendar('option', {
-            selectable: true,
-        });
     }
 
     middleware(store) {
@@ -339,10 +333,7 @@ export default class Calendar {
      * FC Event Handlers
      */
     _day_click_handler() {
-        const selectable = this._$calendar.fullCalendar('option', 'selectable');
-        if (!selectable) {
-            this._store.dispatch(deselect_event());
-        }
+        this._store.dispatch(deselect_event());
     }
 
     _event_click_handler(event) {
