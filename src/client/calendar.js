@@ -85,6 +85,16 @@ export default class Calendar {
         this._move_event_handler = this._move_event_handler.bind(this);
         this._move_event_handler = this._move_event_handler.bind(this);
         this._select_handler = this._select_handler.bind(this);
+
+        this._reducer = {
+            ADD_EVENTS: this._reducer_add_events,
+            DELETE_EVENTS: this._reducer_delete_events,
+            DESELECT_EVENT: this._reducer_deselect_event,
+            PATCH_EVENTS: this._reducer_patch_events,
+            PATCH_LAYER: this._reducer_patch_layer,
+            SELECT_EVENT: this._reducer_select_event,
+            TOGGLE_SIDEBAR: this._reducer_toggle_sidebar,
+        };
     }
 
     create($parent, store) {
@@ -97,125 +107,128 @@ export default class Calendar {
         this._last_scroll = performance.now();
     }
 
+    _reducer_toggle_sidebar() {
+        setImmediate(this.resize.bind(this));
+    }
+
+    _reducer_add_events(state, action) {
+        if (action.creating) {
+            const fc_events = _.map(
+                action.events,
+                _.partial(_event_to_fc_event, user_config.timezone)
+            );
+
+            const event_source = _layer_to_fc_event_source({
+                id: META_LAYER_CREATE_EVENT,
+                acl: {
+                    create: false,
+                    edit: false,
+                    delete: false,
+                },
+                color: '#EC4956',
+                text_color: '#FFFFFF',
+                events: [],
+                selected: true,
+                loaded: true,
+            });
+            event_source.events = fc_events;
+            this.add_layer(event_source);
+        } else {
+            const layers_update = {};
+            _.forEach(action.events, (event) => {
+                const [source_id, short_layer_id, ] = split_merged_id(event.id); // eslint-disable-line array-bracket-spacing
+                const layer_id = merge_ids(source_id, short_layer_id);
+                if (_.get(state, ['layers', layer_id, 'loaded'], false)) {
+                    const fc_event = _event_to_fc_event(user_config.timezone, event);
+                    if (!(layer_id in layers_update)) {
+                        layers_update[layer_id] = [];
+                    }
+                    layers_update[layer_id].push(fc_event);
+                }
+            });
+
+            _.forEach(layers_update, (events, layer_id) => {
+                this.add_events(layer_id, events);
+            });
+        }
+    }
+
+    _reducer_patch_events(state, action) {
+        this.patch_events(action.events);
+    }
+
+    _reducer_delete_events(state, action) {
+        this.remove_events(action.ids);
+    }
+
+    _reducer_patch_layer(state, action) {
+        if (action.patch.loaded === true) {
+            const layer = state.layers[action.id];
+            if (layer.loaded !== true) {
+                const events = _(state.events)
+                    .at(layer.events)
+                    .map(_.partial(_event_to_fc_event, user_config.timezone))
+                    .value();
+                const event_source = _layer_to_fc_event_source(layer);
+                event_source.events = events;
+                this.add_layer(event_source);
+            }
+        } else {
+            this.remove_layer(action.id);
+        }
+    }
+
+    _reducer_select_event(state, action) {
+        const event_id = action.id;
+        const [source_id, short_layer_id, ] = split_merged_id(event_id); // eslint-disable-line array-bracket-spacing
+        const layer_id = merge_ids(source_id, short_layer_id);
+        const event = _.get(state, ['events', event_id], {});
+        const color = _.get(event, 'color', _.get(state, ['layers', layer_id, 'color'], null));
+        this.patch_events(
+            [
+                {
+                    id: event_id,
+                    color: shift_lum(color, 70),
+                    textColor: 'white',
+                    selected: true,
+                },
+            ]
+        );
+        this._$calendar.fullCalendar('option', {
+            selectable: false,
+        });
+    }
+
+    _reducer_deselect_event(state) {
+        if (!this._remove_placeholder_event()) {
+            const fc_event_update = {
+                id: state.selected_event.id,
+                selected: false,
+            };
+
+            const state_event = _.get(state, ['events', state.selected_event.id], {});
+            if (!_.isEmpty(state_event.color)) {
+                fc_event_update.color = shift_lum(state_event.color, 85);
+                fc_event_update.textColor = shift_lum(state_event.color, 25);
+            } else {
+                fc_event_update.color = null;
+                fc_event_update.textColor = null;
+            }
+
+            this.patch_events([fc_event_update]);
+        }
+        this._$calendar.fullCalendar('option', {
+            selectable: true,
+        });
+    }
+
     middleware(store) {
         return next => (action) => {
             const state = store.getState();
-
-            if (action.type === 'TOGGLE_SIDEBAR') {
-                setImmediate(this.resize.bind(this));
+            const reducer_fn = _.get(this._reducer, action.type);
+            if (_.isFunction(reducer_fn)) {
+                reducer_fn.call(this, state, action);
             }
-
-            if (action.type === 'ADD_EVENTS') {
-                if (action.creating) {
-                    const fc_events = _.map(
-                        action.events,
-                        _.partial(_event_to_fc_event, user_config.timezone)
-                    );
-
-                    const event_source = _layer_to_fc_event_source({
-                        id: META_LAYER_CREATE_EVENT,
-                        acl: {
-                            create: false,
-                            edit: false,
-                            delete: false,
-                        },
-                        color: '#EC4956',
-                        text_color: '#FFFFFF',
-                        events: [],
-                        selected: true,
-                        loaded: true,
-                    });
-                    event_source.events = fc_events;
-                    this.add_layer(event_source);
-                } else {
-                    const layers_update = {};
-                    _.forEach(action.events, (event) => {
-                        const [source_id, short_layer_id, ] = split_merged_id(event.id); // eslint-disable-line array-bracket-spacing
-                        const layer_id = merge_ids(source_id, short_layer_id);
-                        if (_.get(state, ['layers', layer_id, 'loaded'], false)) {
-                            const fc_event = _event_to_fc_event(user_config.timezone, event);
-                            if (!(layer_id in layers_update)) {
-                                layers_update[layer_id] = [];
-                            }
-                            layers_update[layer_id].push(fc_event);
-                        }
-                    });
-
-                    _.forEach(layers_update, (events, layer_id) => {
-                        this.add_events(layer_id, events);
-                    });
-                }
-            }
-
-            if (action.type === 'PATCH_EVENTS') {
-                this.patch_events(action.events);
-            }
-
-            if (action.type === 'DELETE_EVENTS') {
-                this.remove_events(action.ids);
-            }
-
-            if (action.type === 'PATCH_LAYER') {
-                if (action.patch.loaded === true) {
-                    const layer = state.layers[action.id];
-                    if (layer.loaded !== true) {
-                        const events = _(state.events)
-                            .at(layer.events)
-                            .map(_.partial(_event_to_fc_event, user_config.timezone))
-                            .value();
-                        const event_source = _layer_to_fc_event_source(layer);
-                        event_source.events = events;
-                        this.add_layer(event_source);
-                    }
-                } else {
-                    this.remove_layer(action.id);
-                }
-            }
-
-            if (action.type === 'SELECT_EVENT') {
-                const event_id = action.id;
-                const [source_id, short_layer_id, ] = split_merged_id(event_id); // eslint-disable-line array-bracket-spacing
-                const layer_id = merge_ids(source_id, short_layer_id);
-                const event = _.get(state, ['events', event_id], {});
-                const color = _.get(event, 'color', _.get(state, ['layers', layer_id, 'color'], null));
-                this.patch_events(
-                    [
-                        {
-                            id: event_id,
-                            color: shift_lum(color, 70),
-                            textColor: 'white',
-                            selected: true,
-                        },
-                    ]
-                );
-                this._$calendar.fullCalendar('option', {
-                    selectable: false,
-                });
-            }
-
-            if (action.type === 'DESELECT_EVENT') {
-                if (!this._remove_placeholder_event()) {
-                    const fc_event_update = {
-                        id: state.selected_event.id,
-                        selected: false,
-                    };
-
-                    const state_event = _.get(state, ['events', state.selected_event.id], {});
-                    if (!_.isEmpty(state_event.color)) {
-                        fc_event_update.color = shift_lum(state_event.color, 85);
-                        fc_event_update.textColor = shift_lum(state_event.color, 25);
-                    } else {
-                        fc_event_update.color = null;
-                        fc_event_update.textColor = null;
-                    }
-
-                    this.patch_events([fc_event_update]);
-                }
-                this._$calendar.fullCalendar('option', {
-                    selectable: true,
-                });
-            }
-
             next(action);
         };
     }
