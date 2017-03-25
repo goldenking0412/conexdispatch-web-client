@@ -51,7 +51,7 @@ export const event_prop_type = React.PropTypes.shape({
     end: moment_prop_types.momentObject,
     attendees: React.PropTypes.arrayOf(attendee_prop_type),
     reminders: React.PropTypes.arrayOf(reminder_prop_type),
-    kind: React.PropTypes.oneOf(['event#basic']),
+    kind: React.PropTypes.oneOf(['event#basic', 'event#invitation']),
 });
 
 
