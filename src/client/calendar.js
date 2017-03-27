@@ -194,6 +194,7 @@ export default class Calendar {
                 },
             ]
         );
+        this._$calendar.addClass('hide-highlight');
     }
 
     _reducer_deselect_event(state) {
@@ -214,6 +215,7 @@ export default class Calendar {
 
             this.patch_events([fc_event_update]);
         }
+        this._$calendar.removeClass('hide-highlight');
     }
 
     middleware(store) {
@@ -333,6 +335,7 @@ export default class Calendar {
      * FC Event Handlers
      */
     _day_click_handler() {
+        this._$calendar.removeClass('hide-highlight');
         this._store.dispatch(deselect_event());
     }
 

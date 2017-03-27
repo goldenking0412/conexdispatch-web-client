@@ -7,6 +7,20 @@
 @import 'colors';
 /* stylelint-disable */
 
+/**
+ * When an event is selected in Kin, any "selection" made via FC will be
+ * discarded, this gives us the ability to unselect an event (in Kin) by
+ * clicking on any empty spot of the current view.
+ *
+ * Instead of disabling FullCalendar's selection when an event is selected
+ * (which requires to edit an option, triggering a complete redraw of the
+ * current FC view), we simply hide the FC's highlights nodes to not distract
+ * the user into thinking he's actually making a selection.
+ */
+.hide-highlight .fc-highlight {
+    display: none;
+}
+
 /*!
  * FullCalendar v3.3.0 Stylesheet
  * Docs & License: https://fullcalendar.io/

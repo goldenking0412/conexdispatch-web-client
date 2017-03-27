@@ -502,3 +502,7 @@ $react-dates-color-text-focus: $white;
         }
     }
 }
+
+.kin-tooltip-overlay.event-tooltip-overlay {
+    z-index: $kin-tooltip-overlay-zindex - 2; // Make sure we are under .fc-view-container
+}
