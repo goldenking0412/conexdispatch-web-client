@@ -1150,6 +1150,10 @@ be a descendant of the grid when it is being dragged.
 	vertical-align: top;
 }
 
+.fc-time-grid-event.fc-short .fc-time::after {
+    content: "\00a0";
+}
+
 .fc-time-grid-event.fc-short .fc-time span {
 	display: none; /* don't display the full time text... */
 }
