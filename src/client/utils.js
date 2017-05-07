@@ -151,6 +151,11 @@ export const user_config = {
         this[`_${key}`] = value;
         localStorage.setItem(`kin:user_config:${key}`, JSON.stringify(value));
     },
+
+    clear() {
+        // TODO: might be worth only removing keys introduced by `user_config`
+        localStorage.clear();
+    },
 };
 
 
@@ -299,7 +304,7 @@ export function fetch_check_simple_status(error) {
     switch (error.response.status) { // eslint-disable-line default-case
     case 401:
         if (user_config.authenticated) {
-            user_config.token = null;
+            user_config.clear();
         }
         location_redirect('./auth.html');
         break;

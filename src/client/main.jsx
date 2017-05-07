@@ -103,6 +103,7 @@ function init_full_sync(fc_calendar, store) {
 function main() {
     extract_token_from_hash();
     if (!user_config.authenticated) {
+        user_config.clear();
         location_redirect('./auth.html');
         return;
     }
