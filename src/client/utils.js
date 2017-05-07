@@ -30,7 +30,7 @@ export const user_config = {
         default_view: 'agendaWeek',
         display_name: 'No One',
         first_day: 0,
-        timezone: 'Europe/Paris',
+        timezone: '',
         date_format: 'ddd M/D',
         time_format: 'HH:mm',
         default_calendar_id: '',

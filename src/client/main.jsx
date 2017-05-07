@@ -27,7 +27,7 @@ import { start_polling_loop } from './actions/polling';
 import { async_load_sources } from './actions/sources';
 import { async_load_layers } from './actions/layers';
 import { get_full_calendar_view, update_full_calendar_view } from './actions/ui';
-import { async_load_user } from './actions/user';
+import { async_load_user, async_patch_user } from './actions/user';
 
 import reducer from './reducers';
 
@@ -63,10 +63,12 @@ function create_redux_store(...middlewares) {
 
 function guess_timezone() {
     if (_.isEmpty(user_config.timezone)) {
-        const guessed_timezone = moment.tz.guess();
+        const guessed_timezone = moment.tz.guess() || 'Europe/Paris';
         console.log('guessed timezone: %s', guessed_timezone);
         user_config.timezone = guessed_timezone;
+        return true;
     }
+    return false;
 }
 
 
@@ -105,7 +107,7 @@ function main() {
         return;
     }
     setup_message_popup();
-    guess_timezone();
+    const guessed_timezone = guess_timezone();
 
     const fc_calendar = new Calendar();
     const store = create_redux_store(thunk, fc_calendar.middleware.bind(fc_calendar));
@@ -120,9 +122,18 @@ function main() {
             resolve
         );
     });
-    const _async_load_user = store.dispatch(async_load_user());
+
+    const _load_user_promise = (
+        guessed_timezone
+            ? store.dispatch(async_patch_user(
+                { timezone: user_config.timezone },
+                false
+            ))
+            : store.dispatch(async_load_user())
+    );
+
     bluebird
-        .all([_render_promise, _async_load_user])
+        .all([_render_promise, _load_user_promise])
         .then(init_full_sync.bind(undefined, fc_calendar, store))
         .catch((err) => {
             // TODO: we should have a util abstracting this, handling not
