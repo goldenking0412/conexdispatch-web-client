@@ -35,7 +35,7 @@
     "react-addons-css-transition-group": "^15.1.0",
     "react-addons-perf": "^15.4.1",
     "react-addons-shallow-compare": "^15.4.1",
-    "react-dates": "^8.0.0",
+    "react-dates": "^12.0.0",
     "react-dom": "^15.1.0",
     "react-redux": "^5.0.1",
     "redux": "^3.5.2",

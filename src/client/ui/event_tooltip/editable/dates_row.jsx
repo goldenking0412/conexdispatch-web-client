@@ -109,6 +109,7 @@ export default class DatesRow extends React.Component {
             numberOfMonths: 1,
             onDatesChange: this._on_picker_dates_change,
             onFocusChange: this._on_focus_change,
+            hideKeyboardShortcutsPanel: true,
         };
 
         const time_range_picker_props = {
