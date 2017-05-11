@@ -30,7 +30,7 @@
     "moment-timezone": "^0.5.4",
     "normalize-wheel": "^1.0.1",
     "popper.js": "^1.0.8",
-    "push.js": "0.0.12",
+    "push.js": "0.0.13",
     "react": "^15.1.0",
     "react-addons-css-transition-group": "^15.1.0",
     "react-addons-perf": "^15.4.1",
