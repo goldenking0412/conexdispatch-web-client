@@ -4,14 +4,12 @@
  * Apache 2.0 Licensed
  */
 
+import moment from "moment-timezone";
+import React from "react";
+import TimeInput from "time-input";
 
-import moment from 'moment-timezone';
-import React from 'react';
-import TimeInput from 'time-input';
-
-import { moment_prop_types } from '../../../prop_types';
-import { user_config } from '../../../utils';
-
+import { moment_prop_types } from "../../../prop_types";
+import { user_config } from "../../../utils";
 
 export default class TimeRangePicker extends React.Component {
     constructor(props) {
@@ -30,8 +28,8 @@ export default class TimeRangePicker extends React.Component {
     _time_strings_from_props(props) {
         // TODO: fix this, time-input silences any input
         const output = {
-            start_time: props.start !== null ? props.start.format(props.time_format) : '',
-            end_time: props.end !== null ? props.end.format(props.time_format) : '',
+            start_time: props.start !== null ? props.start.format(props.time_format) : "",
+            end_time: props.end !== null ? props.end.format(props.time_format) : ""
         };
         return output;
     }
@@ -47,8 +45,8 @@ export default class TimeRangePicker extends React.Component {
         // Let's add each time component on the moment_obj
         const moment_obj_copy = moment(moment_obj);
         moment_obj_copy.set({
-            hour: time.get('hour'),
-            minute: time.get('minute'),
+            hour: time.get("hour"),
+            minute: time.get("minute")
         });
         return moment_obj_copy;
     }
@@ -81,29 +79,21 @@ export default class TimeRangePicker extends React.Component {
     render() {
         return (
             <div>
-                <TimeInput
-                  value={this.state.start_time}
-                  onChange={this._on_start_input_change}
-                />
-                <TimeInput
-                  value={this.state.end_time}
-                  onChange={this._on_end_input_change}
-                />
+                <TimeInput value={this.state.start_time} onChange={this._on_start_input_change} />
+                <TimeInput value={this.state.end_time} onChange={this._on_end_input_change} />
             </div>
         );
     }
 }
 
-
 TimeRangePicker.defaultProps = {
     end: null,
-    start: null,
+    start: null
 };
-
 
 TimeRangePicker.propTypes = {
     end: moment_prop_types.momentObject,
     on_dates_change: React.PropTypes.func,
     start: moment_prop_types.momentObject,
-    time_format: React.PropTypes.string,
+    time_format: React.PropTypes.string
 };

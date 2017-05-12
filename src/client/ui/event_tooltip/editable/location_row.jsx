@@ -4,21 +4,24 @@
  * Apache 2.0 Licensed
  */
 
+import classnames from "classnames";
+import React from "react";
+import _ from "lodash";
 
-import classnames from 'classnames';
-import React from 'react';
-import _ from 'lodash';
-
-import { api_url, fetch_check, fetch_check_simple_status, fetch_options,
-    split_merged_id } from '../../../utils';
-
+import {
+    api_url,
+    fetch_check,
+    fetch_check_simple_status,
+    fetch_options,
+    split_merged_id
+} from "../../../utils";
 
 export default class LocationRow extends React.Component {
     constructor() {
         super();
 
         this.state = {
-            results: [],
+            results: []
         };
 
         this.autocomplete = this.autocomplete.bind(this);
@@ -42,7 +45,7 @@ export default class LocationRow extends React.Component {
             <div className="autocompletor-results">
                 <table>
                     <tbody>
-                        {_.map(this.state.results, (location) => {
+                        {_.map(this.state.results, location => {
                             return (
                                 <tr
                                   key={location}
@@ -71,19 +74,16 @@ export default class LocationRow extends React.Component {
         if (_.isEmpty(this.location)) {
             this.clean_autocomplete_results();
         } else {
-            const [source_id, ] = split_merged_id(this.props.layer_id); // eslint-disable-line array-bracket-spacing
-            const url = api_url(
-                `/sources/${escape(source_id)}/places`,
-                {
-                    input: this.location,
-                }
-            );
+            const [source_id] = split_merged_id(this.props.layer_id); // eslint-disable-line array-bracket-spacing
+            const url = api_url(`/sources/${escape(source_id)}/places`, {
+                input: this.location
+            });
             fetch(url, fetch_options())
                 .then(fetch_check)
                 .catch(fetch_check_simple_status)
-                .then((json_res) => {
+                .then(json_res => {
                     this.setState({
-                        results: _.map(_.get(json_res, 'places', []), 'description'),
+                        results: _.map(_.get(json_res, "places", []), "description")
                     });
                 });
         }
@@ -91,12 +91,12 @@ export default class LocationRow extends React.Component {
 
     clean_autocomplete_results() {
         this.setState({
-            results: [],
+            results: []
         });
     }
 
     select_location(event) {
-        const location = $(event.target).closest('tr').data('value');
+        const location = $(event.target).closest("tr").data("value");
         if (!_.isUndefined(location)) {
             this.props.on_change(location);
         }
@@ -118,7 +118,9 @@ export default class LocationRow extends React.Component {
                       onBlur={this.props.on_blur}
                       onChange={this._on_change}
                       onFocus={this.props.on_focus}
-                      ref={(ref) => { this.event_location_input = ref; }}
+                      ref={ref => {
+                          this.event_location_input = ref;
+                      }}
                     />
                     {this._render_results()}
                 </label>
@@ -127,7 +129,6 @@ export default class LocationRow extends React.Component {
     }
 }
 
-
 LocationRow.propTypes = {
     layer_id: React.PropTypes.string,
     location: React.PropTypes.string,
@@ -135,5 +136,5 @@ LocationRow.propTypes = {
     on_blur: React.PropTypes.func,
     on_change: React.PropTypes.func,
     on_focus: React.PropTypes.func,
-    focused: React.PropTypes.bool,
+    focused: React.PropTypes.bool
 };

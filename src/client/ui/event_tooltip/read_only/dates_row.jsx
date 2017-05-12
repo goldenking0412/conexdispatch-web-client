@@ -4,14 +4,12 @@
  * Apache 2.0 Licensed
  */
 
+import moment from "moment-timezone";
+import React from "react";
+import _ from "lodash";
 
-import moment from 'moment-timezone';
-import React from 'react';
-import _ from 'lodash';
-
-import { moment_prop_types } from '../../../prop_types';
-import { user_config } from '../../../utils';
-
+import { moment_prop_types } from "../../../prop_types";
+import { user_config } from "../../../utils";
 
 export default class DatesRow extends React.Component {
     /**
@@ -42,7 +40,7 @@ export default class DatesRow extends React.Component {
      * Monday, Dec 12th 2016  10:00
      */
     _partial_render() {
-        const _format_prop = (prop_name) => {
+        const _format_prop = prop_name => {
             const value = this.props[prop_name];
             if (_.isEmpty(value)) {
                 // TODO: there is a similar style in edit subtooltips (no reminders, no invitees)?
@@ -62,8 +60,8 @@ export default class DatesRow extends React.Component {
 
         return (
             <div className="dates-row row">
-                {_format_prop('start')}
-                {_format_prop('end')}
+                {_format_prop("start")}
+                {_format_prop("end")}
             </div>
         );
     }
@@ -79,12 +77,12 @@ export default class DatesRow extends React.Component {
             <div className="dates-row row">
                 <div className="datetimes-wrapper">
                     <p>
-                        {this._format_date('start')}
+                        {this._format_date("start")}
                         &nbsp;
                         {this._time_cell(this.props.start, this.props.all_day)}
                     </p>
                     <p>
-                        {this._format_date('end')}
+                        {this._format_date("end")}
                         &nbsp;
                         {this._time_cell(this.props.end, this.props.all_day)}
                     </p>
@@ -107,7 +105,7 @@ export default class DatesRow extends React.Component {
             <div className="dates-row row">
                 <div className="datetimes-wrapper">
                     <p>
-                        {this._format_date('start')}
+                        {this._format_date("start")}
                     </p>
                     <p>
                         {this._time_cell(this.props.start, this.props.all_day)}
@@ -124,14 +122,14 @@ export default class DatesRow extends React.Component {
 
     _format_date(prop_name) {
         let value = this.props[prop_name];
-        if (this.props.all_day && prop_name === 'end') {
+        if (this.props.all_day && prop_name === "end") {
             // In all-day mode, the end day is "inclusive":
             // An event stored as Fri 1 00:00 -> Sun 3 00:00 should be displayed ass Fri 1 -> Sat 2
-            value = moment(value).subtract(1, 'day');
+            value = moment(value).subtract(1, "day");
         }
         return (
             <span className="date-cell">
-                {value.format('dddd, MMM Do YYYY')}
+                {value.format("dddd, MMM Do YYYY")}
             </span>
         );
     }
@@ -160,16 +158,15 @@ export default class DatesRow extends React.Component {
         if (empty_start || empty_end) {
             return this._partial_render();
         }
-        if (this.props.start.isSame(this.props.end, 'day')) {
+        if (this.props.start.isSame(this.props.end, "day")) {
             return this._shortcut_render();
         }
         return this._verbose_render();
     }
 }
 
-
 DatesRow.propTypes = {
     all_day: React.PropTypes.bool,
     start: moment_prop_types.momentObject,
-    end: moment_prop_types.momentObject,
+    end: moment_prop_types.momentObject
 };

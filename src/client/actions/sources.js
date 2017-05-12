@@ -4,48 +4,49 @@
  * Apache 2.0 Licensed
  */
 
+import "whatwg-fetch";
+import _ from "lodash";
 
-import 'whatwg-fetch';
-import _ from 'lodash';
+import {
+    api_url,
+    fetch_check,
+    fetch_check_simple_status,
+    fetch_check_advanced_status,
+    fetch_options,
+    location_redirect,
+    split_source_id
+} from "../utils";
 
-import { api_url, fetch_check, fetch_check_simple_status,
-    fetch_check_advanced_status, fetch_options, location_redirect,
-    split_source_id } from '../utils';
-
-
-export const add_sources = (sources) => {
+export const add_sources = sources => {
     return {
-        type: 'ADD_SOURCES',
-        sources,
+        type: "ADD_SOURCES",
+        sources
     };
 };
-
 
 export const patch_source = (id, patch) => {
     return {
-        type: 'PATCH_SOURCE',
+        type: "PATCH_SOURCE",
         id,
-        patch,
+        patch
     };
 };
 
-
-export const delete_sources = (ids) => {
+export const delete_sources = ids => {
     return {
-        type: 'DELETE_SOURCES',
-        ids,
+        type: "DELETE_SOURCES",
+        ids
     };
 };
-
 
 export const async_load_sources = () => {
-    return (dispatch) => {
-        return fetch(api_url('/sources'), fetch_options())
+    return dispatch => {
+        return fetch(api_url("/sources"), fetch_options())
             .then(fetch_check)
             .catch(fetch_check_simple_status)
             .catch(_.partial(fetch_check_advanced_status, dispatch))
-            .then((json_res) => {
-                _.forEach(json_res.sources, (source) => {
+            .then(json_res => {
+                _.forEach(json_res.sources, source => {
                     source.loaded = false; // eslint-disable-line no-param-reassign
                 });
                 dispatch(add_sources(json_res.sources));
@@ -53,15 +54,14 @@ export const async_load_sources = () => {
     };
 };
 
-
-export const async_deauth_source = (source_id) => {
-    return (dispatch) => {
+export const async_deauth_source = source_id => {
+    return dispatch => {
         const { provider_name } = split_source_id(source_id);
         return fetch(api_url(`/source/${provider_name}/deauth/${source_id}`), fetch_options())
             .then(fetch_check)
             .catch(fetch_check_simple_status)
             .catch(_.partial(fetch_check_advanced_status, dispatch))
-            .then((res_json) => {
+            .then(res_json => {
                 location_redirect(res_json.redirect);
             });
     };

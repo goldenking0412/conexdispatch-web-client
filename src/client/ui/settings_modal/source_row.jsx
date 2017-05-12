@@ -4,14 +4,12 @@
  * Apache 2.0 Licensed
  */
 
+import classnames from "classnames";
+import React from "react";
+import _ from "lodash";
 
-import classnames from 'classnames';
-import React from 'react';
-import _ from 'lodash';
-
-import { api_url, providers, user_config } from '../../utils';
-import { async_deauth_source } from '../../actions/sources';
-
+import { api_url, providers, user_config } from "../../utils";
+import { async_deauth_source } from "../../actions/sources";
 
 export default class SettingsModalSourceRow extends React.Component {
     constructor() {
@@ -20,25 +18,25 @@ export default class SettingsModalSourceRow extends React.Component {
     }
 
     _on_deauth_click(event) {
-        const source_id = $(event.target).data('source-id');
+        const source_id = $(event.target).data("source-id");
         this.props.dispatch(async_deauth_source(source_id));
     }
 
     _get_connect_classes() {
-        return classnames('button', 'small', 'primary', {
-            hide: !_.isEmpty(this.props.id),
+        return classnames("button", "small", "primary", {
+            hide: !_.isEmpty(this.props.id)
         });
     }
 
     _get_reconnect_classes() {
-        return classnames('button', 'small', 'primary', {
-            hide: this.props.status !== 'disconnected',
+        return classnames("button", "small", "primary", {
+            hide: this.props.status !== "disconnected"
         });
     }
 
     _get_disconnect_classes() {
-        return classnames('button', 'small', 'alert', {
-            hide: _.isEmpty(this.props.id),
+        return classnames("button", "small", "alert", {
+            hide: _.isEmpty(this.props.id)
         });
     }
 
@@ -47,7 +45,7 @@ export default class SettingsModalSourceRow extends React.Component {
             <tr>
                 <td>
                     {(() => {
-                        if (this.props.status === 'disconnected') {
+                        if (this.props.status === "disconnected") {
                             return (
                                 <div className="disconnect-overlay">
                                     <span className="fa fa-exclamation-triangle" />
@@ -64,7 +62,7 @@ export default class SettingsModalSourceRow extends React.Component {
                 </td>
                 <td>
                     {_.capitalize(this.props.name)}
-                    {this.props.sub_title ? <em><br />{this.props.sub_title}</em> : ''}
+                    {this.props.sub_title ? <em><br />{this.props.sub_title}</em> : ""}
                 </td>
                 <td>
                     <a
@@ -98,5 +96,5 @@ SettingsModalSourceRow.propTypes = {
     status: React.PropTypes.string,
     name: React.PropTypes.string,
     sub_title: React.PropTypes.string,
-    dispatch: React.PropTypes.func,
+    dispatch: React.PropTypes.func
 };

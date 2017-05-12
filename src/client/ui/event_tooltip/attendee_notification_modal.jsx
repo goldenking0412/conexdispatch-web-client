@@ -4,10 +4,8 @@
  * Apache 2.0 Licensed
  */
 
-
-import { connect } from 'react-redux';
-import React from 'react';
-
+import { connect } from "react-redux";
+import React from "react";
 
 class AttendeeNotificationModal extends React.Component {
     constructor() {
@@ -22,15 +20,17 @@ class AttendeeNotificationModal extends React.Component {
 
     _save_event(notify_attendees = false) {
         const $modal = $(this.modal);
-        $modal.foundation('close');
-        const action = $modal.data('action');
+        $modal.foundation("close");
+        const action = $modal.data("action");
         this.props.dispatch(action(notify_attendees));
     }
 
     render() {
         return (
             <div
-              ref={(ref) => { this.modal = ref; }}
+              ref={ref => {
+                  this.modal = ref;
+              }}
               id="attendee-notification-modal"
               className="reveal"
               data-reveal
@@ -42,16 +42,10 @@ class AttendeeNotificationModal extends React.Component {
                     <em>You&apos;ve updated this event</em>
                 </header>
                 <div className="button-group text-center callout">
-                    <a
-                      className="primary button expanded"
-                      onClick={this.send}
-                    >
+                    <a className="primary button expanded" onClick={this.send}>
                         Send
                     </a>
-                    <a
-                      className="secondary button expanded"
-                      onClick={this.dont_send}
-                    >
+                    <a className="secondary button expanded" onClick={this.dont_send}>
                         Don&apos;t send
                     </a>
                 </div>
@@ -60,11 +54,9 @@ class AttendeeNotificationModal extends React.Component {
     }
 }
 
-
 AttendeeNotificationModal.propTypes = {
-    dispatch: React.PropTypes.func,
+    dispatch: React.PropTypes.func
 };
-
 
 const AttendeeNotificationModalContainer = connect()(AttendeeNotificationModal);
 export default AttendeeNotificationModalContainer;

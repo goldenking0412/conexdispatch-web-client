@@ -4,9 +4,7 @@
  * Apache 2.0 Licensed
  */
 
-
-import React from 'react';
-
+import React from "react";
 
 export default class SubtooltipOpenerRow extends React.Component {
     constructor() {
@@ -37,11 +35,10 @@ export default class SubtooltipOpenerRow extends React.Component {
     }
 }
 
-
 SubtooltipOpenerRow.propTypes = {
     children: React.PropTypes.oneOfType([
         React.PropTypes.arrayOf(React.PropTypes.node),
         React.PropTypes.node
     ]),
-    open: React.PropTypes.func,
+    open: React.PropTypes.func
 };

@@ -4,20 +4,18 @@
  * Apache 2.0 Licensed
  */
 
+import classnames from "classnames";
+import React from "react";
+import { connect } from "react-redux";
 
-import classnames from 'classnames';
-import React from 'react';
-import { connect } from 'react-redux';
+import { EVENTS_NS } from "../config";
 
-import { EVENTS_NS } from '../config';
-
-import { deselect_event } from '../actions/events';
-import { toggle_sidebar } from '../actions/ui';
-import CalendarToolbar from './calendar_toolbar';
-import EventTooltip from './event_tooltip/base';
-import SettingsModal from './settings_modal/base';
-import SourcesList from './sources_list';
-
+import { deselect_event } from "../actions/events";
+import { toggle_sidebar } from "../actions/ui";
+import CalendarToolbar from "./calendar_toolbar";
+import EventTooltip from "./event_tooltip/base";
+import SettingsModal from "./settings_modal/base";
+import SourcesList from "./sources_list";
 
 class App extends React.Component {
     constructor(props) {
@@ -43,7 +41,7 @@ class App extends React.Component {
 
     open_settings_modal(event) {
         event.preventDefault();
-        $('#settings-modal').foundation('open');
+        $("#settings-modal").foundation("open");
     }
 
     toggle_sidebar(event) {
@@ -52,13 +50,8 @@ class App extends React.Component {
     }
 
     render() {
-        const content_classes = classnames(
-            'content',
-            { margin: this.props.sidebar.show }
-        );
-        const aside_classes = classnames(
-            { show: this.props.sidebar.show }
-        );
+        const content_classes = classnames("content", { margin: this.props.sidebar.show });
+        const aside_classes = classnames({ show: this.props.sidebar.show });
 
         return (
             <div>
@@ -91,17 +84,15 @@ class App extends React.Component {
 App.propTypes = {
     dispatch: React.PropTypes.func,
     sidebar: React.PropTypes.shape({
-        show: React.PropTypes.bool,
-    }),
+        show: React.PropTypes.bool
+    })
 };
-
 
 function map_state_props(state) {
     return {
-        sidebar: state.ui.sidebar,
+        sidebar: state.ui.sidebar
     };
 }
-
 
 const AppContainer = connect(map_state_props)(App);
 export default AppContainer;

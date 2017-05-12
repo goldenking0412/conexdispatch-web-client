@@ -4,15 +4,13 @@
  * Apache 2.0 Licensed
  */
 
+import React from "react";
+import _ from "lodash";
 
-import React from 'react';
-import _ from 'lodash';
-
-import { expanded_source_prop_type } from '../../prop_types';
-import { split_source_id, user_config } from '../../utils';
-import { async_patch_user } from '../../actions/user';
-import { async_refresh_layers } from '../../actions/polling';
-
+import { expanded_source_prop_type } from "../../prop_types";
+import { split_source_id, user_config } from "../../utils";
+import { async_patch_user } from "../../actions/user";
+import { async_refresh_layers } from "../../actions/polling";
 
 export default class SettingsModalSettingsTab extends React.Component {
     constructor() {
@@ -26,22 +24,24 @@ export default class SettingsModalSettingsTab extends React.Component {
 
     refresh_layers() {
         const $button = $(this.refresh_button);
-        $button.addClass('disabled');
+        $button.addClass("disabled");
         this.props
             .dispatch(async_refresh_layers(false))
             .then(() => {
-                $button.removeClass('disabled');
+                $button.removeClass("disabled");
             })
             .catch(() => {
-                $button.removeClass('disabled');
+                $button.removeClass("disabled");
             });
     }
 
     select_first_day(event) {
         const first_day = parseInt($(event.target).val(), 10);
-        this.props.dispatch(async_patch_user({
-            first_day,
-        }));
+        this.props.dispatch(
+            async_patch_user({
+                first_day
+            })
+        );
     }
 
     select_time_format(event) {
@@ -58,9 +58,11 @@ export default class SettingsModalSettingsTab extends React.Component {
 
     select_default_calendar_id(js_event) {
         const default_calendar_id = $(js_event.target).val();
-        this.props.dispatch(async_patch_user({
-            default_calendar_id,
-        }));
+        this.props.dispatch(
+            async_patch_user({
+                default_calendar_id
+            })
+        );
     }
 
     render() {
@@ -68,7 +70,9 @@ export default class SettingsModalSettingsTab extends React.Component {
             <div className="tabs-panel is-active" id="settings-preferences">
                 <p className="text-center">
                     <button
-                      ref={(ref) => { this.refresh_button = ref; }}
+                      ref={ref => {
+                          this.refresh_button = ref;
+                      }}
                       className="button primary"
                       onClick={this.refresh_layers}
                     >
@@ -95,18 +99,18 @@ export default class SettingsModalSettingsTab extends React.Component {
                                         const first_days = [
                                             {
                                                 value: 1,
-                                                name: 'Monday'
+                                                name: "Monday"
                                             },
                                             {
                                                 value: 0,
-                                                name: 'Sunday',
+                                                name: "Sunday"
                                             },
                                             {
                                                 value: 6,
-                                                name: 'Saturday',
-                                            },
+                                                name: "Saturday"
+                                            }
                                         ];
-                                        return _.map(first_days, (day) => {
+                                        return _.map(first_days, day => {
                                             return (
                                                 <option value={day.value} key={day.value}>
                                                     {day.name}
@@ -132,15 +136,15 @@ export default class SettingsModalSettingsTab extends React.Component {
                                     {(() => {
                                         const date_formats = [
                                             {
-                                                value: 'ddd D MMM',
-                                                name: 'Tue 4 Oct',
+                                                value: "ddd D MMM",
+                                                name: "Tue 4 Oct"
                                             },
                                             {
-                                                value: 'ddd M/D',
-                                                name: 'Tue 10/4',
-                                            },
+                                                value: "ddd M/D",
+                                                name: "Tue 10/4"
+                                            }
                                         ];
-                                        return _.map(date_formats, (date_format) => {
+                                        return _.map(date_formats, date_format => {
                                             return (
                                                 <option
                                                   key={date_format.value}
@@ -169,15 +173,15 @@ export default class SettingsModalSettingsTab extends React.Component {
                                     {(() => {
                                         const time_formats = [
                                             {
-                                                value: 'h:mm A',
-                                                name: '1:00 PM'
+                                                value: "h:mm A",
+                                                name: "1:00 PM"
                                             },
                                             {
-                                                value: 'HH:mm',
-                                                name: '13:00',
-                                            },
+                                                value: "HH:mm",
+                                                name: "13:00"
+                                            }
                                         ];
-                                        return _.map(time_formats, (time_format) => {
+                                        return _.map(time_formats, time_format => {
                                             return (
                                                 <option
                                                   key={time_format.value}
@@ -206,16 +210,16 @@ export default class SettingsModalSettingsTab extends React.Component {
                                   onChange={this.select_default_calendar_id}
                                   value={user_config.default_calendar_id}
                                 >
-                                    {_.map(this.props.create_able_sources, (source) => {
+                                    {_.map(this.props.create_able_sources, source => {
                                         const { provider_name } = split_source_id(source.id);
                                         return (
-                                            <optgroup label={`${provider_name} - ${source.email}`} key={source.id}>
-                                                {_.map(source.layers, (layer) => {
+                                            <optgroup
+                                              label={`${provider_name} - ${source.email}`}
+                                              key={source.id}
+                                            >
+                                                {_.map(source.layers, layer => {
                                                     return (
-                                                        <option
-                                                          value={layer.id}
-                                                          key={layer.id}
-                                                        >
+                                                        <option value={layer.id} key={layer.id}>
                                                             {layer.title}
                                                         </option>
                                                     );
@@ -233,8 +237,7 @@ export default class SettingsModalSettingsTab extends React.Component {
     }
 }
 
-
 SettingsModalSettingsTab.propTypes = {
     dispatch: React.PropTypes.func,
-    create_able_sources: React.PropTypes.objectOf(expanded_source_prop_type),
+    create_able_sources: React.PropTypes.objectOf(expanded_source_prop_type)
 };

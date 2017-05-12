@@ -4,24 +4,26 @@
  * Apache 2.0 Licensed
  */
 
+import "fullcalendar";
+import moment from "moment";
+import normalize_wheel from "normalize-wheel";
+import _ from "lodash";
 
-import 'fullcalendar';
-import moment from 'moment';
-import normalize_wheel from 'normalize-wheel';
-import _ from 'lodash';
-
-import { EVENTS_NS } from './config';
-import { fetch_error, is_create_able_layer,
-         merge_ids, create_message_popup, shift_lum,
-         user_config, split_merged_id } from './utils';
-import { async_save_event, create_event,
-        deselect_event, select_event } from './actions/events';
-import { get_full_calendar_view, update_full_calendar_view } from './actions/ui';
-
+import { EVENTS_NS } from "./config";
+import {
+    fetch_error,
+    is_create_able_layer,
+    merge_ids,
+    create_message_popup,
+    shift_lum,
+    user_config,
+    split_merged_id
+} from "./utils";
+import { async_save_event, create_event, deselect_event, select_event } from "./actions/events";
+import { get_full_calendar_view, update_full_calendar_view } from "./actions/ui";
 
 const SCROLL_COOLDOWN = 500;
-const META_LAYER_CREATE_EVENT = 'kin-0:meta-create-layer';
-
+const META_LAYER_CREATE_EVENT = "kin-0:meta-create-layer";
 
 function _layer_to_fc_event_source(layer) {
     const fc_event_source = {
@@ -29,19 +31,18 @@ function _layer_to_fc_event_source(layer) {
         color: shift_lum(layer.color, 85),
         textColor: shift_lum(layer.color, 10),
         borderColor: shift_lum(layer.color, 70),
-        editable: _.get(layer, ['acl', 'edit'], false),
+        editable: _.get(layer, ["acl", "edit"], false)
     };
     return fc_event_source;
 }
 
-
 function _event_to_fc_event(timezone, event) {
     const fc_event = _.cloneDeep(event);
 
-    fc_event.className = '';
+    fc_event.className = "";
     if (!_.isEmpty(fc_event.kind)) {
-        if (fc_event.kind.indexOf('invitation') !== -1) {
-            fc_event.className = 'striped';
+        if (fc_event.kind.indexOf("invitation") !== -1) {
+            fc_event.className = "striped";
         }
     }
 
@@ -50,13 +51,13 @@ function _event_to_fc_event(timezone, event) {
     }
 
     if (!_.isNull(fc_event.start) && !_.isNull(fc_event.end)) {
-        const diff = fc_event.end.diff(fc_event.start, 'minutes');
+        const diff = fc_event.end.diff(fc_event.start, "minutes");
         if (diff < 30) {
-            fc_event.end = moment(fc_event.start).add(30, 'minutes');
+            fc_event.end = moment(fc_event.start).add(30, "minutes");
         }
         if (diff > 24 * 60) {
             fc_event.allDay = true;
-            fc_event.end.subtract(1, 'minute').add(1, 'day');
+            fc_event.end.subtract(1, "minute").add(1, "day");
         }
     }
 
@@ -76,7 +77,6 @@ function _event_to_fc_event(timezone, event) {
     return fc_event;
 }
 
-
 export default class Calendar {
     constructor() {
         this._day_click_handler = this._day_click_handler.bind(this);
@@ -93,7 +93,7 @@ export default class Calendar {
             PATCH_EVENTS: this._reducer_patch_events,
             PATCH_LAYER: this._reducer_patch_layer,
             SELECT_EVENT: this._reducer_select_event,
-            TOGGLE_SIDEBAR: this._reducer_toggle_sidebar,
+            TOGGLE_SIDEBAR: this._reducer_toggle_sidebar
         };
     }
 
@@ -102,7 +102,7 @@ export default class Calendar {
         this._$calendar = this._create_fullcalendar($parent);
 
         this._update_view_switch();
-        $parent.data('calendar', this);
+        $parent.data("calendar", this);
 
         this._last_scroll = performance.now();
     }
@@ -123,22 +123,22 @@ export default class Calendar {
                 acl: {
                     create: false,
                     edit: false,
-                    delete: false,
+                    delete: false
                 },
-                color: '#EC4956',
-                text_color: '#FFFFFF',
+                color: "#EC4956",
+                text_color: "#FFFFFF",
                 events: [],
                 selected: true,
-                loaded: true,
+                loaded: true
             });
             event_source.events = fc_events;
             this.add_layer(event_source);
         } else {
             const layers_update = {};
-            _.forEach(action.events, (event) => {
-                const [source_id, short_layer_id, ] = split_merged_id(event.id); // eslint-disable-line array-bracket-spacing
+            _.forEach(action.events, event => {
+                const [source_id, short_layer_id] = split_merged_id(event.id); // eslint-disable-line array-bracket-spacing
                 const layer_id = merge_ids(source_id, short_layer_id);
-                if (_.get(state, ['layers', layer_id, 'loaded'], false)) {
+                if (_.get(state, ["layers", layer_id, "loaded"], false)) {
                     const fc_event = _event_to_fc_event(user_config.timezone, event);
                     if (!(layer_id in layers_update)) {
                         layers_update[layer_id] = [];
@@ -180,31 +180,29 @@ export default class Calendar {
 
     _reducer_select_event(state, action) {
         const event_id = action.id;
-        const [source_id, short_layer_id, ] = split_merged_id(event_id); // eslint-disable-line array-bracket-spacing
+        const [source_id, short_layer_id] = split_merged_id(event_id); // eslint-disable-line array-bracket-spacing
         const layer_id = merge_ids(source_id, short_layer_id);
-        const event = _.get(state, ['events', event_id], {});
-        const color = _.get(event, 'color', _.get(state, ['layers', layer_id, 'color'], null));
-        this.patch_events(
-            [
-                {
-                    id: event_id,
-                    color: shift_lum(color, 70),
-                    textColor: 'white',
-                    selected: true,
-                },
-            ]
-        );
-        this._$calendar.addClass('hide-highlight');
+        const event = _.get(state, ["events", event_id], {});
+        const color = _.get(event, "color", _.get(state, ["layers", layer_id, "color"], null));
+        this.patch_events([
+            {
+                id: event_id,
+                color: shift_lum(color, 70),
+                textColor: "white",
+                selected: true
+            }
+        ]);
+        this._$calendar.addClass("hide-highlight");
     }
 
     _reducer_deselect_event(state) {
         if (!this._remove_placeholder_event()) {
             const fc_event_update = {
                 id: state.selected_event.id,
-                selected: false,
+                selected: false
             };
 
-            const state_event = _.get(state, ['events', state.selected_event.id], {});
+            const state_event = _.get(state, ["events", state.selected_event.id], {});
             if (!_.isEmpty(state_event.color)) {
                 fc_event_update.color = shift_lum(state_event.color, 85);
                 fc_event_update.textColor = shift_lum(state_event.color, 25);
@@ -215,11 +213,11 @@ export default class Calendar {
 
             this.patch_events([fc_event_update]);
         }
-        this._$calendar.removeClass('hide-highlight');
+        this._$calendar.removeClass("hide-highlight");
     }
 
     middleware(store) {
-        return next => (action) => {
+        return next => action => {
             const state = store.getState();
             const reducer_fn = _.get(this._reducer, action.type);
             if (_.isFunction(reducer_fn)) {
@@ -239,34 +237,31 @@ export default class Calendar {
         $(window).off(`resize.${EVENTS_NS}`);
     }
 
-
     /*
      * Custom Event Handlers
      */
     resize() {
-        const width = $('.content').width();
+        const width = $(".content").width();
         const height = $(window).height() - 35;
         const ratio = width / height;
-        this._$calendar.fullCalendar('option', 'aspectRatio', ratio);
+        this._$calendar.fullCalendar("option", "aspectRatio", ratio);
     }
 
     scroll(event) {
-        const current_view = this._$calendar.fullCalendar('getView').name;
+        const current_view = this._$calendar.fullCalendar("getView").name;
         const normalized = normalize_wheel(event.originalEvent);
 
-        if (normalized.pixelY === 0 || current_view === 'month') {
-            if ((performance.now() - this._last_scroll) > SCROLL_COOLDOWN) {
+        if (normalized.pixelY === 0 || current_view === "month") {
+            if (performance.now() - this._last_scroll > SCROLL_COOLDOWN) {
                 if (normalized.pixelX <= -10 || normalized.pixelY <= -10) {
                     this._store.dispatch(deselect_event());
-                    this._$calendar.fullCalendar('prev');
-                    this._store.dispatch(
-                        update_full_calendar_view(get_full_calendar_view()));
+                    this._$calendar.fullCalendar("prev");
+                    this._store.dispatch(update_full_calendar_view(get_full_calendar_view()));
                     this._last_scroll = performance.now();
                 } else if (normalized.pixelX >= 10 || normalized.pixelY >= 10) {
                     this._store.dispatch(deselect_event());
-                    this._$calendar.fullCalendar('next');
-                    this._store.dispatch(
-                        update_full_calendar_view(get_full_calendar_view()));
+                    this._$calendar.fullCalendar("next");
+                    this._store.dispatch(update_full_calendar_view(get_full_calendar_view()));
                     this._last_scroll = performance.now();
                 }
             }
@@ -275,67 +270,68 @@ export default class Calendar {
         return true;
     }
 
-
     /*
      * Data Manipulations
      */
     add_layer(layer) {
         this.remove_layer(layer.id);
-        this._$calendar.fullCalendar('addEventSource', layer);
+        this._$calendar.fullCalendar("addEventSource", layer);
     }
 
     remove_layer(layer_id) {
-        const fc_event_source = this._$calendar.fullCalendar('getEventSourceById', layer_id);
+        const fc_event_source = this._$calendar.fullCalendar("getEventSourceById", layer_id);
         if (fc_event_source !== undefined) {
             // Otherwise FullCalendar will still report event changes even with an empty source
-            this._$calendar.fullCalendar('removeEventSource', layer_id);
+            this._$calendar.fullCalendar("removeEventSource", layer_id);
         }
     }
 
     add_events(layer_id, fc_events) {
         // All events should have an ID matching the layer_id
         if (!_.isEmpty(fc_events)) {
-            const fc_event_source = this._$calendar.fullCalendar('getEventSourceById', layer_id);
-            this._$calendar.fullCalendar('removeEventSource', fc_event_source);
+            const fc_event_source = this._$calendar.fullCalendar("getEventSourceById", layer_id);
+            this._$calendar.fullCalendar("removeEventSource", fc_event_source);
             const events = _(fc_event_source.events)
-                  .keyBy('id')
-                  .assign(_.keyBy(fc_events, 'id'))
-                  .values()
-                  .value();
+                .keyBy("id")
+                .assign(_.keyBy(fc_events, "id"))
+                .values()
+                .value();
             fc_event_source.events = events;
-            this._$calendar.fullCalendar('addEventSource', fc_event_source);
+            this._$calendar.fullCalendar("addEventSource", fc_event_source);
         }
     }
 
     remove_events(fc_events_id) {
         if (!_.isEmpty(fc_events_id)) {
             this._$calendar.fullCalendar(
-                'removeEvents', fc_event => fc_events_id.indexOf(fc_event._id) !== -1);
+                "removeEvents",
+                fc_event => fc_events_id.indexOf(fc_event._id) !== -1
+            );
         }
     }
 
     patch_events(fc_events_patch) {
-        _.forEach(fc_events_patch, (fc_event_patch) => {
+        _.forEach(fc_events_patch, fc_event_patch => {
             // Will remove all properties set `undefined` in `fc_event_patch`
-            const fc_event = this._$calendar.fullCalendar('clientEvents', fc_event_patch.id)[0];
-            if (!_.isUndefined(fc_event)) { // Events can become undefined due to updates etc ...
+            const fc_event = this._$calendar.fullCalendar("clientEvents", fc_event_patch.id)[0];
+            if (!_.isUndefined(fc_event)) {
+                // Events can become undefined due to updates etc ...
                 _.merge(fc_event, fc_event_patch);
                 _(fc_event_patch).forEach((val, prop) => {
                     if (val === undefined) {
                         delete fc_event[prop];
                     }
                 });
-                this._$calendar.fullCalendar('updateEvent', fc_event);
+                this._$calendar.fullCalendar("updateEvent", fc_event);
             }
         });
     }
-
 
     /*
      * FC Event Handlers
      */
     _day_click_handler() {
-        this._$calendar.removeClass('hide-highlight');
+        this._$calendar.removeClass("hide-highlight");
         this._store.dispatch(deselect_event());
     }
 
@@ -349,32 +345,37 @@ export default class Calendar {
         // TODO: double check this
         const dates = {
             start: event.start,
-            end: _.isEmpty(event.end) ? $.fullCalendar.moment(event.start).add(1, event.allDay ? 'day' : 'hour') : event.end,
+            end: _.isEmpty(event.end)
+                ? $.fullCalendar.moment(event.start).add(1, event.allDay ? "day" : "hour")
+                : event.end
         };
 
-        _(['start', 'end'])
-            .forEach((prop) => {
-                event_patch[prop] = {};
-                if (event.allDay) {
-                    event_patch[prop].date = dates[prop].format('YYYY-MM-DD');
-                } else {
-                    event_patch[prop].date_time = moment.tz(
-                        dates[prop].format(), user_config.timezone).format();
-                }
-            });
+        _(["start", "end"]).forEach(prop => {
+            event_patch[prop] = {};
+            if (event.allDay) {
+                event_patch[prop].date = dates[prop].format("YYYY-MM-DD");
+            } else {
+                event_patch[prop].date_time = moment
+                    .tz(dates[prop].format(), user_config.timezone)
+                    .format();
+            }
+        });
 
-        this._store.dispatch(async_save_event(event.id, event_patch))
-            .catch((error) => {
-                fetch_error(error);
-                revert_func();
-            });
+        this._store.dispatch(async_save_event(event.id, event_patch)).catch(error => {
+            fetch_error(error);
+            revert_func();
+        });
     }
 
     _select_handler(start_date, end_date) {
         const redux_state = this._store.getState();
         if (_.isNull(redux_state.selected_event.id)) {
             // Let's try to get currently set default calendar
-            let default_layer = _.get(redux_state, ['layers', user_config.default_calendar_id], undefined);
+            let default_layer = _.get(
+                redux_state,
+                ["layers", user_config.default_calendar_id],
+                undefined
+            );
 
             if (_.isUndefined(default_layer) || !is_create_able_layer(default_layer)) {
                 // Try to fallback to a "random" layer
@@ -383,45 +384,44 @@ export default class Calendar {
 
             if (!_.isUndefined(default_layer)) {
                 const event = {
-                    id: merge_ids(default_layer.id, 'kintoday_creating_event'),
-                    title: '',
+                    id: merge_ids(default_layer.id, "kintoday_creating_event"),
+                    title: "",
                     start: {},
                     end: {},
                     color: default_layer.color,
                     textColor: default_layer.textColor,
-                    all_day: !start_date.hasTime(),
+                    all_day: !start_date.hasTime()
                 };
                 // FC feeds us a moment in local tz, we "format" it to loose
                 // any timezone information it has and re-parse it with the
                 // user's current tz.
-                const format = start_date.hasTime() ? 'YYYY-MM-DD[T]HH:mm:ss' : 'YYYY-MM-DD';
+                const format = start_date.hasTime() ? "YYYY-MM-DD[T]HH:mm:ss" : "YYYY-MM-DD";
                 const start_date_tzed = moment.tz(start_date.format(format), user_config.timezone);
                 const end_date_tzed = moment.tz(end_date.format(format), user_config.timezone);
-                event.start[start_date.hasTime() ? 'date_time' : 'date'] = start_date_tzed.format();
-                event.end[end_date.hasTime() ? 'date_time' : 'date'] = end_date_tzed.format();
+                event.start[start_date.hasTime() ? "date_time" : "date"] = start_date_tzed.format();
+                event.end[end_date.hasTime() ? "date_time" : "date"] = end_date_tzed.format();
                 this._store.dispatch(create_event(event));
             } else {
-                create_message_popup('no editable calendar loaded', ['error']);
+                create_message_popup("no editable calendar loaded", ["error"]);
             }
         } else {
             this._store.dispatch(deselect_event());
         }
-        this._$calendar.fullCalendar('unselect');
+        this._$calendar.fullCalendar("unselect");
     }
-
 
     /*
      * FC-specific functions
      */
     _event_render(fc_event, $elem, view) {
-        $elem.attr('data-id', fc_event.id);
+        $elem.attr("data-id", fc_event.id);
         if (fc_event.syncing === true) {
             $elem.prepend('<div class="loader-spinner"></div>');
         } else {
-            $elem.find('.loader-spinner').remove();
+            $elem.find(".loader-spinner").remove();
         }
-        if (!fc_event.allDay && !fc_event.selected && view.name === 'month') {
-            $elem.css('background', 'inherit');
+        if (!fc_event.allDay && !fc_event.selected && view.name === "month") {
+            $elem.css("background", "inherit");
         }
     }
 
@@ -443,42 +443,43 @@ export default class Calendar {
                 agendaWeek: {
                     columnFormat: user_config.date_format,
                     slotLabelFormat: user_config.time_format,
-                    timeFormat: user_config.time_format,
+                    timeFormat: user_config.time_format
                 },
                 month: {
                     fixedWeekCount: false,
-                    columnFormat: 'dddd',
-                    timeFormat: user_config.time_format,
-                },
+                    columnFormat: "dddd",
+                    timeFormat: user_config.time_format
+                }
             },
 
-            defaultTimedEventDuration: '01:00:00',
+            defaultTimedEventDuration: "01:00:00",
             forceEventDuration: true,
-            nextDayThreshold: '00:00:00',
+            nextDayThreshold: "00:00:00",
 
             eventLimit: true,
             handleWindowResize: false,
             nowIndicator: true,
-            selectable: true,
+            selectable: true
         };
         return $parent.fullCalendar(settings);
     }
 
     _update_view_switch() {
-        const current_view = this._$calendar.fullCalendar('getView');
-        const is_month = (current_view.name === 'month');
-        $('.view-switch')
-            .toggleClass('fa-th', !is_month)
-            .toggleClass('fa-bars', is_month);
+        const current_view = this._$calendar.fullCalendar("getView");
+        const is_month = current_view.name === "month";
+        $(".view-switch").toggleClass("fa-th", !is_month).toggleClass("fa-bars", is_month);
     }
 
     /*
      * Redux helpers
      */
     _remove_placeholder_event() {
-        const fake_source = this._$calendar.fullCalendar('getEventSourceById', META_LAYER_CREATE_EVENT);
+        const fake_source = this._$calendar.fullCalendar(
+            "getEventSourceById",
+            META_LAYER_CREATE_EVENT
+        );
         if (!_.isUndefined(fake_source)) {
-            this._$calendar.fullCalendar('removeEventSource', META_LAYER_CREATE_EVENT);
+            this._$calendar.fullCalendar("removeEventSource", META_LAYER_CREATE_EVENT);
             return true;
         }
         return false;

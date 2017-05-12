@@ -4,16 +4,13 @@
  * Apache 2.0 Licensed
  */
 
+import querystring from "querystring";
+import React from "react";
+import _ from "lodash";
 
-import querystring from 'querystring';
-import React from 'react';
-import _ from 'lodash';
+import { GMAP_PUBLIC_TOKEN } from "../../../config";
 
-import { GMAP_PUBLIC_TOKEN } from '../../../config';
-
-
-const location_icon = require('../../../../public/imgs/icons/location.png');
-
+const location_icon = require("../../../../public/imgs/icons/location.png");
 
 export default class LocationRow extends React.Component {
     _render_link(location) {
@@ -38,18 +35,18 @@ export default class LocationRow extends React.Component {
     _render_map(location) {
         const img_size = {
             width: 350,
-            height: 100,
+            height: 100
         };
 
         const stringified_map_img_qs = querystring.stringify({
             size: `${img_size.width}x${img_size.height}`,
             markers: `size:mid|${location}`,
-            key: GMAP_PUBLIC_TOKEN,
+            key: GMAP_PUBLIC_TOKEN
         });
         const map_img_src = `https://maps.googleapis.com/maps/api/staticmap?${stringified_map_img_qs}`;
 
         const stringified_map_link_qs = querystring.stringify({
-            q: location,
+            q: location
         });
         const map_link = `http://maps.google.com/?${stringified_map_link_qs}`;
         return (
@@ -79,7 +76,7 @@ export default class LocationRow extends React.Component {
     render() {
         const location = _.trim(this.props.location);
         if (!_.isEmpty(location)) {
-            if (location.startsWith('http')) {
+            if (location.startsWith("http")) {
                 return this._render_link(location);
             }
             return this._render_map(location);
@@ -89,5 +86,5 @@ export default class LocationRow extends React.Component {
 }
 
 LocationRow.propTypes = {
-    location: React.PropTypes.string,
+    location: React.PropTypes.string
 };

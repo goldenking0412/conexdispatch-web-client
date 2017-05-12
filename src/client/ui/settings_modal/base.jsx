@@ -4,17 +4,15 @@
  * Apache 2.0 Licensed
  */
 
+import React from "react";
+import { connect } from "react-redux";
 
-import React from 'react';
-import { connect } from 'react-redux';
-
-import { expanded_source_prop_type, source_prop_type } from '../../prop_types';
-import { get_create_able_sources } from '../../utils';
-import { async_logout_user } from '../../actions/user';
-import SettingsModalSettingsTab from './settings_tab';
-import SettingsModalSourcesTab from './sources_tab';
-import SettingsModalNotificationsTab from './notifications_tab';
-
+import { expanded_source_prop_type, source_prop_type } from "../../prop_types";
+import { get_create_able_sources } from "../../utils";
+import { async_logout_user } from "../../actions/user";
+import SettingsModalSettingsTab from "./settings_tab";
+import SettingsModalSourcesTab from "./sources_tab";
+import SettingsModalNotificationsTab from "./notifications_tab";
 
 class SettingsModal extends React.Component {
     constructor() {
@@ -29,7 +27,7 @@ class SettingsModal extends React.Component {
     }
 
     close_modal() {
-        $(this.modal).foundation('close');
+        $(this.modal).foundation("close");
     }
 
     logout_user() {
@@ -39,13 +37,17 @@ class SettingsModal extends React.Component {
     render() {
         return (
             <div
-              ref={(ref) => { this.modal = ref; }}
+              ref={ref => {
+                  this.modal = ref;
+              }}
               id="settings-modal"
               className="reveal"
               data-reveal
             >
                 <ul
-                  ref={(ref) => { this.tabs = ref; }}
+                  ref={ref => {
+                      this.tabs = ref;
+                  }}
                   id="settings-tabs"
                   className="tabs row"
                   data-tabs
@@ -81,16 +83,11 @@ class SettingsModal extends React.Component {
                       dispatch={this.props.dispatch}
                     />
 
-                    <SettingsModalNotificationsTab
-                      dispatch={this.props.dispatch}
-                    />
+                    <SettingsModalNotificationsTab dispatch={this.props.dispatch} />
                 </div>
 
                 <footer>
-                    <a
-                      className="button small alert float-left"
-                      onClick={this.logout_user}
-                    >
+                    <a className="button small alert float-left" onClick={this.logout_user}>
                         Logout
                     </a>
                     <a
@@ -106,22 +103,19 @@ class SettingsModal extends React.Component {
     }
 }
 
-
 SettingsModal.propTypes = {
     dispatch: React.PropTypes.func,
     create_able_sources: React.PropTypes.objectOf(expanded_source_prop_type),
-    sources: React.PropTypes.objectOf(source_prop_type),
+    sources: React.PropTypes.objectOf(source_prop_type)
 };
 
-
-const map_state_props = (state) => {
+const map_state_props = state => {
     const create_able_sources = get_create_able_sources(state);
     return {
         create_able_sources,
-        sources: state.sources,
+        sources: state.sources
     };
 };
-
 
 const SettingsModalContainer = connect(map_state_props)(SettingsModal);
 export default SettingsModalContainer;

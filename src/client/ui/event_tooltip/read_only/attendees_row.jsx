@@ -4,15 +4,13 @@
  * Apache 2.0 Licensed
  */
 
+import React from "react";
+import _ from "lodash";
 
-import React from 'react';
-import _ from 'lodash';
+import { attendee_prop_type } from "../../../prop_types";
+import { ATTENDEE_BG_COLORS, hash_code, rsvp_icons } from "../../../utils";
 
-import { attendee_prop_type } from '../../../prop_types';
-import { ATTENDEE_BG_COLORS, hash_code, rsvp_icons } from '../../../utils';
-
-
-const AttendeeCell = (props) => {
+const AttendeeCell = props => {
     const email_hash = hash_code(props.attendee.email);
     const color = ATTENDEE_BG_COLORS[email_hash % ATTENDEE_BG_COLORS.length];
     return (
@@ -36,16 +34,15 @@ const AttendeeCell = (props) => {
     );
 };
 AttendeeCell.propTypes = {
-    attendee: attendee_prop_type,
+    attendee: attendee_prop_type
 };
-
 
 export default class AttendeesRow extends React.Component {
     render() {
         if (!_.isEmpty(this.props.attendees)) {
             return (
                 <div className="attendees-row row small-up-8 constrained">
-                    {_.map(this.props.attendees, (attendee) => {
+                    {_.map(this.props.attendees, attendee => {
                         return (
                             <div className="columns" key={attendee.email}>
                                 <AttendeeCell attendee={attendee} />
@@ -60,5 +57,5 @@ export default class AttendeesRow extends React.Component {
 }
 
 AttendeesRow.propTypes = {
-    attendees: React.PropTypes.arrayOf(attendee_prop_type),
+    attendees: React.PropTypes.arrayOf(attendee_prop_type)
 };

@@ -4,12 +4,10 @@
  * Apache 2.0 Licensed
  */
 
+import React from "react";
 
-import React from 'react';
-
-import { user_config } from '../../utils';
-import { start_notification_loop, stop_notification_loop } from '../../actions/notifications';
-
+import { user_config } from "../../utils";
+import { start_notification_loop, stop_notification_loop } from "../../actions/notifications";
 
 export default class SettingsModalNotificationsTab extends React.Component {
     constructor() {
@@ -45,7 +43,7 @@ export default class SettingsModalNotificationsTab extends React.Component {
                 <p className="text-center">
                     {(() => {
                         switch (user_config.notification_permission) {
-                        case 'granted':
+                        case "granted":
                             return (
                                 <span>
                                     <br />
@@ -53,24 +51,24 @@ export default class SettingsModalNotificationsTab extends React.Component {
                                       className="button alert"
                                       onClick={this.disable_notifications}
                                     >
-                                        Disable Notifications
-                                    </a>
+                                            Disable Notifications
+                                        </a>
                                 </span>
                             );
-                        case 'default':
+                        case "default":
                             return (
                                 <a
                                   className="button primary"
                                   onClick={this.try_enabling_notifications}
                                 >
-                                    Enable Notifications
-                                </a>
+                                        Enable Notifications
+                                    </a>
                             );
-                        case 'denied':
-                            return 'Please allow your browser to use notifications';
-                        case 'unsupported':
+                        case "denied":
+                            return "Please allow your browser to use notifications";
+                        case "unsupported":
                         default:
-                            return 'Notifications not supported by your browser';
+                            return "Notifications not supported by your browser";
                         }
                     })()}
                 </p>
@@ -80,5 +78,5 @@ export default class SettingsModalNotificationsTab extends React.Component {
 }
 
 SettingsModalNotificationsTab.propTypes = {
-    dispatch: React.PropTypes.func,
+    dispatch: React.PropTypes.func
 };

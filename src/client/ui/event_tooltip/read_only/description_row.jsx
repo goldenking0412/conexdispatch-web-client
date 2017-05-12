@@ -4,10 +4,8 @@
  * Apache 2.0 Licensed
  */
 
-
-import React from 'react';
-import _ from 'lodash';
-
+import React from "react";
+import _ from "lodash";
 
 export default class DescriptionRow extends React.Component {
     render() {
@@ -25,5 +23,5 @@ export default class DescriptionRow extends React.Component {
 }
 
 DescriptionRow.propTypes = {
-    description: React.PropTypes.string,
+    description: React.PropTypes.string
 };

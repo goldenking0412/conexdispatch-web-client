@@ -4,16 +4,14 @@
  * Apache 2.0 Licensed
  */
 
+import React from "react";
+import _ from "lodash";
 
-import React from 'react';
-import _ from 'lodash';
+import { source_prop_type } from "../../prop_types";
+import { split_source_id, providers } from "../../utils";
+import SettingsModalSourceRow from "./source_row";
 
-import { source_prop_type } from '../../prop_types';
-import { split_source_id, providers } from '../../utils';
-import SettingsModalSourceRow from './source_row';
-
-
-const SettingsModalSourcesTab = (props) => {
+const SettingsModalSourcesTab = props => {
     return (
         <div className="tabs-panel" id="settings-accounts">
             <header>
@@ -38,11 +36,11 @@ const SettingsModalSourcesTab = (props) => {
             </header>
             <table className="hover connected-sources">
                 <tbody>
-                    {_.map(props.sources, (source) => {
+                    {_.map(props.sources, source => {
                         const { provider_name } = split_source_id(source.id);
                         const sub_title = _([source.display_name, source.email])
-                                                   .filter(val => !_.isNil(val))
-                                                   .join(' - ');
+                            .filter(val => !_.isNil(val))
+                            .join(" - ");
                         return (
                             <SettingsModalSourceRow
                               key={source.id}
@@ -60,11 +58,9 @@ const SettingsModalSourcesTab = (props) => {
     );
 };
 
-
 SettingsModalSourcesTab.propTypes = {
     sources: React.PropTypes.objectOf(source_prop_type),
-    dispatch: React.PropTypes.func,
+    dispatch: React.PropTypes.func
 };
-
 
 export default SettingsModalSourcesTab;

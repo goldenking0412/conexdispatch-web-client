@@ -4,16 +4,14 @@
  * Apache 2.0 Licensed
  */
 
+import classnames from "classnames";
+import { connect } from "react-redux";
+import React from "react";
+import _ from "lodash";
 
-import classnames from 'classnames';
-import { connect } from 'react-redux';
-import React from 'react';
-import _ from 'lodash';
-
-import { layer_prop_type } from '../prop_types';
-import { split_source_id, user_config } from '../utils';
-import SourceLayersListItem from './source_layers_list_item';
-
+import { layer_prop_type } from "../prop_types";
+import { split_source_id, user_config } from "../utils";
+import SourceLayersListItem from "./source_layers_list_item";
 
 class SourceLayersList extends React.Component {
     constructor() {
@@ -22,21 +20,19 @@ class SourceLayersList extends React.Component {
     }
 
     _render_accessory() {
-        const disconnected_indicator_classes = classnames(
-            'fa', 'fa-exclamation-triangle',
-            { hide: this.props.status !== 'disconnected' }
-        );
-        const loading_spinner_classes = classnames(
-            'loader-spinner',
-            { hide: this.props.loaded || this.props.status === 'disconnected' }
-        );
+        const disconnected_indicator_classes = classnames("fa", "fa-exclamation-triangle", {
+            hide: this.props.status !== "disconnected"
+        });
+        const loading_spinner_classes = classnames("loader-spinner", {
+            hide: this.props.loaded || this.props.status === "disconnected"
+        });
         const collapser_classes = classnames(
-            'fa',
+            "fa",
             {
-                'fa-chevron-down': user_config.is_collapsed(this.props.id),
-                'fa-chevron-up': !user_config.is_collapsed(this.props.id),
+                "fa-chevron-down": user_config.is_collapsed(this.props.id),
+                "fa-chevron-up": !user_config.is_collapsed(this.props.id)
             },
-            { hide: !this.props.loaded || this.props.status === 'disconnected' }
+            { hide: !this.props.loaded || this.props.status === "disconnected" }
         );
         return (
             <div className="float-right source-accessory">
@@ -48,9 +44,9 @@ class SourceLayersList extends React.Component {
     }
 
     accessory_click() {
-        if (this.props.status === 'disconnected') {
-            $('#settings-modal').foundation('open');
-            $('#settings-tabs').foundation('selectTab', 'settings-accounts');
+        if (this.props.status === "disconnected") {
+            $("#settings-modal").foundation("open");
+            $("#settings-tabs").foundation("selectTab", "settings-accounts");
         } else {
             const collapsed = user_config.is_collapsed(this.props.id);
             user_config.set_collapsed(this.props.id, !collapsed);
@@ -68,36 +64,33 @@ class SourceLayersList extends React.Component {
                         {_.capitalize(provider_name)}
                         &nbsp;
                         <strong>
-                            {(
-                                !_.isEmpty(this.props.email)
-                                    ? this.props.email
-                                    : this.props.display_name
-                             )}
+                            {!_.isEmpty(this.props.email)
+                                ? this.props.email
+                                : this.props.display_name}
                         </strong>
                     </div>
                 </h3>
                 <div className="clearfix" />
                 <ul
-                  className={classnames(
-                             'menu', 'vertical', {
-                                 hide: user_config.is_collapsed(this.props.id),
-                             })}
+                  className={classnames("menu", "vertical", {
+                      hide: user_config.is_collapsed(this.props.id)
+                  })}
                 >
-                    {this.props.status !== 'disconnected' && _.map(this.props.layers, (layer) => {
-                        return (
-                            <SourceLayersListItem
-                              dispatch={this.props.dispatch}
-                              key={layer.id}
-                              {...layer}
-                            />
-                        );
-                    })}
+                    {this.props.status !== "disconnected" &&
+                        _.map(this.props.layers, layer => {
+                            return (
+                                <SourceLayersListItem
+                                  dispatch={this.props.dispatch}
+                                  key={layer.id}
+                                  {...layer}
+                                />
+                            );
+                        })}
                 </ul>
             </div>
         );
     }
 }
-
 
 SourceLayersList.propTypes = {
     loaded: React.PropTypes.bool,
@@ -106,18 +99,14 @@ SourceLayersList.propTypes = {
     status: React.PropTypes.string,
     email: React.PropTypes.string,
     display_name: React.PropTypes.string,
-    layers: React.PropTypes.objectOf(layer_prop_type),
+    layers: React.PropTypes.objectOf(layer_prop_type)
 };
 
 const map_state_props = (state, own_props) => {
     return {
-        layers: _(state.layers)
-                         .at(own_props.layers)
-                         .keyBy('id')
-                         .value(),
+        layers: _(state.layers).at(own_props.layers).keyBy("id").value()
     };
 };
-
 
 const SourceLayersListContainer = connect(map_state_props)(SourceLayersList);
 export default SourceLayersListContainer;

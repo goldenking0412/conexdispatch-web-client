@@ -4,14 +4,12 @@
  * Apache 2.0 Licensed
  */
 
+import classnames from "classnames";
+import React from "react";
 
-import classnames from 'classnames';
-import React from 'react';
-
-import { fetch_error } from '../utils';
-import { async_toggle_selected_layer } from '../actions/layers';
-import { async_load_events } from '../actions/events';
-
+import { fetch_error } from "../utils";
+import { async_toggle_selected_layer } from "../actions/layers";
+import { async_load_events } from "../actions/events";
 
 export default class SourceLayersListItem extends React.Component {
     constructor(props) {
@@ -26,13 +24,9 @@ export default class SourceLayersListItem extends React.Component {
 
         const layer_id = this.props.id;
         if (this.props.selected) {
-            this.props
-                .dispatch(async_toggle_selected_layer(layer_id, false))
-                .catch(fetch_error);
+            this.props.dispatch(async_toggle_selected_layer(layer_id, false)).catch(fetch_error);
         } else {
-            this.props
-                .dispatch(async_toggle_selected_layer(layer_id, true))
-                .catch(fetch_error);
+            this.props.dispatch(async_toggle_selected_layer(layer_id, true)).catch(fetch_error);
             this.props.dispatch(async_load_events(layer_id)).catch(fetch_error);
         }
     }
@@ -42,23 +36,20 @@ export default class SourceLayersListItem extends React.Component {
             if (this.props.selected) {
                 return {
                     borderLeft: `10px solid ${this.props.color}`,
-                    opacity: '1.0',
+                    opacity: "1.0"
                 };
             }
             return {
-                borderLeft: '10px solid transparent',
-                opacity: '0.5',
+                borderLeft: "10px solid transparent",
+                opacity: "0.5"
             };
         })();
 
-        const loading_spinner_classes = classnames(
-            'loader-spinner',
-            { hide: this.props.loaded === this.props.selected }
-        );
+        const loading_spinner_classes = classnames("loader-spinner", {
+            hide: this.props.loaded === this.props.selected
+        });
 
-        const checkbox_classes = classnames(
-            { hide: this.props.loaded !== this.props.selected }
-        );
+        const checkbox_classes = classnames({ hide: this.props.loaded !== this.props.selected });
 
         return (
             <li style={layer_style}>
@@ -86,5 +77,5 @@ SourceLayersListItem.propTypes = {
     id: React.PropTypes.string,
     dispatch: React.PropTypes.func,
     color: React.PropTypes.string,
-    title: React.PropTypes.string,
+    title: React.PropTypes.string
 };

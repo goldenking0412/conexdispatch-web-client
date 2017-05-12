@@ -4,12 +4,9 @@
  * Apache 2.0 Licensed
  */
 
+import React from "react";
 
-import React from 'react';
-
-
-const left_chevron = require('../../../../public/imgs/icons/left_chevron.png');
-
+const left_chevron = require("../../../../public/imgs/icons/left_chevron.png");
 
 export default class DetailsSubTooltip extends React.Component {
     constructor() {
@@ -53,12 +50,11 @@ export default class DetailsSubTooltip extends React.Component {
     }
 }
 
-
 DetailsSubTooltip.propTypes = {
     children: React.PropTypes.oneOfType([
         React.PropTypes.arrayOf(React.PropTypes.node),
         React.PropTypes.node
     ]),
     toggle_subtooltip: React.PropTypes.func,
-    title: React.PropTypes.string,
+    title: React.PropTypes.string
 };
