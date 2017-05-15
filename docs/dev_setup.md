@@ -83,10 +83,14 @@ $ docker run -d -p 6390:6379 redis
 This uses `dev.kin.today` as a domain name.
 ~~~~
 $ mkdir -p certs
-$ openssl genrsa -out ./certs/localhost-key.pem 2048
-$ openssl req -new -x509 -sha256 -days 365 -key ./certs/localhost-key.pem -out ./certs/localhost-cert.pem -nodes -subj '/CN=dev.kin.today'
+$ cd certs
+$ openssl req -nodes -newkey rsa:2048 -keyout localhost-key.pem -new -x509 -out localhost-cert.pem -subj /CN=dev.kin.today -reqexts SAN -extensions SAN -config <(cat /System/Library/OpenSSL/openssl.cnf <(printf '[SAN]\nsubjectAltName=DNS:dev.kin.today')) -sha256 -days 365
 $ echo "0.0.0.0 dev.kin.today" | sudo tee -a /etc/hosts
 ~~~~
+
+#### Linux ####
+
+follow the same instructions as OSX, but you will need to use the relevant `-config` path to your OpenSSL installation default config template.
 
 #### Windows ####
 TODO
