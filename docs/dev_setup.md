@@ -78,7 +78,7 @@ $ docker run -d -p 6390:6379 redis
 
 **as a way to simplify Kin's codebase and reduce dev/prod mismatches in configuration, we require SSL everywhere**
 
-#### Linux / Mac OS X ####
+#### Mac OS X ####
 
 This uses `dev.kin.today` as a domain name.
 ~~~~
