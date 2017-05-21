@@ -5,7 +5,7 @@
  */
 
 import moment from "moment-timezone";
-import React from "react";
+import PropTypes from 'prop-types';
 import _ from "lodash";
 
 export const moment_prop_types = {
@@ -26,67 +26,67 @@ export const moment_prop_types = {
     }
 };
 
-export const attendee_prop_type = React.PropTypes.shape({
-    email: React.PropTypes.string,
-    response_status: React.PropTypes.oneOf(["needs_action", "declined", "tentative", "accepted"]),
-    self: React.PropTypes.bool
+export const attendee_prop_type = PropTypes.shape({
+    email: PropTypes.string,
+    response_status: PropTypes.oneOf(["needs_action", "declined", "tentative", "accepted"]),
+    self: PropTypes.bool
 });
 
-export const reminder_prop_type = React.PropTypes.shape({
-    minutes: React.PropTypes.number
+export const reminder_prop_type = PropTypes.shape({
+    minutes: PropTypes.number
 });
 
-const event_id_prop_type = React.PropTypes.string;
-export const event_prop_type = React.PropTypes.shape({
+const event_id_prop_type = PropTypes.string;
+export const event_prop_type = PropTypes.shape({
     id: event_id_prop_type,
-    title: React.PropTypes.string,
-    status: React.PropTypes.oneOf(["confirmed"]),
-    description: React.PropTypes.string,
-    location: React.PropTypes.string,
-    all_day: React.PropTypes.bool,
+    title: PropTypes.string,
+    status: PropTypes.oneOf(["confirmed"]),
+    description: PropTypes.string,
+    location: PropTypes.string,
+    all_day: PropTypes.bool,
     start: moment_prop_types.momentObject,
     end: moment_prop_types.momentObject,
-    attendees: React.PropTypes.arrayOf(attendee_prop_type),
-    reminders: React.PropTypes.arrayOf(reminder_prop_type),
-    kind: React.PropTypes.oneOf(["event#basic", "event#invitation"])
+    attendees: PropTypes.arrayOf(attendee_prop_type),
+    reminders: PropTypes.arrayOf(reminder_prop_type),
+    kind: PropTypes.oneOf(["event#basic", "event#invitation"])
 });
 
-const layer_id_prop_type = React.PropTypes.string;
-export const layer_prop_type = React.PropTypes.shape({
+const layer_id_prop_type = PropTypes.string;
+export const layer_prop_type = PropTypes.shape({
     id: layer_id_prop_type,
-    events: React.PropTypes.arrayOf(layer_id_prop_type),
-    title: React.PropTypes.string,
-    acl: React.PropTypes.shape({
-        create: React.PropTypes.bool,
-        edit: React.PropTypes.bool,
-        delete: React.PropTypes.bool
+    events: PropTypes.arrayOf(layer_id_prop_type),
+    title: PropTypes.string,
+    acl: PropTypes.shape({
+        create: PropTypes.bool,
+        edit: PropTypes.bool,
+        delete: PropTypes.bool
     }),
-    color: React.PropTypes.string,
-    text_color: React.PropTypes.string,
-    selected: React.PropTypes.bool,
-    loaded: React.PropTypes.bool,
-    sync_token: React.PropTypes.string
+    color: PropTypes.string,
+    text_color: PropTypes.string,
+    selected: PropTypes.bool,
+    loaded: PropTypes.bool,
+    sync_token: PropTypes.string
 });
 
 const base_source_shape = {
     // id: React.PropTypes.string,
-    id: React.PropTypes.string,
-    layers: React.PropTypes.arrayOf(layer_id_prop_type),
-    display_name: React.PropTypes.string,
-    email: React.PropTypes.string,
-    status: React.PropTypes.oneOf(["connected", "refreshing", "disconnected"]),
-    colors: React.PropTypes.object,
-    loaded: React.PropTypes.bool
+    id: PropTypes.string,
+    layers: PropTypes.arrayOf(layer_id_prop_type),
+    display_name: PropTypes.string,
+    email: PropTypes.string,
+    status: PropTypes.oneOf(["connected", "refreshing", "disconnected"]),
+    colors: PropTypes.object,
+    loaded: PropTypes.bool
 };
-export const source_prop_type = React.PropTypes.shape(base_source_shape);
+export const source_prop_type = PropTypes.shape(base_source_shape);
 
-export const expanded_source_prop_type = React.PropTypes.shape(
+export const expanded_source_prop_type = PropTypes.shape(
     _.merge({}, base_source_shape, {
-        layers: React.PropTypes.objectOf(layer_prop_type)
+        layers: PropTypes.objectOf(layer_prop_type)
     })
 );
 
-export const color_prop_type = React.PropTypes.shape({
-    background: React.PropTypes.string,
-    foreground: React.PropTypes.string
+export const color_prop_type = PropTypes.shape({
+    background: PropTypes.string,
+    foreground: PropTypes.string
 });

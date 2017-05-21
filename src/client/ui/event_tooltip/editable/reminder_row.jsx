@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 /*!
  * kin
  * Copyright(c) 2016-2017 Benoit Person
@@ -24,6 +25,6 @@ export default function ReminderRow(props) {
 }
 
 ReminderRow.propTypes = {
-    open: React.PropTypes.func,
-    reminders: React.PropTypes.arrayOf(reminder_prop_type)
+    open: PropTypes.func,
+    reminders: PropTypes.arrayOf(reminder_prop_type)
 };

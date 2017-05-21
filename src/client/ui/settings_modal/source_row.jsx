@@ -5,6 +5,7 @@
  */
 
 import classnames from "classnames";
+import PropTypes from 'prop-types';
 import React from "react";
 import _ from "lodash";
 
@@ -92,9 +93,9 @@ export default class SettingsModalSourceRow extends React.Component {
 }
 
 SettingsModalSourceRow.propTypes = {
-    id: React.PropTypes.string,
-    status: React.PropTypes.string,
-    name: React.PropTypes.string,
-    sub_title: React.PropTypes.string,
-    dispatch: React.PropTypes.func
+    id: PropTypes.string,
+    status: PropTypes.string,
+    name: PropTypes.string,
+    sub_title: PropTypes.string,
+    dispatch: PropTypes.func
 };

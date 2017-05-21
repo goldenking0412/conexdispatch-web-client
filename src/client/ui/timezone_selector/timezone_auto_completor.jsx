@@ -5,6 +5,7 @@
  */
 
 import Fuse from "fuse.js";
+import PropTypes from 'prop-types';
 import React from "react";
 import _ from "lodash";
 
@@ -80,6 +81,6 @@ export default class TimezoneAutoCompletor extends React.Component {
 }
 
 TimezoneAutoCompletor.propTypes = {
-    timezones: React.PropTypes.arrayOf(React.PropTypes.string),
-    select_timezone: React.PropTypes.func
+    timezones: PropTypes.arrayOf(PropTypes.string),
+    select_timezone: PropTypes.func
 };

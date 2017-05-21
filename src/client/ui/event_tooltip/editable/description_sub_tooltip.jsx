@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 /*!
  * kin
  * Copyright(c) 2016-2017 Benoit Person
@@ -38,7 +39,7 @@ export default class DescriptionSubTooltip extends React.Component {
 }
 
 DescriptionSubTooltip.propTypes = {
-    description: React.PropTypes.string,
-    on_change: React.PropTypes.func,
-    toggle_subtooltip: React.PropTypes.func
+    description: PropTypes.string,
+    on_change: PropTypes.func,
+    toggle_subtooltip: PropTypes.func
 };

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 /*!
  * kin
  * Copyright(c) 2016-2017 Benoit Person
@@ -104,9 +105,9 @@ class SettingsModal extends React.Component {
 }
 
 SettingsModal.propTypes = {
-    dispatch: React.PropTypes.func,
-    create_able_sources: React.PropTypes.objectOf(expanded_source_prop_type),
-    sources: React.PropTypes.objectOf(source_prop_type)
+    dispatch: PropTypes.func,
+    create_able_sources: PropTypes.objectOf(expanded_source_prop_type),
+    sources: PropTypes.objectOf(source_prop_type)
 };
 
 const map_state_props = state => {

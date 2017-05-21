@@ -6,6 +6,7 @@
 
 import classnames from "classnames";
 import moment from "moment-timezone";
+import PropTypes from 'prop-types';
 import React from "react";
 
 import { user_config } from "../../utils";
@@ -34,8 +35,8 @@ const TimezoneRow = props => {
 };
 
 TimezoneRow.propTypes = {
-    timezone: React.PropTypes.string,
-    select_timezone: React.PropTypes.func
+    timezone: PropTypes.string,
+    select_timezone: PropTypes.func
 };
 
 export default TimezoneRow;

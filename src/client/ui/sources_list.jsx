@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 /*!
  * kin
  * Copyright(c) 2016-2017 Benoit Person
@@ -42,7 +43,7 @@ class SourcesList extends React.Component {
 }
 
 SourcesList.propTypes = {
-    sources: React.PropTypes.objectOf(source_prop_type)
+    sources: PropTypes.objectOf(source_prop_type)
 };
 
 const map_state_props = state => {

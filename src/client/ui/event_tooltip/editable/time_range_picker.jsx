@@ -5,6 +5,7 @@
  */
 
 import moment from "moment-timezone";
+import PropTypes from 'prop-types';
 import React from "react";
 import TimeInput from "time-input";
 
@@ -93,7 +94,7 @@ TimeRangePicker.defaultProps = {
 
 TimeRangePicker.propTypes = {
     end: moment_prop_types.momentObject,
-    on_dates_change: React.PropTypes.func,
+    on_dates_change: PropTypes.func,
     start: moment_prop_types.momentObject,
-    time_format: React.PropTypes.string
+    time_format: PropTypes.string
 };

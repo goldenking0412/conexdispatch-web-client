@@ -5,6 +5,7 @@
  */
 
 import { connect } from "react-redux";
+import PropTypes from 'prop-types';
 import React from "react";
 import _ from "lodash";
 
@@ -86,14 +87,14 @@ class EventTooltip extends React.Component {
 EventTooltip.propTypes = {
     event: event_prop_type,
     layer: layer_prop_type,
-    selected_event: React.PropTypes.shape({
-        id: React.PropTypes.string,
-        creating: React.PropTypes.bool,
-        dirty: React.PropTypes.bool,
-        editing: React.PropTypes.bool
+    selected_event: PropTypes.shape({
+        id: PropTypes.string,
+        creating: PropTypes.bool,
+        dirty: PropTypes.bool,
+        editing: PropTypes.bool
     }),
-    dispatch: React.PropTypes.func,
-    colors: React.PropTypes.objectOf(color_prop_type)
+    dispatch: PropTypes.func,
+    colors: PropTypes.objectOf(color_prop_type)
 };
 
 const map_state_props = state => {

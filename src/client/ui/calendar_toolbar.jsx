@@ -6,6 +6,7 @@
 
 import classnames from "classnames";
 import moment from "moment-timezone";
+import PropTypes from 'prop-types';
 import React from "react";
 import { connect } from "react-redux";
 
@@ -201,17 +202,17 @@ class CalendarToolbar extends React.Component {
 }
 
 CalendarToolbar.propTypes = {
-    dispatch: React.PropTypes.func,
-    full_calendar: React.PropTypes.shape({
-        status: React.PropTypes.string,
-        view: React.PropTypes.shape({
-            name: React.PropTypes.strng,
-            params: React.PropTypes.object
+    dispatch: PropTypes.func,
+    full_calendar: PropTypes.shape({
+        status: PropTypes.string,
+        view: PropTypes.shape({
+            name: PropTypes.strng,
+            params: PropTypes.object
         })
     }),
-    timezone_tooltip_show: React.PropTypes.bool,
-    sidebar: React.PropTypes.shape({
-        show: React.PropTypes.bool
+    timezone_tooltip_show: PropTypes.bool,
+    sidebar: PropTypes.shape({
+        show: PropTypes.bool
     })
 };
 

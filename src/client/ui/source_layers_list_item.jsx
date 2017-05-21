@@ -5,6 +5,7 @@
  */
 
 import classnames from "classnames";
+import PropTypes from 'prop-types';
 import React from "react";
 
 import { fetch_error } from "../utils";
@@ -72,10 +73,10 @@ export default class SourceLayersListItem extends React.Component {
 }
 
 SourceLayersListItem.propTypes = {
-    loaded: React.PropTypes.bool,
-    selected: React.PropTypes.bool,
-    id: React.PropTypes.string,
-    dispatch: React.PropTypes.func,
-    color: React.PropTypes.string,
-    title: React.PropTypes.string
+    loaded: PropTypes.bool,
+    selected: PropTypes.bool,
+    id: PropTypes.string,
+    dispatch: PropTypes.func,
+    color: PropTypes.string,
+    title: PropTypes.string
 };

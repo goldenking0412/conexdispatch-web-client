@@ -5,6 +5,7 @@
  */
 
 import classnames from "classnames";
+import PropTypes from 'prop-types';
 import React from "react";
 import _ from "lodash";
 
@@ -73,11 +74,11 @@ export default class LayerRow extends React.Component {
 }
 
 LayerRow.propTypes = {
-    layer_id: React.PropTypes.string,
-    create_able_sources: React.PropTypes.objectOf(expanded_source_prop_type),
-    creating: React.PropTypes.bool,
-    focused: React.PropTypes.bool.isRequired,
-    on_blur: React.PropTypes.func,
-    on_change: React.PropTypes.func.isRequired,
-    on_focus: React.PropTypes.func
+    layer_id: PropTypes.string,
+    create_able_sources: PropTypes.objectOf(expanded_source_prop_type),
+    creating: PropTypes.bool,
+    focused: PropTypes.bool.isRequired,
+    on_blur: PropTypes.func,
+    on_change: PropTypes.func.isRequired,
+    on_focus: PropTypes.func
 };

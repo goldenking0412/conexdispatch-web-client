@@ -5,6 +5,7 @@
  */
 
 import classnames from "classnames";
+import PropTypes from 'prop-types';
 import React from "react";
 import { connect } from "react-redux";
 
@@ -82,9 +83,9 @@ class App extends React.Component {
 }
 
 App.propTypes = {
-    dispatch: React.PropTypes.func,
-    sidebar: React.PropTypes.shape({
-        show: React.PropTypes.bool
+    dispatch: PropTypes.func,
+    sidebar: PropTypes.shape({
+        show: PropTypes.bool
     })
 };
 

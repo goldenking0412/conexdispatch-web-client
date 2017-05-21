@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 /*!
  * kin
  * Copyright(c) 2016-2017 Benoit Person
@@ -23,5 +24,5 @@ export default class DescriptionRow extends React.Component {
 }
 
 DescriptionRow.propTypes = {
-    description: React.PropTypes.string
+    description: PropTypes.string
 };

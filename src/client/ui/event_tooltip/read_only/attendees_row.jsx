@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 /*!
  * kin
  * Copyright(c) 2016-2017 Benoit Person
@@ -57,5 +58,5 @@ export default class AttendeesRow extends React.Component {
 }
 
 AttendeesRow.propTypes = {
-    attendees: React.PropTypes.arrayOf(attendee_prop_type)
+    attendees: PropTypes.arrayOf(attendee_prop_type)
 };

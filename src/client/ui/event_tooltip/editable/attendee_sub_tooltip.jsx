@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 /*!
  * kin
  * Copyright(c) 2016-2017 Benoit Person
@@ -172,10 +173,10 @@ export default class AttendeeSubTooltip extends React.Component {
 }
 
 AttendeeSubTooltip.propTypes = {
-    attendees: React.PropTypes.arrayOf(attendee_prop_type),
-    layer_id: React.PropTypes.string,
-    on_change: React.PropTypes.func,
-    toggle_subtooltip: React.PropTypes.func
+    attendees: PropTypes.arrayOf(attendee_prop_type),
+    layer_id: PropTypes.string,
+    on_change: PropTypes.func,
+    toggle_subtooltip: PropTypes.func
 };
 
 // TODO: should definitely be shared with read-only's AttendeesRow
@@ -246,6 +247,6 @@ const AttendeeList = props => {
 };
 
 AttendeeList.propTypes = {
-    attendees: React.PropTypes.arrayOf(attendee_prop_type),
-    delete_attendee: React.PropTypes.func
+    attendees: PropTypes.arrayOf(attendee_prop_type),
+    delete_attendee: PropTypes.func
 };

@@ -5,6 +5,7 @@
  */
 
 import classnames from "classnames";
+import PropTypes from 'prop-types';
 import React from "react";
 import _ from "lodash";
 
@@ -142,17 +143,17 @@ export default class MainSubTooltip extends React.Component {
 }
 
 MainSubTooltip.propTypes = {
-    creating: React.PropTypes.bool,
+    creating: PropTypes.bool,
 
     // TODO: add a "strict" prop type with every field required? + add `layer_id`
     event: event_prop_type,
 
-    create_able_sources: React.PropTypes.objectOf(expanded_source_prop_type),
-    focused_input: React.PropTypes.string,
+    create_able_sources: PropTypes.objectOf(expanded_source_prop_type),
+    focused_input: PropTypes.string,
 
-    on_input_blur: React.PropTypes.func.isRequired,
-    on_input_focus: React.PropTypes.func.isRequired,
-    on_change: React.PropTypes.func.isRequired,
-    on_submit: React.PropTypes.func.isRequired,
-    toggle_subtooltip: React.PropTypes.objectOf(React.PropTypes.func)
+    on_input_blur: PropTypes.func.isRequired,
+    on_input_focus: PropTypes.func.isRequired,
+    on_change: PropTypes.func.isRequired,
+    on_submit: PropTypes.func.isRequired,
+    toggle_subtooltip: PropTypes.objectOf(PropTypes.func)
 };

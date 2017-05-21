@@ -6,6 +6,7 @@
 
 import classnames from "classnames";
 import Popper from "popper.js";
+import PropTypes from 'prop-types';
 import React from "react";
 import _ from "lodash";
 
@@ -95,15 +96,15 @@ KinTooltip.defaultProps = {
 };
 
 KinTooltip.propTypes = {
-    children: React.PropTypes.oneOfType([
-        React.PropTypes.arrayOf(React.PropTypes.node),
-        React.PropTypes.node
+    children: PropTypes.oneOfType([
+        PropTypes.arrayOf(PropTypes.node),
+        PropTypes.node
     ]),
-    on_close: React.PropTypes.func,
-    overlay_classes: React.PropTypes.arrayOf(React.PropTypes.string),
-    tooltip_options: React.PropTypes.objectOf(React.PropTypes.any),
-    root_classes: React.PropTypes.arrayOf(React.PropTypes.string),
-    target: React.PropTypes.instanceOf(Element)
+    on_close: PropTypes.func,
+    overlay_classes: PropTypes.arrayOf(PropTypes.string),
+    tooltip_options: PropTypes.objectOf(PropTypes.any),
+    root_classes: PropTypes.arrayOf(PropTypes.string),
+    target: PropTypes.instanceOf(Element)
 };
 
 export default KinTooltip;

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 /*!
  * kin
  * Copyright(c) 2016-2017 Benoit Person
@@ -33,7 +34,7 @@ function ColorPickerButton(props) {
 
 ColorPickerButton.propTypes = {
     color: color_prop_type.isRequired,
-    onClick: React.PropTypes.func
+    onClick: PropTypes.func
 };
 
 class ColorPicker extends React.Component {
@@ -92,13 +93,13 @@ class ColorPicker extends React.Component {
 }
 
 ColorPicker.propTypes = {
-    colors: React.PropTypes.objectOf(color_prop_type),
+    colors: PropTypes.objectOf(color_prop_type),
     default_color: color_prop_type,
-    select_color: React.PropTypes.func.isRequired,
+    select_color: PropTypes.func.isRequired,
 
     // Those come from Redux
-    dispatch: React.PropTypes.func,
-    show: React.PropTypes.bool
+    dispatch: PropTypes.func,
+    show: PropTypes.bool
 };
 
 function map_state_props(state) {

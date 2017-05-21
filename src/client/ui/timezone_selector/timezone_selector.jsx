@@ -5,6 +5,7 @@
  */
 
 import moment from "moment-timezone";
+import PropTypes from 'prop-types';
 import React from "react";
 import { connect } from "react-redux";
 import _ from "lodash";
@@ -68,7 +69,7 @@ class TimezoneSelector extends React.Component {
 }
 
 TimezoneSelector.propTypes = {
-    dispatch: React.PropTypes.func
+    dispatch: PropTypes.func
 };
 
 const TimezoneSelectorContainer = connect()(TimezoneSelector);

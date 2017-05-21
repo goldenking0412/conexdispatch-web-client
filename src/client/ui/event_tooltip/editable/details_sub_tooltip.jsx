@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 /*!
  * kin
  * Copyright(c) 2016-2017 Benoit Person
@@ -51,10 +52,10 @@ export default class DetailsSubTooltip extends React.Component {
 }
 
 DetailsSubTooltip.propTypes = {
-    children: React.PropTypes.oneOfType([
-        React.PropTypes.arrayOf(React.PropTypes.node),
-        React.PropTypes.node
+    children: PropTypes.oneOfType([
+        PropTypes.arrayOf(PropTypes.node),
+        PropTypes.node
     ]),
-    toggle_subtooltip: React.PropTypes.func,
-    title: React.PropTypes.string
+    toggle_subtooltip: PropTypes.func,
+    title: PropTypes.string
 };

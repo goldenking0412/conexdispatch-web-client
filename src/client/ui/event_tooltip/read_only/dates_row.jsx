@@ -5,6 +5,7 @@
  */
 
 import moment from "moment-timezone";
+import PropTypes from 'prop-types';
 import React from "react";
 import _ from "lodash";
 
@@ -166,7 +167,7 @@ export default class DatesRow extends React.Component {
 }
 
 DatesRow.propTypes = {
-    all_day: React.PropTypes.bool,
+    all_day: PropTypes.bool,
     start: moment_prop_types.momentObject,
     end: moment_prop_types.momentObject
 };

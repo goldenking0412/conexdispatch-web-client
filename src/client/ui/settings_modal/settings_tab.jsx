@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 /*!
  * kin
  * Copyright(c) 2016-2017 Benoit Person
@@ -238,6 +239,6 @@ export default class SettingsModalSettingsTab extends React.Component {
 }
 
 SettingsModalSettingsTab.propTypes = {
-    dispatch: React.PropTypes.func,
-    create_able_sources: React.PropTypes.objectOf(expanded_source_prop_type)
+    dispatch: PropTypes.func,
+    create_able_sources: PropTypes.objectOf(expanded_source_prop_type)
 };

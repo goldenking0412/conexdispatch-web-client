@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 /*!
  * kin
  * Copyright(c) 2016-2017 Benoit Person
@@ -24,6 +25,6 @@ export default function AttendeeRow(props) {
 }
 
 AttendeeRow.propTypes = {
-    attendees: React.PropTypes.arrayOf(attendee_prop_type),
-    open: React.PropTypes.func
+    attendees: PropTypes.arrayOf(attendee_prop_type),
+    open: PropTypes.func
 };

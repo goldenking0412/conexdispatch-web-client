@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 /*!
  * kin
  * Copyright(c) 2016-2017 Benoit Person
@@ -59,8 +60,8 @@ const SettingsModalSourcesTab = props => {
 };
 
 SettingsModalSourcesTab.propTypes = {
-    sources: React.PropTypes.objectOf(source_prop_type),
-    dispatch: React.PropTypes.func
+    sources: PropTypes.objectOf(source_prop_type),
+    dispatch: PropTypes.func
 };
 
 export default SettingsModalSourcesTab;

@@ -6,6 +6,7 @@
 
 import classnames from "classnames";
 import { connect } from "react-redux";
+import PropTypes from 'prop-types';
 import React from "react";
 import _ from "lodash";
 
@@ -93,13 +94,13 @@ class SourceLayersList extends React.Component {
 }
 
 SourceLayersList.propTypes = {
-    loaded: React.PropTypes.bool,
-    id: React.PropTypes.string,
-    dispatch: React.PropTypes.func,
-    status: React.PropTypes.string,
-    email: React.PropTypes.string,
-    display_name: React.PropTypes.string,
-    layers: React.PropTypes.objectOf(layer_prop_type)
+    loaded: PropTypes.bool,
+    id: PropTypes.string,
+    dispatch: PropTypes.func,
+    status: PropTypes.string,
+    email: PropTypes.string,
+    display_name: PropTypes.string,
+    layers: PropTypes.objectOf(layer_prop_type)
 };
 
 const map_state_props = (state, own_props) => {

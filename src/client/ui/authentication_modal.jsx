@@ -5,6 +5,7 @@
  */
 
 import classnames from "classnames";
+import PropTypes from 'prop-types';
 import React from "react";
 
 import { api_url } from "../utils";
@@ -35,5 +36,5 @@ export default function AuthenticationModal(props) {
 }
 
 AuthenticationModal.propTypes = {
-    show: React.PropTypes.bool
+    show: PropTypes.bool
 };

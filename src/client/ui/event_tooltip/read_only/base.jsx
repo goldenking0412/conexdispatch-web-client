@@ -6,6 +6,7 @@
 
 import classnames from "classnames";
 import { connect } from "react-redux";
+import PropTypes from 'prop-types';
 import React from "react";
 import _ from "lodash";
 
@@ -189,11 +190,11 @@ class ReadOnlyEventTooltip extends React.Component {
 
 ReadOnlyEventTooltip.propTypes = {
     event: event_prop_type,
-    id: React.PropTypes.string,
-    toggle_edit_mode: React.PropTypes.func,
-    dispatch: React.PropTypes.func,
+    id: PropTypes.string,
+    toggle_edit_mode: PropTypes.func,
+    dispatch: PropTypes.func,
     layer: layer_prop_type,
-    colors: React.PropTypes.objectOf(color_prop_type)
+    colors: PropTypes.objectOf(color_prop_type)
 };
 
 const ReadOnlyEventTooltipContainer = connect()(ReadOnlyEventTooltip);

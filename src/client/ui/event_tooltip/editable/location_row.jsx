@@ -5,6 +5,7 @@
  */
 
 import classnames from "classnames";
+import PropTypes from 'prop-types';
 import React from "react";
 import _ from "lodash";
 
@@ -130,11 +131,11 @@ export default class LocationRow extends React.Component {
 }
 
 LocationRow.propTypes = {
-    layer_id: React.PropTypes.string,
-    location: React.PropTypes.string,
+    layer_id: PropTypes.string,
+    location: PropTypes.string,
 
-    on_blur: React.PropTypes.func,
-    on_change: React.PropTypes.func,
-    on_focus: React.PropTypes.func,
-    focused: React.PropTypes.bool
+    on_blur: PropTypes.func,
+    on_change: PropTypes.func,
+    on_focus: PropTypes.func,
+    focused: PropTypes.bool
 };

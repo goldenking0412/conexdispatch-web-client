@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 /*!
  * kin
  * Copyright(c) 2016-2017 Benoit Person
@@ -86,5 +87,5 @@ export default class LocationRow extends React.Component {
 }
 
 LocationRow.propTypes = {
-    location: React.PropTypes.string
+    location: PropTypes.string
 };

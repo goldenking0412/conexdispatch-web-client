@@ -5,6 +5,7 @@
  */
 
 import moment from "moment-timezone";
+import PropTypes from 'prop-types';
 import React from "react";
 import _ from "lodash";
 
@@ -107,9 +108,9 @@ export default class ReminderSubTooltip extends React.Component {
 }
 
 ReminderSubTooltip.propTypes = {
-    reminders: React.PropTypes.arrayOf(reminder_prop_type),
-    on_change: React.PropTypes.func,
-    toggle_subtooltip: React.PropTypes.func
+    reminders: PropTypes.arrayOf(reminder_prop_type),
+    on_change: PropTypes.func,
+    toggle_subtooltip: PropTypes.func
 };
 
 const ReminderList = props => {
@@ -149,6 +150,6 @@ const ReminderList = props => {
 };
 
 ReminderList.propTypes = {
-    remove_reminder: React.PropTypes.func,
-    reminders: React.PropTypes.arrayOf(reminder_prop_type)
+    remove_reminder: PropTypes.func,
+    reminders: PropTypes.arrayOf(reminder_prop_type)
 };

@@ -6,6 +6,7 @@
 
 import classnames from "classnames";
 import moment from "moment-timezone";
+import PropTypes from 'prop-types';
 import React from "react";
 import { DateRangePicker } from "react-dates";
 import _ from "lodash";
@@ -159,12 +160,12 @@ export default class DatesRow extends React.Component {
 }
 
 DatesRow.propTypes = {
-    all_day: React.PropTypes.bool,
-    all_day_focused: React.PropTypes.bool,
+    all_day: PropTypes.bool,
+    all_day_focused: PropTypes.bool,
     start: moment_prop_types.momentObject,
     end: moment_prop_types.momentObject,
 
-    on_dates_change: React.PropTypes.func,
-    on_all_day_blur: React.PropTypes.func,
-    on_all_day_focus: React.PropTypes.func
+    on_dates_change: PropTypes.func,
+    on_all_day_blur: PropTypes.func,
+    on_all_day_focus: PropTypes.func
 };

@@ -5,6 +5,7 @@
  */
 
 import { connect } from "react-redux";
+import PropTypes from 'prop-types';
 import React from "react";
 
 class AttendeeNotificationModal extends React.Component {
@@ -55,7 +56,7 @@ class AttendeeNotificationModal extends React.Component {
 }
 
 AttendeeNotificationModal.propTypes = {
-    dispatch: React.PropTypes.func
+    dispatch: PropTypes.func
 };
 
 const AttendeeNotificationModalContainer = connect()(AttendeeNotificationModal);

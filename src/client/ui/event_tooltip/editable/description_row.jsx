@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 /*!
  * kin
  * Copyright(c) 2016-2017 Benoit Person
@@ -21,6 +22,6 @@ export default function DescriptionRow(props) {
 }
 
 DescriptionRow.propTypes = {
-    description: React.PropTypes.string,
-    open: React.PropTypes.func
+    description: PropTypes.string,
+    open: PropTypes.func
 };

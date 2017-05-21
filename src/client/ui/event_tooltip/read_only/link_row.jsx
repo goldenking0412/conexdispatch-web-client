@@ -5,6 +5,7 @@
  */
 
 import classnames from "classnames";
+import PropTypes from 'prop-types';
 import React from "react";
 import _ from "lodash";
 
@@ -42,6 +43,6 @@ export default class LinkRow extends React.Component {
 }
 
 LinkRow.propTypes = {
-    id: React.PropTypes.string,
-    link: React.PropTypes.string
+    id: PropTypes.string,
+    link: PropTypes.string
 };

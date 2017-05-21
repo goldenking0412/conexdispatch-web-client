@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 /*!
  * kin
  * Copyright(c) 2016-2017 Benoit Person
@@ -59,5 +60,5 @@ export default class LeaveEditModeModal extends React.Component {
 }
 
 LeaveEditModeModal.propTypes = {
-    dispatch: React.PropTypes.func
+    dispatch: PropTypes.func
 };

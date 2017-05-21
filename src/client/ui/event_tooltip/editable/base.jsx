@@ -7,6 +7,7 @@
 import { connect } from "react-redux";
 import moment from "moment-timezone";
 import { round as moment_round } from "spotoninc-moment-round";
+import PropTypes from 'prop-types';
 import React from "react";
 import ReactCSSTransitionGroup from "react-addons-css-transition-group";
 import _ from "lodash";
@@ -268,11 +269,11 @@ class EditableEventTooltip extends React.Component {
 EditableEventTooltip.propTypes = {
     event: event_prop_type,
     layer: layer_prop_type,
-    creating: React.PropTypes.bool,
-    dirty: React.PropTypes.bool,
-    dispatch: React.PropTypes.func,
-    id: React.PropTypes.string,
-    create_able_sources: React.PropTypes.objectOf(expanded_source_prop_type)
+    creating: PropTypes.bool,
+    dirty: PropTypes.bool,
+    dispatch: PropTypes.func,
+    id: PropTypes.string,
+    create_able_sources: PropTypes.objectOf(expanded_source_prop_type)
 };
 
 const map_state_props = state => {
