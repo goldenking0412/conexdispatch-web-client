@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 /*!
  * kin
  * Copyright(c) 2016-2017 Benoit Person
@@ -24,22 +24,16 @@ export default class SubtooltipOpenerRow extends React.Component {
 
     render() {
         return (
-            <section
-              className="sub-tooltip-opener-row cursored"
-              onClick={this.props.open}
-              onKeyUp={this._on_key_up}
-              tabIndex={0}
-            >
-                {this.props.children}
+            <section className="sub-tooltip-opener-row">
+                <a onClick={this.props.open} onKeyUp={this._on_key_up} role="button" tabIndex={0}>
+                    {this.props.children}
+                </a>
             </section>
         );
     }
 }
 
 SubtooltipOpenerRow.propTypes = {
-    children: PropTypes.oneOfType([
-        PropTypes.arrayOf(PropTypes.node),
-        PropTypes.node
-    ]),
+    children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
     open: PropTypes.func
 };

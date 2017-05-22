@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 /*!
  * kin
  * Copyright(c) 2016-2017 Benoit Person
@@ -28,10 +28,11 @@ export default class DetailsSubTooltip extends React.Component {
         return (
             <div className="details-sub-tooltip">
                 <header>
-                    <h5
-                      className="text-center cursored"
+                    <a
+                      className="text-center"
                       onClick={this.props.toggle_subtooltip}
                       onKeyUp={this._on_key_up}
+                      role="button"
                       tabIndex={0}
                     >
                         <div className="float-left">
@@ -43,7 +44,7 @@ export default class DetailsSubTooltip extends React.Component {
                         </div>
 
                         {this.props.title}
-                    </h5>
+                    </a>
                 </header>
                 {this.props.children}
             </div>
@@ -52,10 +53,7 @@ export default class DetailsSubTooltip extends React.Component {
 }
 
 DetailsSubTooltip.propTypes = {
-    children: PropTypes.oneOfType([
-        PropTypes.arrayOf(PropTypes.node),
-        PropTypes.node
-    ]),
+    children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
     toggle_subtooltip: PropTypes.func,
     title: PropTypes.string
 };

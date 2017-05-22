@@ -6,7 +6,7 @@
 
 import classnames from "classnames";
 import { connect } from "react-redux";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import React from "react";
 import _ from "lodash";
 
@@ -59,7 +59,12 @@ class SourceLayersList extends React.Component {
         const { provider_name } = split_source_id(this.props.id);
         return (
             <div className="source-layers-list" id={this.props.id}>
-                <h3 onClick={this.accessory_click}>
+                <a
+                  className="source-layers-list__header"
+                  onClick={this.accessory_click}
+                  role="button"
+                  tabIndex={0}
+                >
                     {this._render_accessory()}
                     <div className="source-title">
                         {_.capitalize(provider_name)}
@@ -70,7 +75,7 @@ class SourceLayersList extends React.Component {
                                 : this.props.display_name}
                         </strong>
                     </div>
-                </h3>
+                </a>
                 <div className="clearfix" />
                 <ul
                   className={classnames("menu", "vertical", {

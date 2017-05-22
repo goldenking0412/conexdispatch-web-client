@@ -201,7 +201,10 @@ $react-dates-color-text-focus: $white;
     }
 
     .details-sub-tooltip {
-        h5 {
+        a {
+            color: $dark-gray;
+            display: block;
+            font-size: 1.1rem;
             outline: none;
 
             &:focus {
@@ -433,10 +436,13 @@ $react-dates-color-text-focus: $white;
         }
 
         .sub-tooltip-opener-row {
-            outline: none;
+            a {
+                color: $dark-gray;
+                outline: none;
 
-            &:focus h6 {
-                color: $kin-color;
+                &:focus h6 {
+                    color: $kin-color;
+                }
             }
         }
 

@@ -31,6 +31,7 @@ module.exports = {
         'arrow-body-style': 0, // Both styles are awesome ;)
         'class-methods-use-this': 0,
         'jsx-a11y/no-static-element-interactions': 0,
+        'jsx-a11y/no-autofocus': 0,
         'no-console': 0,
         'no-bitwise': 0,
         'react/require-default-props': 0

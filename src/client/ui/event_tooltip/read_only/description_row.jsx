@@ -8,19 +8,17 @@ import PropTypes from 'prop-types';
 import React from "react";
 import _ from "lodash";
 
-export default class DescriptionRow extends React.Component {
-    render() {
-        if (!_.isEmpty(this.props.description)) {
-            return (
-                <div className="description-row row">
-                    <p className="constrained">
-                        {this.props.description}
-                    </p>
-                </div>
-            );
-        }
-        return null;
+export default function DescriptionRow({description}) {
+    if (!_.isEmpty(description)) {
+        return (
+            <div className="description-row row">
+                <p className="constrained">
+                    {description}
+                </p>
+            </div>
+        );
     }
+    return null;
 }
 
 DescriptionRow.propTypes = {
