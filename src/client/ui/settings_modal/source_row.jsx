@@ -5,7 +5,7 @@
  */
 
 import classnames from "classnames";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import React from "react";
 import _ from "lodash";
 
@@ -63,7 +63,9 @@ export default class SettingsModalSourceRow extends React.Component {
                 </td>
                 <td>
                     {_.capitalize(this.props.name)}
-                    {this.props.sub_title ? <em><br />{this.props.sub_title}</em> : ""}
+                    {this.props.sub_title
+                        ? <div className="source-row__sub-title">{this.props.sub_title}</div>
+                        : null}
                 </td>
                 <td>
                     <a

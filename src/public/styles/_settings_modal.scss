@@ -77,6 +77,14 @@
                 opacity: 0.5;
             }
         }
+
+        .source-row__sub-title {
+            @extend em;
+
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
     }
 }
 
