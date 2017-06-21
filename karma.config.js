@@ -15,7 +15,7 @@ module.exports = function(config) {
     config.set({
         frameworks: ['mocha', 'sinon-chai'],
         reporters: ['mocha', 'coverage'],
-        browsers: ['PhantomJS'],
+        browsers: ['ChromeHeadless'],
 
         files: [
             './test/index.js',
@@ -30,16 +30,11 @@ module.exports = function(config) {
             noInfo: true,
         },
 
-        phantomjsLauncher: {
-            // Have phantomjs exit if a ResourceError is encountered (useful if karma exits without killing phantom)
-            exitOnResourceError: true,
-        },
-
         plugins: [
+            'karma-chrome-launcher',
             'karma-coverage',
-            'karma-mocha',
             'karma-mocha-reporter',
-            'karma-phantomjs-launcher',
+            'karma-mocha',
             'karma-sinon-chai',
             'karma-sourcemap-loader',
             'karma-webpack',
