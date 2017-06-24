@@ -55,7 +55,7 @@ describe('connector', function () {
         it('throws an error if no token', function () {
             const params = {};
             expect(() => connector_utils.redirect_to_API(params))
-                .to.throw(connector_utils.KinConnectorError);
+                .to.throw();
         });
 
         it('redirects to an url containing role, provider and token', function () {
