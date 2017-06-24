@@ -57,7 +57,7 @@
     "chai": "^4.0.2",
     "chai-as-promised": "^7.0.0",
     "css-loader": "^0.28.4",
-    "del": "^2.2.0",
+    "del": "^3.0.0",
     "eslint": "^3.8.1",
     "eslint-config-airbnb": "^15.0.1",
     "eslint-config-prettier": "^2.0.0",
