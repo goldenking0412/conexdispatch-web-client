@@ -4,53 +4,44 @@
  * Apache 2.0 Licensed
  */
 
-const path = require('path');
-const webpack = require('webpack');
+const path = require("path");
+const webpack = require("webpack");
 
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const RollbarSourceMapPlugin = require('rollbar-sourcemap-webpack-plugin');
-const WebpackCleanupPlugin = require('webpack-cleanup-plugin');
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const RollbarSourceMapPlugin = require("rollbar-sourcemap-webpack-plugin");
+const WebpackCleanupPlugin = require("webpack-cleanup-plugin");
 
 // TODO: Those "rollbar"-related configs are also in `src/client/config.js`
 // We should definitely have a better way of "sharing" them than copy-pasting ;)
-const ROLLBAR_PUBLIC_TOKEN = '';
+const ROLLBAR_PUBLIC_TOKEN = "";
 const ROLLBAR_CODE_VERSION = 0.1;
 
-const config = function(options) {
+module.exports = function webpack_config(options) {
     const output = {
         output: {
-            path: path.join(__dirname, 'public'),
-            filename: '[name]-[hash].js'
+            path: path.join(__dirname, "public"),
+            filename: "[name]-[hash].js"
         },
         module: {
             rules: [
                 {
                     test: /\.jsx?$/,
-                    include: [
-                        path.join(__dirname, 'src'),
-                        path.join(__dirname, 'test')
-                    ],
+                    include: [path.join(__dirname, "src"), path.join(__dirname, "test")],
                     exclude: [
-                        path.join(__dirname, 'node_modules'),
-                        path.join(
-                            __dirname,
-                            'src/client/rollbar.umd.nojson.min.js'
-                        )
+                        path.join(__dirname, "node_modules"),
+                        path.join(__dirname, "src/client/rollbar.umd.nojson.min.js")
                     ],
-                    use: 'eslint-loader',
-                    enforce: 'pre'
+                    use: "eslint-loader",
+                    enforce: "pre"
                 },
                 {
                     test: /\.jsx?$/,
-                    include: [
-                        path.join(__dirname, 'src'),
-                        path.join(__dirname, 'test')
-                    ],
-                    exclude: path.join(__dirname, 'node_modules'),
+                    include: [path.join(__dirname, "src"), path.join(__dirname, "test")],
+                    exclude: path.join(__dirname, "node_modules"),
                     use: [
                         {
-                            loader: 'babel-loader',
+                            loader: "babel-loader",
                             options: {
                                 cacheDirectory: true
                             }
@@ -60,63 +51,63 @@ const config = function(options) {
                 {
                     test: /\.scss$/,
                     use: [
-                        'style-loader',
-                        'css-loader',
+                        "style-loader",
+                        "css-loader",
                         {
-                            loader: 'sass-loader',
+                            loader: "sass-loader",
                             options: {
-                                outputStyle: 'expanded'
+                                outputStyle: "expanded"
                             }
                         },
-                        'postcss-loader'
+                        "postcss-loader"
                     ]
                 },
                 {
                     test: /\.css$/,
                     use: ExtractTextPlugin.extract({
-                        fallback: 'style-loader',
-                        use: 'css-loader'
+                        fallback: "style-loader",
+                        use: "css-loader"
                     })
                 },
                 {
                     test: /\.png$/,
-                    use: 'url-loader?limit=100000'
+                    use: "url-loader?limit=100000"
                 },
                 {
                     test: /\.jpg$/,
-                    use: 'file-loader'
+                    use: "file-loader"
                 },
                 {
                     test: /\.gif$/,
-                    use: 'file-loader'
+                    use: "file-loader"
                 },
                 {
                     test: /\.mp3$/,
-                    use: 'file-loader'
+                    use: "file-loader"
                 },
                 {
                     test: /\.otf$/,
-                    use: 'file-loader'
+                    use: "file-loader"
                 },
                 {
                     test: /\.json$/,
-                    use: 'json-loader'
+                    use: "json-loader"
                 }
             ]
         },
         plugins: [
-            new ExtractTextPlugin('[name]-[hash].css'),
+            new ExtractTextPlugin("[name]-[hash].css"),
             new webpack.DefinePlugin({
                 KIN_ENV_NAME: JSON.stringify(options.env)
             }),
             new webpack.ProvidePlugin({
-                $: 'jquery',
-                jQuery: 'jquery',
-                'window.jQuery': 'jquery'
+                $: "jquery",
+                jQuery: "jquery",
+                "window.jQuery": "jquery"
             })
         ],
         resolve: {
-            extensions: ['.js', '.jsx']
+            extensions: [".js", ".jsx"]
         },
         performance: {
             hints: false // With vendors, we are far exceeding the "recommended" sizes
@@ -125,53 +116,53 @@ const config = function(options) {
 
     // Environement-specific options
     output.devtool = {
-        dev: 'eval',
-        preprod: 'hidden-source-map',
-        prod: 'hidden-source-map'
+        dev: "eval",
+        preprod: "hidden-source-map",
+        prod: "hidden-source-map"
     }[options.env];
 
     // Add Plugins
-    if (['dev', 'preprod', 'prod'].indexOf(options.env) !== -1) {
+    if (["dev", "preprod", "prod"].indexOf(options.env) !== -1) {
         output.entry = {
-            auth: ['./src/client/auth.jsx'],
-            client: ['./src/client/main.jsx'],
-            connector: ['./src/client/connector/main.js']
+            auth: ["./src/client/auth.jsx"],
+            client: ["./src/client/main.jsx"],
+            connector: ["./src/client/connector/main.js"]
         };
 
         output.plugins = output.plugins.concat(
             new HtmlWebpackPlugin({
-                chunks: ['auth', 'vendor'],
-                favicon: 'src/public/imgs/logo/logo@3x.png',
-                filename: 'auth.html',
-                template: 'src/public/template.html',
-                title: 'Kin Calendar - Authentication'
+                chunks: ["auth", "vendor"],
+                favicon: "src/public/imgs/logo/logo@3x.png",
+                filename: "auth.html",
+                template: "src/public/template.html",
+                title: "Kin Calendar - Authentication"
             }),
             new HtmlWebpackPlugin({
-                chunks: ['client', 'vendor'],
-                favicon: 'src/public/imgs/logo/logo@3x.png',
-                filename: 'index.html',
-                template: 'src/public/template.html',
-                title: 'Kin Calendar'
+                chunks: ["client", "vendor"],
+                favicon: "src/public/imgs/logo/logo@3x.png",
+                filename: "index.html",
+                template: "src/public/template.html",
+                title: "Kin Calendar"
             }),
             new HtmlWebpackPlugin({
-                chunks: ['connector', 'vendor'],
-                favicon: 'src/public/imgs/logo/logo@3x.png',
-                filename: 'connector.html',
-                template: 'src/public/template.html',
-                title: 'Kin Calendar - Connector'
+                chunks: ["connector", "vendor"],
+                favicon: "src/public/imgs/logo/logo@3x.png",
+                filename: "connector.html",
+                template: "src/public/template.html",
+                title: "Kin Calendar - Connector"
             }),
             new WebpackCleanupPlugin(),
             new webpack.optimize.CommonsChunkPlugin({
-                name: 'vendor',
+                name: "vendor",
                 minChunks: module => /node_modules/.test(module.resource)
             })
         );
     }
 
-    if (['preprod', 'prod'].indexOf(options.env) !== -1) {
+    if (["preprod", "prod"].indexOf(options.env) !== -1) {
         const public_path = {
-            preprod: 'https://beta.calendar.kin.today',
-            prod: 'https://calendar.kin.today'
+            preprod: "https://beta.calendar.kin.today",
+            prod: "https://calendar.kin.today"
         }[options.env];
 
         output.plugins = output.plugins.concat(
@@ -184,8 +175,8 @@ const config = function(options) {
                 minimize: true
             }),
             new webpack.DefinePlugin({
-                'process.env': {
-                    NODE_ENV: JSON.stringify('production')
+                "process.env": {
+                    NODE_ENV: JSON.stringify("production")
                 }
             }),
             new webpack.optimize.UglifyJsPlugin({
@@ -202,7 +193,7 @@ const config = function(options) {
         );
     }
 
-    if (options.env === 'dev') {
+    if (options.env === "dev") {
         output.plugins = output.plugins.concat(
             new webpack.LoaderOptionsPlugin({
                 minimize: false,
@@ -213,5 +204,3 @@ const config = function(options) {
 
     return output;
 };
-
-module.exports = config;

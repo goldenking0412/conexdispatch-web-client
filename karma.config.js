@@ -4,40 +4,37 @@
  * Apache 2.0 Licensed
  */
 
-
-var webpack_config = require('./webpack.config.js')({
-    env: 'test',
+const webpack_config = require("./webpack.config.js")({
+    env: "test"
 });
-webpack_config.devtool = 'inline-source-map';
 
+webpack_config.devtool = "inline-source-map";
 
-module.exports = function(config) {
+module.exports = function karma_config(config) {
     config.set({
-        frameworks: ['mocha', 'sinon-chai'],
-        reporters: ['mocha', 'coverage'],
-        browsers: ['ChromeHeadless'],
+        frameworks: ["mocha", "sinon-chai"],
+        reporters: ["mocha", "coverage"],
+        browsers: ["ChromeHeadless"],
 
-        files: [
-            './test/index.js',
-        ],
+        files: ["./test/index.js"],
 
         preprocessors: {
-            './test/index.js': ['webpack', 'sourcemap'],
+            "./test/index.js": ["webpack", "sourcemap"]
         },
 
         webpack: webpack_config,
         webpackMiddleware: {
-            noInfo: true,
+            noInfo: true
         },
 
         plugins: [
-            'karma-chrome-launcher',
-            'karma-coverage',
-            'karma-mocha-reporter',
-            'karma-mocha',
-            'karma-sinon-chai',
-            'karma-sourcemap-loader',
-            'karma-webpack',
-        ],
+            "karma-chrome-launcher",
+            "karma-coverage",
+            "karma-mocha-reporter",
+            "karma-mocha",
+            "karma-sinon-chai",
+            "karma-sourcemap-loader",
+            "karma-webpack"
+        ]
     });
 };

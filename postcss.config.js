@@ -4,11 +4,13 @@
  * Apache 2.0 Licensed
  */
 
+// NOTE: eslint-config-base-airbnb's config for `import/no-extraneous-dependencies` doesn't support PostCSS config files
+const autoprefixer = require("autoprefixer"); // eslint-disable-line import/no-extraneous-dependencies
 
 module.exports = {
     plugins: [
-        require('autoprefixer')({
-            browsers: ['last 2 versions'],
+        autoprefixer({
+            browsers: ["last 2 versions"]
         })
     ]
 };
