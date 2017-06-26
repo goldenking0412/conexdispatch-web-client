@@ -1,0 +1,17 @@
+.logo {
+    position: fixed;
+    top: 0;
+    left: 20px;
+    z-index: 10;
+    background: url('../imgs/logo/logo@3x.png') no-repeat;
+    background-size: contain;
+    height: 40px;
+    width: 40px;
+    cursor: pointer;
+    transform: translate(0, -4px);
+    transition: transform 100ms ease-out;
+
+    &:hover {
+        transform: translate(0, 0);
+    }
+}
