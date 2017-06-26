@@ -35,6 +35,7 @@
 @import 'sources_list';
 @import 'timezone_selector';
 @import 'custom_fc';
+@import 'message_stack';
 
 body {
     overflow: hidden;
@@ -172,49 +173,5 @@ aside {
 
     &:hover {
         color: $darker-gray;
-    }
-}
-
-.message-popup-stack {
-    position: absolute;
-    display: block;
-    bottom: 0;
-    left: 0;
-    z-index: 1000;
-    width: 100vw;
-
-    .message-popup {
-        $message-width: 400px;
-
-        margin: 0.2rem auto;
-        width: $message-width;
-        background: blue;
-        background: $light-gray;
-        color: $dark-gray;
-        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
-
-        &.error {
-            background: $kin-color;
-            color: #FFFFFF;
-        }
-
-        &.template {
-            display: none;
-        }
-
-        .message-text {
-            padding: 0.3rem 1rem;
-        }
-
-        .message-close {
-            float: right;
-            cursor: pointer;
-            font-weight: normal;
-            padding: 0.3rem 1rem;
-
-            &:hover {
-                color: $kin-color;
-            }
-        }
     }
 }
