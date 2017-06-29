@@ -41,6 +41,9 @@ module.exports = {
         KIN_ENV_NAME: false
     },
     settings: {
-        'import/core-modules': ['config', 'utils', 'prop_types']
+        'import/core-modules': ['config', 'utils', 'prop_types'],
+        "import/resolver": {
+            "babel-module": {}
+        }
     }
 };

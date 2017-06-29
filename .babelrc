@@ -14,4 +14,12 @@
             ],
         },
     },
+    "plugins": [
+        [
+            "module-resolver",
+            {
+                "root": ["./src/client"],
+            }
+        ]
+    ],
 }
