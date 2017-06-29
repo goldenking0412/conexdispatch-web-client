@@ -20,6 +20,7 @@
             {
                 "root": ["./src/client"],
             }
-        ]
-    ],
+        ],
+        "transform-class-properties",
+    ]
 }

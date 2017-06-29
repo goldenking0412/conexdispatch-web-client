@@ -1,5 +1,6 @@
 module.exports = {
     extends: ["airbnb", "prettier"],
+    parser: "babel-eslint",
     parserOptions: {
         ecmaVersion: 6,
         sourceType: "module",
