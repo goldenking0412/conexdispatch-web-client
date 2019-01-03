@@ -41,16 +41,6 @@ class KinTooltip extends React.Component {
         }
     }
 
-    _refresh_tooltip() {
-        if (!_.isNull(this._tooltip)) {
-            this._tooltip.destroy();
-        }
-
-        const tooltip_options = _.merge({}, DEFAULT_TOOLTIP_OPTIONS, this.props.tooltip_options);
-
-        this._tooltip = new Popper(this.props.target, this._tooltip_root, tooltip_options);
-    }
-
     get root_classes() {
         return [
             "kin-tooltip",
@@ -69,6 +59,16 @@ class KinTooltip extends React.Component {
             },
             ...this.props.overlay_classes
         ];
+    }
+
+    _refresh_tooltip() {
+        if (!_.isNull(this._tooltip)) {
+            this._tooltip.destroy();
+        }
+
+        const tooltip_options = _.merge({}, DEFAULT_TOOLTIP_OPTIONS, this.props.tooltip_options);
+
+        this._tooltip = new Popper(this.props.target, this._tooltip_root, tooltip_options);
     }
 
     render() {
