@@ -6,4 +6,4 @@
 /certs
 /coverage
 .DS_Store
-/src/client/config.js
+src/client/config.js
