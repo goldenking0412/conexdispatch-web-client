@@ -9,7 +9,7 @@
   * setup, you can either ignore this, or add your own if you want to gather
   * data about where Kin's failing in your setup ;)
   */
-export const ROLLBAR_PUBLIC_TOKEN = "";
+export const ROLLBAR_PUBLIC_TOKEN = "3a51bfd374ca46e5b9d989d139d25f85";
 export const ROLLBAR_CODE_VERSION = 0.1;
 
 /*
@@ -17,7 +17,7 @@ export const ROLLBAR_CODE_VERSION = 0.1;
  *
  * https://console.developers.google.com/projectselector/apis/credentials
  */
-export const GMAP_PUBLIC_TOKEN = "";
+export const GMAP_PUBLIC_TOKEN = "23g34hgvhj65uk";
 
 /*
  * API hostname reachable from the client
@@ -25,9 +25,9 @@ export const GMAP_PUBLIC_TOKEN = "";
  * e.g.: kin.today
  */
 export const API_HOSTNAME = {
-    dev: "",
+    dev: "api.conexdispatch.com:8080",
     test: "placeholder",
-    prod: ""
+    prod: "api.conexdispatch.com:8080"
 }[KIN_ENV_NAME];
 
 /*

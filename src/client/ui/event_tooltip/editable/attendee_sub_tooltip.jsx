@@ -36,56 +36,6 @@ export default class AttendeeSubTooltip extends React.Component {
         this.invite_attendee = this.invite_attendee.bind(this);
     }
 
-    _render_results() {
-        if (_.isEmpty(this.state.results)) {
-            return null;
-        }
-
-        return (
-            <div className="autocompletor-results">
-                <table>
-                    <tbody>
-                        {_.map(this.state.results, contact => {
-                            return (
-                                <tr
-                                  key={contact.id}
-                                  data-value={contact.email}
-                                  onMouseDown={this.select_contact}
-                                >
-                                    <td>
-                                        {contact.email}&nbsp;
-                                        <em>{contact.display_name}</em>
-                                    </td>
-                                </tr>
-                            );
-                        })}
-                    </tbody>
-                </table>
-            </div>
-        );
-    }
-
-    _try_inviting_attendee(email) {
-        if (_.isEmpty(email)) {
-            return;
-        }
-
-        const found = _.find(this.props.attendees, { email });
-        if (_.isUndefined(found)) {
-            this.props.on_change({
-                attendees: [
-                    {
-                        email,
-                        response_status: "needs_action"
-                    },
-                    ...this.props.attendees
-                ]
-            });
-            $(this.event_attendee_input).val("");
-            this.clean_autocomplete_results();
-        }
-    }
-
     get new_attendee_value() {
         return this.event_attendee_input.value;
     }
@@ -135,6 +85,56 @@ export default class AttendeeSubTooltip extends React.Component {
         event.preventDefault();
         const email = this.new_attendee_value;
         this._try_inviting_attendee(email);
+    }
+
+    _render_results() {
+        if (_.isEmpty(this.state.results)) {
+            return null;
+        }
+
+        return (
+            <div className="autocompletor-results">
+                <table>
+                    <tbody>
+                        {_.map(this.state.results, contact => {
+                            return (
+                                <tr
+                                  key={contact.id}
+                                  data-value={contact.email}
+                                  onMouseDown={this.select_contact}
+                                >
+                                    <td>
+                                        {contact.email}&nbsp;
+                                        <em>{contact.display_name}</em>
+                                    </td>
+                                </tr>
+                            );
+                        })}
+                    </tbody>
+                </table>
+            </div>
+        );
+    }
+
+    _try_inviting_attendee(email) {
+        if (_.isEmpty(email)) {
+            return;
+        }
+
+        const found = _.find(this.props.attendees, { email });
+        if (_.isUndefined(found)) {
+            this.props.on_change({
+                attendees: [
+                    {
+                        email,
+                        response_status: "needs_action"
+                    },
+                    ...this.props.attendees
+                ]
+            });
+            $(this.event_attendee_input).val("");
+            this.clean_autocomplete_results();
+        }
     }
 
     render() {

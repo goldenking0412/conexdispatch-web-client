@@ -32,6 +32,14 @@ export default class LocationRow extends React.Component {
         this._on_change = this._on_change.bind(this);
     }
 
+    get location() {
+        return this.event_location_input.value;
+    }
+
+    set location(location) {
+        this.event_location_input.value = location;
+    }
+
     _on_change(react_event) {
         this.props.on_change(react_event.target.value);
         this.debounced_autocomplete(react_event);
@@ -61,14 +69,6 @@ export default class LocationRow extends React.Component {
                 </table>
             </div>
         );
-    }
-
-    get location() {
-        return this.event_location_input.value;
-    }
-
-    set location(location) {
-        this.event_location_input.value = location;
     }
 
     autocomplete() {
