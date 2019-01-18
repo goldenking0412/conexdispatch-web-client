@@ -168,7 +168,7 @@ class CalendarToolbar extends React.Component {
                         {current_time.zoneAbbr()}
                     </button>
                     <button className="button" onClick={this._today}>
-                        today
+                        today-1
                     </button>
                     <button className="button" onClick={this._prev}>
                         <img className="chevron-icon" src={left_chevron} alt="Left chevron icon" />
