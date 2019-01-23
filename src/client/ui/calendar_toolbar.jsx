@@ -5,7 +5,6 @@
  */
 
 import classnames from "classnames";
-import moment from "moment-timezone";
 import PropTypes from 'prop-types';
 import React from "react";
 import { connect } from "react-redux";
@@ -13,21 +12,23 @@ import { connect } from "react-redux";
 import KinTooltip from "./kin_tooltip";
 import TimezoneSelector from "./timezone_selector/timezone_selector";
 
-import { fetch_error, user_config } from "../utils";
+import { fetch_error } from "../utils";
 import { deselect_event } from "../actions/events";
 import {
     get_full_calendar_view,
     toggle_timezone_selector_tooltip,
-    update_full_calendar_view
+    update_full_calendar_view,
+    toggle_sidebar
 } from "../actions/ui";
 import { async_patch_user } from "../actions/user";
 
 const left_chevron = require("../../public/imgs/icons/left_chevron.png");
 const right_chevron = require("../../public/imgs/icons/right_chevron.png");
+const calendar_icon = require("../../public/imgs/icons/calendar.png");
 
 class CalendarToolbar extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         this._next = this._next.bind(this);
         this._prev = this._prev.bind(this);
@@ -36,10 +37,16 @@ class CalendarToolbar extends React.Component {
         this._today = this._today.bind(this);
         this._update_full_calendar_view = this._update_full_calendar_view.bind(this);
         this._view_switch = this._view_switch.bind(this);
+        this.toggle_sidebar = this.toggle_sidebar.bind(this);
     }
 
     get _$calendar() {
         return $("#calendar");
+    }
+
+    toggle_sidebar(event) {
+        event.preventDefault();
+        this.props.dispatch(toggle_sidebar(!this.props.sidebar.show));
     }
 
     _update_full_calendar_view() {
@@ -141,8 +148,6 @@ class CalendarToolbar extends React.Component {
     }
 
     render() {
-        const current_time = moment.tz(user_config.timezone);
-
         const is_month = this.props.full_calendar.view.name === "month";
         const view_switch_classes = classnames("fa", "view-switch", {
             "fa-th": !is_month,
@@ -152,23 +157,21 @@ class CalendarToolbar extends React.Component {
         const target = this.props.timezone_tooltip_show ? this._timezone_tooltip_target : null;
 
         const toolbar_classes = classnames("calendar-toolbar", {
-            margin: !this.props.sidebar.show
+            margin: 0
         });
 
         return (
             <div className={toolbar_classes}>
-                <div className="float-left">
-                    <button
-                      className="button calendar-toolbar__timezone"
-                      ref={ref => {
-                          this._timezone_tooltip_target = ref;
-                      }}
-                      onClick={this._show_timezone_tooltip}
-                    >
-                        {current_time.zoneAbbr()}
+                <div className="toolbar-left-pad float-left toolbar-group">
+                    <button className="button" onClick={this.toggle_sidebar}>
+                        <span className="fa fa-bars" />
                     </button>
-                    <button className="button" onClick={this._today}>
-                        today
+                    <img className="calendar-icon" src={calendar_icon} alt="Calendar icon" />
+                    <span className="font-template1 transparent-option1">Calendar</span>
+                </div>
+                <div className="toolbar-center-pad toolbar-group float-left">
+                    <button className="button bordered-button" onClick={this._today}>
+                        Today
                     </button>
                     <button className="button" onClick={this._prev}>
                         <img className="chevron-icon" src={left_chevron} alt="Left chevron icon" />
@@ -180,8 +183,13 @@ class CalendarToolbar extends React.Component {
                           alt="Right chevron icon"
                         />
                     </button>
+                    <div className="font-template2">January 2019</div>
+
+                    <button className="button">
+                        <span className="glyphicon glyphicon-search" />
+                    </button>
                 </div>
-                <div className="float-right">
+                <div className="toolbar-right-pad toolbar-group float-right">
                     <div className="calendar-toolbar__title">
                         {this._render_view_title()}
                     </div>
