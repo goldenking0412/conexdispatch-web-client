@@ -56,26 +56,27 @@ class App extends React.Component {
 
         return (
             <div>
-                <div className="logo" onClick={this.toggle_sidebar} />
-                <aside className={aside_classes}>
-                    <div>
-                        <a
-                          href="#settings-modal"
-                          className="float-right settings-button"
-                          onClick={this.open_settings_modal}
-                        >
-                            <span className="fa fa-cog" />
-                        </a>
-                    </div>
-                    <div className="clearfix" />
-                    <SourcesList />
-                </aside>
+                <CalendarToolbar />
+                <div>
+                    <aside className={aside_classes}>
+                        <div>
+                            <a
+                              href="#settings-modal"
+                              className="float-right settings-button"
+                              onClick={this.open_settings_modal}
+                            >
+                                <span className="fa fa-cog" />
+                            </a>
+                        </div>
+                        <div className="clearfix" />
+                        <SourcesList />
+                    </aside>
 
-                <div className={content_classes}>
-                    <EventTooltip />
-                    <SettingsModal />
-                    <CalendarToolbar />
-                    <div id="calendar" />
+                    <div className={content_classes}>
+                        <EventTooltip />
+                        <SettingsModal />
+                        <div id="calendar" />
+                    </div>
                 </div>
             </div>
         );
