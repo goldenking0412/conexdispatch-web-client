@@ -37,6 +37,7 @@
 @import 'custom_fc';
 @import 'message_stack';
 @import 'logo';
+@import 'custom_react_calendar';
 
 body {
     overflow: hidden;
@@ -133,8 +134,10 @@ aside {
     float: left;
     width: $sidebar-width;
     height: 100vh;
-    background: $light-gray;
+    background: $white;
     overflow: auto;
+    border: 1px solid $border-gray;
+    border-right: 0px;
 
     &.show {
         display: block;

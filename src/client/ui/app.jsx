@@ -8,6 +8,7 @@ import classnames from "classnames";
 import PropTypes from 'prop-types';
 import React from "react";
 import { connect } from "react-redux";
+import Calendar from "react-calendar";
 
 import { EVENTS_NS } from "../config";
 
@@ -59,6 +60,9 @@ class App extends React.Component {
                 <CalendarToolbar />
                 <div>
                     <aside className={aside_classes}>
+                        <div>
+                            <Calendar />
+                        </div>
                         <div>
                             <a
                               href="#settings-modal"
