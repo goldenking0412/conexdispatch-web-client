@@ -12,10 +12,9 @@
         color: $dark-gray;
         background: none;
         border-width: 0 !important;
-        border-radius: 0;
+        border-radius: 50%;
         box-shadow: none;
-        height: 2.5rem;
-        padding: 0.5rem 1rem;
+        padding: 1rem 1rem;
         margin: 0;
 
         &:focus {
@@ -27,10 +26,17 @@
         }
     }
 
+    .arrow-button {
+        height: 2.5rem;
+        padding: 0.5rem 1rem;
+    }
+
     .bordered-button {
         border: 1px solid !important;
         border-color: $border-gray !important;
         border-radius: 5px;
+        height: 2.5rem;
+        padding: 0.5rem 1rem;
     }
 
     .calendar-toolbar__title {
@@ -126,6 +132,10 @@
         direction: ltr;
         font-feature-settings: 'liga' 1;
         -webkit-font-smoothing: antialiased;
+    }
+
+    .toolbar-icon {
+        font-size: 18px;
     }
 
     .transparent-option1 {

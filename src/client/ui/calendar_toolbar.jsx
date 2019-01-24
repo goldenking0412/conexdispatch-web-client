@@ -173,28 +173,43 @@ class CalendarToolbar extends React.Component {
                     <button className="button bordered-button" onClick={this._today}>
                         Today
                     </button>
-                    <button className="button" onClick={this._prev}>
+                    <button className="button arrow-button" onClick={this._prev}>
                         <img className="chevron-icon" src={left_chevron} alt="Left chevron icon" />
                     </button>
-                    <button className="button" onClick={this._next}>
+                    <button className="button arrow-button" onClick={this._next}>
                         <img
                           className="chevron-icon"
                           src={right_chevron}
                           alt="Right chevron icon"
                         />
                     </button>
-                    <div className="font-template2">January 2019</div>
+
+                    <div className="calendar-toolbar__title font-template2">
+                        {this._render_view_title()}
+                    </div>
 
                     <button className="button">
-                        <span className="glyphicon glyphicon-search" />
+                        <span className="fa fa-search toolbar-icon" />
+                    </button>
+                    <button className="button">
+                        <span className="fa fa-cog toolbar-icon" />
                     </button>
                 </div>
                 <div className="toolbar-right-pad toolbar-group float-right">
-                    <div className="calendar-toolbar__title">
-                        {this._render_view_title()}
-                    </div>
                     <button className="button" onClick={this._view_switch}>
                         <span className={view_switch_classes} />
+                    </button>
+                    <button className="button">
+                        <span className="fa fa-th" />
+                    </button>
+                    <button className="button">
+                        <span className="fa fa-bell" />
+                    </button>
+                    <button className="button bordered-button account-area">
+                        <span className="user-title float-left">Conexwest</span>
+                        <div className="user-image float-left">
+                            <img alt="prop" />
+                        </div>
                     </button>
                 </div>
                 <KinTooltip
