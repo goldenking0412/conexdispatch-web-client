@@ -14,7 +14,7 @@ const WebpackCleanupPlugin = require("webpack-cleanup-plugin");
 
 // TODO: Those "rollbar"-related configs are also in `src/client/config.js`
 // We should definitely have a better way of "sharing" them than copy-pasting ;)
-const ROLLBAR_PUBLIC_TOKEN = "";
+const ROLLBAR_PUBLIC_TOKEN = "3a51bfd374ca46e5b9d989d139d25f85";
 const ROLLBAR_CODE_VERSION = 0.1;
 
 module.exports = function webpack_config(options) {
