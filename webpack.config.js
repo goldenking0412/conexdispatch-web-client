@@ -135,21 +135,21 @@ module.exports = function webpack_config(options) {
                 favicon: "src/public/imgs/logo/logo@3x.png",
                 filename: "auth.html",
                 template: "src/public/template.html",
-                title: "Kin Calendar - Authentication"
+                title: "Conexwest Dispatch Calendar - Authentication"
             }),
             new HtmlWebpackPlugin({
                 chunks: ["client", "vendor"],
                 favicon: "src/public/imgs/logo/logo@3x.png",
                 filename: "index.html",
                 template: "src/public/template.html",
-                title: "Kin Calendar"
+                title: "Conexwest Dispatch Calendar"
             }),
             new HtmlWebpackPlugin({
                 chunks: ["connector", "vendor"],
                 favicon: "src/public/imgs/logo/logo@3x.png",
                 filename: "connector.html",
                 template: "src/public/template.html",
-                title: "Kin Calendar - Connector"
+                title: "Conexwest Dispatch Calendar - Connector"
             }),
             new WebpackCleanupPlugin(),
             new webpack.optimize.CommonsChunkPlugin({
@@ -161,8 +161,8 @@ module.exports = function webpack_config(options) {
 
     if (["preprod", "prod"].indexOf(options.env) !== -1) {
         const public_path = {
-            preprod: "https://beta.calendar.kin.today",
-            prod: "https://calendar.kin.today"
+            preprod: "https://beta.api.conexdispatch.com",
+            prod: "https://api.conexdispatch.com"
         }[options.env];
 
         output.plugins = output.plugins.concat(
