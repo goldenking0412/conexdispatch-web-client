@@ -136,7 +136,7 @@ aside {
     height: 100vh;
     background: $white;
     overflow: auto;
-    border: 1px solid $border-gray;
+    border: 1px solid $aside-border;
     border-right: 0px;
 
     &.show {
