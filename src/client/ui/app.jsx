@@ -60,7 +60,7 @@ class App extends React.Component {
                 <CalendarToolbar />
                 <div>
                     <aside className={aside_classes}>
-                        <div>
+                        <div className="navigation-calendar">
                             <Calendar />
                         </div>
                         <div>
