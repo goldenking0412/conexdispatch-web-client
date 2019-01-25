@@ -14,7 +14,6 @@ export default function AuthenticationModal(props) {
     const classes = classnames("authentication-modal", { show: props.show });
     return (
         <div className={classes}>
-            <div className="logo" />
             <div className="callout">
                 <a
                   className="provider-button row google-style"
