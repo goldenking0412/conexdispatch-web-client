@@ -85,6 +85,7 @@ export default class Calendar {
         this._move_event_handler = this._move_event_handler.bind(this);
         this._move_event_handler = this._move_event_handler.bind(this);
         this._select_handler = this._select_handler.bind(this);
+        this._column_header_render = this._column_header_render.bind(this);
 
         this._reducer = {
             ADD_EVENTS: this._reducer_add_events,
@@ -425,6 +426,27 @@ export default class Calendar {
         }
     }
 
+    _column_header_render(mom) {
+        let response = '';
+        const today = new Date();
+        if (mom.isSame(today, 'd')) {
+            response += '<div class="column-header column-header-today">';
+        }
+        else {
+            response += '<div class="column-header">';
+        }
+        response += '<span class="float-left">';
+        response += mom.format('ddd');
+        response += '</span>';
+
+        response += '<br/>';
+        response += '<span class="float-left column-header-day-of-month">';
+        response += mom.format('D');
+        response += '</span>';
+        response += '</div>';
+        return response;
+    }
+
     _create_fullcalendar($parent) {
         const settings = {
             header: false,
@@ -435,6 +457,7 @@ export default class Calendar {
             eventResize: this._move_event_handler,
             eventDrop: this._move_event_handler,
             select: this._select_handler,
+            columnHeaderHtml: this._column_header_render,
 
             defaultView: user_config.default_view,
             firstDay: user_config.first_day,

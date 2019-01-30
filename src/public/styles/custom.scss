@@ -1,0 +1,18 @@
+/*!
+ * Custom SCSS
+ */
+
+/* Main Full Calendar Header CSS */
+.column-header {
+  padding-left: 15px;
+  font-weight: lighter;
+}
+
+.column-header-day-of-month {
+  font-size: 40px;
+  padding-bottom: 10px;
+}
+
+.column-header-today {
+  color: $light-blue;
+}

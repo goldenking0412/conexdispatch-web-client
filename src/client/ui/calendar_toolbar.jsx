@@ -130,11 +130,11 @@ class CalendarToolbar extends React.Component {
     _render_view_title() {
         switch (this.props.full_calendar.view.name) {
         case "basicWeek": {
-            console.log(this.props.full_calendar.view.params);
-            const start = this.props.full_calendar.view.params.start;
+            // const start = this.props.full_calendar.view.params.start;
+            const today = new Date();
             return (
                 <span>
-                    {start.format("MMMM")} {start.format("Y")}
+                    {today.toLocaleString('en-us', { month: 'long' })} {today.getFullYear()}
                 </span>
             );
         }
