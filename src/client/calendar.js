@@ -429,7 +429,10 @@ export default class Calendar {
     _column_header_render(mom) {
         let response = '';
         const today = new Date();
-        if (mom.isSame(today, 'd')) {
+        const moment_date = mom.toDate();
+        if (today.getFullYear() === moment_date.getFullYear() && 
+            today.getMonth() === moment_date.getMonth() &&
+            today.getDate() === moment_date.getDate()) {
             response += '<div class="column-header column-header-today">';
         }
         else {
