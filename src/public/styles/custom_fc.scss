@@ -220,8 +220,8 @@ hr.fc-divider {
 
 
 }
-.fc .fc-agendaWeek-view th,
-.fc .fc-agendaWeek-view td {
+.fc .fc-basicWeek-view th,
+.fc .fc-basicWeek-view td {
     &:first-child {
         border-width: 0rem;
     }
@@ -237,10 +237,6 @@ hr.fc-divider {
 
     table {
         margin: 0;
-    }
-
-    th {
-        border: 0;
     }
 }
 
@@ -767,7 +763,7 @@ a.fc-more:hover {
         }
     }
 
-    &.fc-agendaWeek-view {
+    &.fc-basicWeek-view {
 		.fc-event {
             font-size: 0.8rem;
         }

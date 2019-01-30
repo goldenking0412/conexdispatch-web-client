@@ -17,13 +17,11 @@ import { toggle_sidebar } from "../actions/ui";
 import CalendarToolbar from "./calendar_toolbar";
 import EventTooltip from "./event_tooltip/base";
 import SettingsModal from "./settings_modal/base";
-import SourcesList from "./sources_list";
 
 class App extends React.Component {
     constructor(props) {
         super(props);
         this.keydown_handler = this.keydown_handler.bind(this);
-        this.open_settings_modal = this.open_settings_modal.bind(this);
         this.toggle_sidebar = this.toggle_sidebar.bind(this);
     }
 
@@ -39,11 +37,6 @@ class App extends React.Component {
         if (event.which === 27) {
             this.props.dispatch(deselect_event());
         }
-    }
-
-    open_settings_modal(event) {
-        event.preventDefault();
-        $("#settings-modal").foundation("open");
     }
 
     toggle_sidebar(event) {
@@ -63,17 +56,7 @@ class App extends React.Component {
                         <div className="navigation-calendar">
                             <Calendar />
                         </div>
-                        <div>
-                            <a
-                              href="#settings-modal"
-                              className="float-right settings-button"
-                              onClick={this.open_settings_modal}
-                            >
-                                <span className="fa fa-cog" />
-                            </a>
-                        </div>
                         <div className="clearfix" />
-                        <SourcesList />
                     </aside>
 
                     <div className={content_classes}>

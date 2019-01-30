@@ -148,12 +148,12 @@ class ReadOnlyEventTooltip extends React.Component {
         const edit_button = _.get(this.props.layer, "acl.edit", false)
             ? (<button onClick={this.props.toggle_edit_mode} className="secondary button small">
                   Edit
-              </button>)
+            </button>)
             : null;
         const delete_button = _.get(this.props.layer, "acl.delete", false)
             ? (<button onClick={this.delete_event} className="alert button small float-right">
                   Delete
-              </button>)
+            </button>)
             : null;
 
         if (!_.isNull(edit_button) || !_.isNull(delete_button)) {

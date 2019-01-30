@@ -38,10 +38,16 @@ class CalendarToolbar extends React.Component {
         this._update_full_calendar_view = this._update_full_calendar_view.bind(this);
         this._view_switch = this._view_switch.bind(this);
         this.toggle_sidebar = this.toggle_sidebar.bind(this);
+        this.open_settings_modal = this.open_settings_modal.bind(this);
     }
 
     get _$calendar() {
         return $("#calendar");
+    }
+
+    open_settings_modal(event) {
+        event.preventDefault();
+        $("#settings-modal").foundation("open");
     }
 
     toggle_sidebar(event) {
@@ -81,7 +87,7 @@ class CalendarToolbar extends React.Component {
     _view_switch() {
         if (this.props.dispatch(deselect_event())) {
             const next_view = this.props.full_calendar.view.name === "month"
-                ? "agendaWeek"
+                ? "basicWeek"
                 : "month";
             const $fc_view_container = this._$calendar.find(".fc-view-container");
             const $prev_fc_view = this._$calendar.find(".fc-view");
@@ -123,22 +129,12 @@ class CalendarToolbar extends React.Component {
 
     _render_view_title() {
         switch (this.props.full_calendar.view.name) {
-        case "agendaWeek": {
-            const start = this.props.full_calendar.view.params.start;
-            const end = this.props.full_calendar.view.params.end;
-            return (
-                <span>
-                    <strong>{start.format("MMM")}</strong> {start.format("D")}
-                        &nbsp;-&nbsp;
-                        <strong>{end.format("MMM")}</strong> {end.format("D")}
-                </span>
-            );
-        }
-        case "month": {
+        case "basicWeek": {
+            console.log(this.props.full_calendar.view.params);
             const start = this.props.full_calendar.view.params.start;
             return (
                 <span>
-                    <strong>{start.format("MMMM")}</strong> {start.format("YYYY")}
+                    {start.format("MMMM")} {start.format("Y")}
                 </span>
             );
         }
@@ -148,12 +144,6 @@ class CalendarToolbar extends React.Component {
     }
 
     render() {
-        const is_month = this.props.full_calendar.view.name === "month";
-        const view_switch_classes = classnames("fa", "view-switch", {
-            "fa-th": !is_month,
-            "fa-bars": is_month
-        });
-
         const target = this.props.timezone_tooltip_show ? this._timezone_tooltip_target : null;
 
         const toolbar_classes = classnames("calendar-toolbar", {
@@ -192,13 +182,16 @@ class CalendarToolbar extends React.Component {
                         <span className="fa fa-search toolbar-icon" />
                     </button>
                     <button className="button">
-                        <span className="fa fa-cog toolbar-icon" />
+                        <a
+                          href="#settings-modal"
+                          className="float-right settings-button"
+                          onClick={this.open_settings_modal}
+                        >
+                            <span className="fa fa-cog" />
+                        </a>
                     </button>
                 </div>
                 <div className="toolbar-right-pad toolbar-group float-right">
-                    <button className="button" onClick={this._view_switch}>
-                        <span className={view_switch_classes} />
-                    </button>
                     <button className="button">
                         <span className="fa fa-th" />
                     </button>

@@ -52,8 +52,8 @@ export default class SettingsModalNotificationsTab extends React.Component {
                                       className="button alert"
                                       onClick={this.disable_notifications}
                                     >
-                                            Disable Notifications
-                                        </a>
+                                        Disable Notifications
+                                    </a>
                                 </span>
                             );
                         case "default":
@@ -62,8 +62,8 @@ export default class SettingsModalNotificationsTab extends React.Component {
                                   className="button primary"
                                   onClick={this.try_enabling_notifications}
                                 >
-                                        Enable Notifications
-                                    </a>
+                                    Enable Notifications
+                                </a>
                             );
                         case "denied":
                             return "Please allow your browser to use notifications";

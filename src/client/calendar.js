@@ -440,14 +440,9 @@ export default class Calendar {
             firstDay: user_config.first_day,
 
             views: {
-                agendaWeek: {
+                basicWeek: {
                     columnFormat: user_config.date_format,
                     slotLabelFormat: user_config.time_format,
-                    timeFormat: user_config.time_format
-                },
-                month: {
-                    fixedWeekCount: false,
-                    columnFormat: "dddd",
                     timeFormat: user_config.time_format
                 }
             },

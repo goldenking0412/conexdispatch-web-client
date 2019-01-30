@@ -23,7 +23,7 @@ export const user_config = {
     _defaults: {
         token: null,
 
-        default_view: "agendaWeek",
+        default_view: "basicWeek",
         display_name: "No One",
         first_day: 0,
         timezone: "",
@@ -119,7 +119,7 @@ export const user_config = {
 
     load_config(config) {
         this._set("default_calendar_id", config.default_calendar_id);
-        this._set("default_view", config.default_view);
+        this._set("default_view", "basicWeek");
         this._set("display_name", config.display_name);
         this._set("first_day", config.first_day);
         this._set("timezone", config.timezone);
