@@ -61,27 +61,152 @@ class App extends React.Component {
                     </aside>
                     <div className="upper-content">
                         <div id="calendar" />
-                        <div className="unassigned-tasks">test</div>
+                        <div className="unassigned-tasks">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th className="unassigned-task-wrapper box-container">
+                                        a
+                                        </th>
+                                        <th className="unassigned-task-wrapper box-container">
+                                        a
+                                        </th>
+                                        <th className="unassigned-task-wrapper box-container">
+                                        a
+                                        </th>
+                                        <th className="unassigned-task-wrapper box-container">
+                                        a
+                                        </th>
+                                        <th className="unassigned-task-wrapper box-container">
+                                        a
+                                        </th>
+                                        <th className="unassigned-task-wrapper box-container">
+                                        a
+                                        </th>
+                                        <th className="unassigned-task-wrapper box-container">
+                                        a
+                                        </th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
                     </div>
                 </div>
 
                 <Tabs>
                     <div label="OAK">
-                        <div className="driver">
-                            Jeff Carter
+                        <div className="driver-wrapper">
+                            <div className="driver">
+                                Jeff Carter
+                            </div>
+                            <div className="driver-task-wrapper">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th className="box-container">
+                                            a
+                                            </th>
+                                            <th className="box-container">
+                                            a
+                                            </th>
+                                            <th className="box-container">
+                                            a
+                                            </th>
+                                            <th className="box-container">
+                                            a
+                                            </th>
+                                            <th className="box-container">
+                                            a
+                                            </th>
+                                            <th className="box-container">
+                                            a
+                                            </th>
+                                            <th className="box-container">
+                                            a
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
                         </div>
-                        <div className="driver">
-                            Habib Nurmagomedov
+                        <div className="driver-wrapper">
+                            <div className="driver">
+                                Habib Nurmagomedov
+                            </div>
+                            <div className="driver-task-wrapper">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th className="box-container">
+                                            a
+                                            </th>
+                                            <th className="box-container">
+                                            a
+                                            </th>
+                                            <th className="box-container">
+                                            a
+                                            </th>
+                                            <th className="box-container">
+                                            a
+                                            </th>
+                                            <th className="box-container">
+                                            a
+                                            </th>
+                                            <th className="box-container">
+                                            a
+                                            </th>
+                                            <th className="box-container">
+                                            a
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
                         </div>
-                        <div className="driver">
-                            Habib Nurmagomedov
+                        <div className="driver-wrapper">
+                            <div className="driver">
+                                Habib Nurmagomedov
+                            </div>
+                            <div className="driver-task-wrapper">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th className="box-container">
+                                            a
+                                            </th>
+                                            <th className="box-container">
+                                            a
+                                            </th>
+                                            <th className="box-container">
+                                            a
+                                            </th>
+                                            <th className="box-container">
+                                            a
+                                            </th>
+                                            <th className="box-container">
+                                            a
+                                            </th>
+                                            <th className="box-container">
+                                            a
+                                            </th>
+                                            <th className="box-container">
+                                            a
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
                         </div>
                     </div>
                     <div label="CHI">
-                        Habib Nurmagomedov
+                        <div className="driver">
+                            Habib Nurmagomedov
+                        </div>
                     </div>
                     <div label="DER">
-                        Vitali Barkouski
+                        <div className="driver">
+                            Vitali Barkouski
+                        </div>
                     </div>
                 </Tabs>
 

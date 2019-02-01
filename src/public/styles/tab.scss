@@ -1,3 +1,5 @@
+$tab-list-width: 50px;
+$sidebar-width: 250px;
 .tab-list {
     padding-left: 0;
     width: 50px;
@@ -7,8 +9,7 @@
 .tab-list-item {
     list-style: none;
     padding: 8px 12px;
-    border: 1px solid $border-gray;
-    border-right-width: 0;
+    border: 1px solid $border-light-gray;;
     border-top-width: 0;
 }
 
@@ -33,13 +34,26 @@ ol {
 
 .tab-content {
     float: left;
+    width: calc(100% - #{$tab-list-width});
 
-    .driver {
-        width: 199px;
+    .driver-wrapper {
+        width: 100%;
+        overflow: auto;
+        .driver {
+            width: 201px;
 
-        padding: 8px 12px;
-        border: 1px solid $border-gray;
-        border-right-width: 0;
-        border-top-width: 0;
+            padding: 8px 12px;
+            border: 1px solid $border-light-gray;
+            border-top-width: 0;
+            border-left-width: 0;
+            float: left;
+        }
+        .driver-task-wrapper {
+            margin-left: $sidebar-width - $tab-list-width + 1px;
+            height: 100%;
+            table {
+                margin-bottom: 0;
+            }
+        }
     }
 }

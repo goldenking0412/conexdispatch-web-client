@@ -6,28 +6,49 @@ $fc-header-height: 74px;
 
 /* Main Full Calendar Header CSS */
 .column-header {
-  padding-left: 15px;
-  font-weight: lighter;
+    padding-left: 15px;
+    font-weight: lighter;
 }
 
 .column-header-day-of-month {
-  font-size: 40px;
-  padding-bottom: 10px;
+    font-size: 40px;
+    padding-bottom: 10px;
 }
 
 .column-header-today {
-  color: $light-blue;
+    color: $light-blue;
 }
 
 #calendar {
 }
 
 .unassigned-tasks {
-  height: $navigation-calendar-height;
-  border-left: 1px solid $border-gray;
-  padding-top: $fc-header-height;
+    height: $navigation-calendar-height;
+    border-left: 1px solid $border-light-gray;
+    padding-top: $fc-header-height;
 }
 
 .upper-content {
-  margin-left: 250px;
+    margin-left: 250px;
+}
+
+.unassigned-day-container {
+    height: $navigation-calendar-height - $fc-header-height;
+    width: 14.295%;
+}
+
+.unassigned-task-wrapper {
+    height: $navigation-calendar-height - $fc-header-height;
+}
+
+.box-container {
+    border-style: solid;
+    border-width: 1px;
+    border-color: $border-light-gray;
+    border-top-width: 0rem;
+    padding: 0;
+}
+
+.box-container:first-child {
+    border-left-width: 0rem;
 }

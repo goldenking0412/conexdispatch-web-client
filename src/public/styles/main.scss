@@ -129,7 +129,7 @@ footer .button {
 ::-webkit-scrollbar-thumb {
     background: $medium-gray;
 }
-$sidebar-width: 250px;
+// $sidebar-width: 250px;
 
 aside {
     display: none;
@@ -137,7 +137,7 @@ aside {
     width: $sidebar-width;
     background: $white;
     overflow: auto;
-    border: 1px solid $aside-border;
+    border: 1px solid $border-light-gray;
     border-right: 0px;
     border-bottom: 0px;
 
@@ -170,5 +170,5 @@ aside {
 .main-content {
     float: left;
     width: 100%;
-    border-bottom: 1px solid $border-gray;
+    border-bottom: 1px solid $border-light-gray;
 }
