@@ -2,8 +2,8 @@
   "name": "kin-web-client",
   "version": "0.1.0",
   "description": "Desktop Web Client for Kin Calendar.",
-  "repository": "https://github.com/KinToday/kin-web-client",
-  "author": "Zowe Siouff <zowesiouff@gmail.com>",
+  "repository": "https://github.com/goldenking0412/conexdispatch-web-client",
+  "author": "Todd Hartman <goldenking0412@gmail.com>",
   "license": "Apache-2.0",
   "keywords": [
     "calendar",

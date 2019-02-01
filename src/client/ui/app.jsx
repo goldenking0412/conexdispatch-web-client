@@ -17,6 +17,7 @@ import { toggle_sidebar } from "../actions/ui";
 import CalendarToolbar from "./calendar_toolbar";
 import EventTooltip from "./event_tooltip/base";
 import SettingsModal from "./settings_modal/base";
+import Tabs from "./tabs";
 
 class App extends React.Component {
     constructor(props) {
@@ -45,25 +46,48 @@ class App extends React.Component {
     }
 
     render() {
-        const content_classes = classnames("content", { margin: this.props.sidebar.show });
-        const aside_classes = classnames({ show: this.props.sidebar.show });
+        const content_classes = classnames("content", { margin: this.props.sidebar.show }, "float-left");
+        const aside_classes = classnames({ show: this.props.sidebar.show }, "float-left");
 
         return (
             <div>
                 <CalendarToolbar />
-                <div>
+                <div className="main-content">
                     <aside className={aside_classes}>
                         <div className="navigation-calendar">
                             <Calendar />
                         </div>
                         <div className="clearfix" />
                     </aside>
-
-                    <div className={content_classes}>
-                        <EventTooltip />
-                        <SettingsModal />
+                    <div className="upper-content">
                         <div id="calendar" />
+                        <div className="unassigned-tasks">test</div>
                     </div>
+                </div>
+
+                <Tabs>
+                    <div label="OAK">
+                        <div className="driver">
+                            Jeff Carter
+                        </div>
+                        <div className="driver">
+                            Habib Nurmagomedov
+                        </div>
+                        <div className="driver">
+                            Habib Nurmagomedov
+                        </div>
+                    </div>
+                    <div label="CHI">
+                        Habib Nurmagomedov
+                    </div>
+                    <div label="DER">
+                        Vitali Barkouski
+                    </div>
+                </Tabs>
+
+                <div className={content_classes}>
+                    <EventTooltip />
+                    <SettingsModal />
                 </div>
             </div>
         );

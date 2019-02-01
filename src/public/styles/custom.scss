@@ -2,6 +2,8 @@
  * Custom SCSS
  */
 
+$fc-header-height: 74px;
+
 /* Main Full Calendar Header CSS */
 .column-header {
   padding-left: 15px;
@@ -15,4 +17,17 @@
 
 .column-header-today {
   color: $light-blue;
+}
+
+#calendar {
+}
+
+.unassigned-tasks {
+  height: $navigation-calendar-height;
+  border-left: 1px solid $border-gray;
+  padding-top: $fc-header-height;
+}
+
+.upper-content {
+  margin-left: 250px;
 }

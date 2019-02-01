@@ -39,6 +39,7 @@
 @import 'logo';
 @import 'custom_react_calendar';
 @import 'custom';
+@import 'tab';
 
 body {
     overflow: hidden;
@@ -134,11 +135,11 @@ aside {
     display: none;
     float: left;
     width: $sidebar-width;
-    height: 100vh;
     background: $white;
     overflow: auto;
     border: 1px solid $aside-border;
     border-right: 0px;
+    border-bottom: 0px;
 
     &.show {
         display: block;
@@ -153,7 +154,7 @@ aside {
     margin-left: 0;
 
     &.margin {
-        margin-left: $sidebar-width;
+        width: calc(100% - #{$sidebar-width});
     }
 }
 
@@ -164,4 +165,10 @@ aside {
     &:hover {
         color: $darker-gray;
     }
+}
+
+.main-content {
+    float: left;
+    width: 100%;
+    border-bottom: 1px solid $border-gray;
 }
