@@ -18,6 +18,7 @@ import CalendarToolbar from "./calendar_toolbar";
 import EventTooltip from "./event_tooltip/base";
 import SettingsModal from "./settings_modal/base";
 import Tabs from "./tabs";
+import DispatchRow from "./dispatch_row";
 
 class App extends React.Component {
     constructor(props) {
@@ -45,6 +46,34 @@ class App extends React.Component {
         this.props.dispatch(toggle_sidebar(!this.props.sidebar.show));
     }
 
+    _render_main() {
+        const main_content = [];
+        for (let i =  0; i < this.props.data.length; i+=1) {
+            main_content.push(
+                <div label={this.props.data[i].location} key={i}>
+                    {this._render_drivers(this.props.data[i].drivers)}
+                </div>
+            )
+        }
+
+        return main_content;
+    }
+
+    _render_drivers(drivers) {
+        const content = [];
+        for (let i = 0; i < drivers.length; i+=1) {
+            content.push(
+                <div className="driver-wrapper" key={i}>
+                    <div className="driver cell">
+                        {drivers[i]}
+                    </div>
+                    <DispatchRow height={50} />
+                </div>
+            )
+        }
+        return content;
+    }
+
     render() {
         const content_classes = classnames("content", { margin: this.props.sidebar.show }, "float-left");
         const aside_classes = classnames({ show: this.props.sidebar.show }, "float-left");
@@ -61,153 +90,14 @@ class App extends React.Component {
                     </aside>
                     <div className="upper-content">
                         <div id="calendar" />
-                        <div className="unassigned-tasks">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th className="unassigned-task-wrapper box-container">
-                                        a
-                                        </th>
-                                        <th className="unassigned-task-wrapper box-container">
-                                        a
-                                        </th>
-                                        <th className="unassigned-task-wrapper box-container">
-                                        a
-                                        </th>
-                                        <th className="unassigned-task-wrapper box-container">
-                                        a
-                                        </th>
-                                        <th className="unassigned-task-wrapper box-container">
-                                        a
-                                        </th>
-                                        <th className="unassigned-task-wrapper box-container">
-                                        a
-                                        </th>
-                                        <th className="unassigned-task-wrapper box-container">
-                                        a
-                                        </th>
-                                    </tr>
-                                </thead>
-                            </table>
-                        </div>
+                        <DispatchRow 
+                          unassigned_task
+                        />
                     </div>
                 </div>
 
-                <Tabs>
-                    <div label="OAK">
-                        <div className="driver-wrapper">
-                            <div className="driver">
-                                Jeff Carter
-                            </div>
-                            <div className="driver-task-wrapper">
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th className="box-container">
-                                            a
-                                            </th>
-                                            <th className="box-container">
-                                            a
-                                            </th>
-                                            <th className="box-container">
-                                            a
-                                            </th>
-                                            <th className="box-container">
-                                            a
-                                            </th>
-                                            <th className="box-container">
-                                            a
-                                            </th>
-                                            <th className="box-container">
-                                            a
-                                            </th>
-                                            <th className="box-container">
-                                            a
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                </table>
-                            </div>
-                        </div>
-                        <div className="driver-wrapper">
-                            <div className="driver">
-                                Habib Nurmagomedov
-                            </div>
-                            <div className="driver-task-wrapper">
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th className="box-container">
-                                            a
-                                            </th>
-                                            <th className="box-container">
-                                            a
-                                            </th>
-                                            <th className="box-container">
-                                            a
-                                            </th>
-                                            <th className="box-container">
-                                            a
-                                            </th>
-                                            <th className="box-container">
-                                            a
-                                            </th>
-                                            <th className="box-container">
-                                            a
-                                            </th>
-                                            <th className="box-container">
-                                            a
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                </table>
-                            </div>
-                        </div>
-                        <div className="driver-wrapper">
-                            <div className="driver">
-                                Habib Nurmagomedov
-                            </div>
-                            <div className="driver-task-wrapper">
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th className="box-container">
-                                            a
-                                            </th>
-                                            <th className="box-container">
-                                            a
-                                            </th>
-                                            <th className="box-container">
-                                            a
-                                            </th>
-                                            <th className="box-container">
-                                            a
-                                            </th>
-                                            <th className="box-container">
-                                            a
-                                            </th>
-                                            <th className="box-container">
-                                            a
-                                            </th>
-                                            <th className="box-container">
-                                            a
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <div label="CHI">
-                        <div className="driver">
-                            Habib Nurmagomedov
-                        </div>
-                    </div>
-                    <div label="DER">
-                        <div className="driver">
-                            Vitali Barkouski
-                        </div>
-                    </div>
+                <Tabs >
+                    {this._render_main()}
                 </Tabs>
 
                 <div className={content_classes}>
@@ -223,7 +113,15 @@ App.propTypes = {
     dispatch: PropTypes.func,
     sidebar: PropTypes.shape({
         show: PropTypes.bool
-    })
+    }),
+    data: PropTypes.arrayOf(
+        PropTypes.shape({
+            location: PropTypes.string,
+            drivers: PropTypes.arrayOf(
+                PropTypes.string
+            )
+        })
+    )
 };
 
 function map_state_props(state) {

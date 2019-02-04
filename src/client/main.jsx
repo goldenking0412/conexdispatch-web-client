@@ -99,6 +99,84 @@ function init_full_sync(fc_calendar, store) {
     store.dispatch(start_polling_loop());
 }
 
+const data = [
+    {
+        location: "OAK",
+        drivers: [
+            "Jeff Carter",
+            "Habib Nurmagomedov",
+            "Vitali Barkouski"
+        ]
+    },
+    {
+        location: "CHI",
+        drivers: [
+            "Alex Rozkin",
+            "Brock Fegan"
+        ]
+    },
+    {
+        location: "DER",
+        drivers: [
+            "Scott Russel"
+        ]
+    },
+    {
+        location: "PAC",
+        drivers: [
+            "Scott Russel"
+        ]
+    },
+    {
+        location: "IBM",
+        drivers: [
+            "Scott Russel"
+        ]
+    },
+    {
+        location: "AMZ",
+        drivers: [
+            "Scott Russel"
+        ]
+    },
+    {
+        location: "BMO",
+        drivers: [
+            "Scott Russel"
+        ]
+    },
+    {
+        location: "LLC",
+        drivers: [
+            "Scott Russel"
+        ]
+    },
+    {
+        location: "YYI",
+        drivers: [
+            "Scott Russel"
+        ]
+    },
+    {
+        location: "BIM",
+        drivers: [
+            "Scott Russel"
+        ]
+    },
+    {
+        location: "LIT",
+        drivers: [
+            "Scott Russel"
+        ]
+    },
+    {
+        location: "COC",
+        drivers: [
+            "Scott Russel"
+        ]
+    }
+];
+
 function main() {
     extract_token_from_hash();
     if (!user_config.authenticated) {
@@ -116,7 +194,7 @@ function main() {
         const root_element = document.getElementsByClassName("root")[0];
         render(
             <Provider store={store}>
-                <App />
+                <App data={data} />
             </Provider>,
             root_element,
             resolve

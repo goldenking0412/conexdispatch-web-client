@@ -22,7 +22,7 @@ class Tab extends Component {
             },
         } = this;
 
-        let className = 'tab-list-item';
+        let className = 'tab-list-item cell';
 
         if (activeTab === label) {
             className += ' tab-list-active';

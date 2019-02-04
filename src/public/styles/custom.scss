@@ -3,6 +3,7 @@
  */
 
 $fc-header-height: 74px;
+$default-cell-height: 50px;
 
 /* Main Full Calendar Header CSS */
 .column-header {
@@ -32,11 +33,6 @@ $fc-header-height: 74px;
     margin-left: 250px;
 }
 
-.unassigned-day-container {
-    height: $navigation-calendar-height - $fc-header-height;
-    width: 14.295%;
-}
-
 .unassigned-task-wrapper {
     height: $navigation-calendar-height - $fc-header-height;
 }
@@ -51,4 +47,8 @@ $fc-header-height: 74px;
 
 .box-container:first-child {
     border-left-width: 0rem;
+}
+
+.cell {
+    height: $default-cell-height;
 }
