@@ -19,6 +19,7 @@ import EventTooltip from "./event_tooltip/base";
 import SettingsModal from "./settings_modal/base";
 import Tabs from "./tabs";
 import DispatchRow from "./dispatch_row";
+import TabcontentContainer from "./tabcontent_container";
 
 class App extends React.Component {
     constructor(props) {
@@ -51,27 +52,12 @@ class App extends React.Component {
         for (let i =  0; i < this.props.data.length; i+=1) {
             main_content.push(
                 <div label={this.props.data[i].location} key={i}>
-                    {this._render_drivers(this.props.data[i].drivers)}
+                    <TabcontentContainer drivers={this.props.data[i].drivers} />
                 </div>
             )
         }
 
         return main_content;
-    }
-
-    _render_drivers(drivers) {
-        const content = [];
-        for (let i = 0; i < drivers.length; i+=1) {
-            content.push(
-                <div className="driver-wrapper" key={i}>
-                    <div className="driver cell">
-                        {drivers[i]}
-                    </div>
-                    <DispatchRow height={100} />
-                </div>
-            )
-        }
-        return content;
     }
 
     render() {

@@ -56,6 +56,14 @@ ol {
             }
         }
     }
+
+    .driver-wrapper.selected {
+        border: 1px solid $selected-border-color;
+        border-left-width: 3px;
+        .driver {
+            margin-left: -3px;
+        }
+    }
     
     thead {
         border: 0;
