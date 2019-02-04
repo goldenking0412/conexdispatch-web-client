@@ -56,4 +56,12 @@ ol {
             }
         }
     }
+    
+    thead {
+        border: 0;
+    }
+}
+
+.auto-scroll {
+    overflow: scroll;
 }

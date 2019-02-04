@@ -42,13 +42,15 @@ $default-cell-height: 50px;
     border-width: 1px;
     border-color: $border-light-gray;
     border-top-width: 0rem;
-    padding: 0;
-}
-
-.box-container:first-child {
     border-left-width: 0rem;
+    padding: 0;
+    flex: 1;
 }
 
 .cell {
-    height: $default-cell-height;
+    height: $default-cell-height*2;
+}
+
+.display-flex {
+    display: flex;
 }

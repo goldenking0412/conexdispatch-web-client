@@ -1,0 +1,17 @@
+.draggable-container {
+    padding: 5px;
+
+    .draggable-item {
+        width: 100%;
+        border: 1px solid #013FCE;
+    }
+
+    .draggable-item:hover {
+        cursor: move;
+    }
+
+    .draggable-item:not(:first-child) {
+        margin-top: 2px;
+    }
+}
+

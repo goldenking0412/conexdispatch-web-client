@@ -32,7 +32,7 @@ class Tabs extends Component {
         } = this;
 
         return (
-            <div className="tabs float-left cell">
+            <div className="tabs float-left auto-scroll">
                 <ol className="tab-list cell">
                     {children.map((child) => {
                         const { label } = child.props;

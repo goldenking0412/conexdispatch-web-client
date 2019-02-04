@@ -39,6 +39,7 @@
     "react-calendar": "^2.18.1",
     "react-dates": "^12.7.1",
     "react-dom": "^15.6.2",
+    "react-dragula": "^1.1.17",
     "react-redux": "^5.1.1",
     "redux": "^3.7.2",
     "redux-thunk": "^2.3.0",

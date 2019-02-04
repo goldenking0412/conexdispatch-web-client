@@ -67,7 +67,7 @@ class App extends React.Component {
                     <div className="driver cell">
                         {drivers[i]}
                     </div>
-                    <DispatchRow height={50} />
+                    <DispatchRow height={100} />
                 </div>
             )
         }
