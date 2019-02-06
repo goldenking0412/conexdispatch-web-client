@@ -1,0 +1,566 @@
+{
+  "unassigned_data": [
+    {
+      "date": "2/3/2019",
+      "daily_dispatches": [
+        {
+          "payment_status": "paid", 
+          "payment_gateway": "",    
+          "title": "Jeff OAK",
+          "invoice_no": "#INV-014254",
+          "line_item": "40HC",
+          "expected_delivery_time": "00.00",
+          "expected_ext_time": "03:00",
+          "delivery_address": "2800 Camino Diabio, Byron CA",
+          "color": "#CFCFCF"
+        }
+      ]
+    },
+    {
+      "date": "2/4/2019",
+      "daily_dispatches": [
+        {
+          "payment_status": "paid", 
+          "payment_gateway": "",    
+          "title": "Jeff CAR",
+          "invoice_no": "#INV-014254",
+          "line_item": "40HC",
+          "expected_delivery_time": "00.00",
+          "expected_ext_time": "03:00",
+          "delivery_address": "2800 Camino Diabio, Byron CA",
+          "color": "#CFCFCF"
+        }
+      ]
+    },
+    {
+      "date": "2/5/2019",
+      "daily_dispatches": [
+        {
+          "payment_status": "paid", 
+          "payment_gateway": "",    
+          "title": "Jeff OAK",
+          "invoice_no": "#INV-014254",
+          "line_item": "40HC",
+          "expected_delivery_time": "00.00",
+          "expected_ext_time": "03:00",
+          "delivery_address": "2800 Camino Diabio, Byron CA",
+          "color": "#CFCFCF"
+        }
+      ]
+    },
+    {
+      "date": "2/6/2019",
+      "daily_dispatches": [
+        {
+          "payment_status": "paid", 
+          "payment_gateway": "",    
+          "title": "Jeff OAK",
+          "invoice_no": "#INV-014254",
+          "line_item": "40HC",
+          "expected_delivery_time": "00.00",
+          "expected_ext_time": "03:00",
+          "delivery_address": "2800 Camino Diabio, Byron CA",
+          "color": "#CFCFCF"
+        }
+      ]
+    },
+    {
+      "date": "2/7/2019",
+      "daily_dispatches": [
+        {
+          "payment_status": "paid", 
+          "payment_gateway": "",    
+          "title": "Jeff OAK",
+          "invoice_no": "#INV-014254",
+          "line_item": "40HC",
+          "expected_delivery_time": "00.00",
+          "expected_ext_time": "03:00",
+          "delivery_address": "2800 Camino Diabio, Byron CA",
+          "color": "#CFCFCF"
+        }
+      ]
+    },
+    {
+      "date": "2/8/2019",
+      "daily_dispatches": [
+        {
+          "payment_status": "paid", 
+          "payment_gateway": "",    
+          "title": "Jeff OAK",
+          "invoice_no": "#INV-014254",
+          "line_item": "40HC",
+          "expected_delivery_time": "00.00",
+          "expected_ext_time": "03:00",
+          "delivery_address": "2800 Camino Diabio, Byron CA",
+          "color": "#CFCFCF"
+        }
+      ]
+    },
+    {
+      "date": "2/9/2019",
+      "daily_dispatches": [
+        {
+          "payment_status": "paid", 
+          "payment_gateway": "",    
+          "title": "Jeff OAK",
+          "invoice_no": "#INV-014254",
+          "line_item": "40HC",
+          "expected_delivery_time": "00.00",
+          "expected_ext_time": "03:00",
+          "delivery_address": "2800 Camino Diabio, Byron CA",
+          "color": "#CFCFCF"
+        }
+      ]
+    }
+  ],
+  "assigned_data": [
+    {
+      "location": "OAK",
+      "drivers": [
+        {
+          "name": "Jeff Carter",
+          "default_color": "#F3F3F3",
+          "phone_number": "+1 609 223 2323",
+          "dispatches": [
+            {
+              "date": "2/3/2019",
+              "daily_dispatches": [
+                {
+                  "title": "Jeff OAK",
+                  "invoice_no": "#INV-014254",
+                  "line_item": "40HC",
+                  "expected_delivery_time": "00.00",
+                  "expected_ext_time": "03:00",
+                  "delivery_address": "2800 Camino Diabio, Byron CA",
+                  "color": "#CFCFCF"
+                },
+                {
+                  "title": "Pickup",
+                  "invoice_no": "#INV-014254",
+                  "line_item": "40HC",
+                  "expected_delivery_time": "00.00",
+                  "expected_ext_time": "03:00",
+                  "delivery_address": "2800 Camino Diabio, Byron CA",
+                  "color": "#FF3333"
+                }
+              ]
+            },
+            {
+              "date": "2/4/2019",
+              "daily_dispatches": [
+                {
+                  "title": "Jeff OAK",
+                  "invoice_no": "#INV-014254",
+                  "line_item": "40HC",
+                  "expected_delivery_time": "00.00",
+                  "expected_ext_time": "03:00",
+                  "delivery_address": "2800 Camino Diabio, Byron CA",
+                  "color": "#CFCFCF"
+                }
+              ]
+            },
+            {
+              "date": "2/5/2019",
+              "daily_dispatches": [
+                {
+                  "title": "Jeff OAK",
+                  "invoice_no": "#INV-014254",
+                  "line_item": "40HC",
+                  "expected_delivery_time": "00.00",
+                  "expected_ext_time": "03:00",
+                  "delivery_address": "2800 Camino Diabio, Byron CA",
+                  "color": "#CFCFCF"
+                }
+              ]
+            },
+            {
+              "date": "2/6/2019",
+              "daily_dispatches": [
+                {
+                  "title": "Jeff OAK",
+                  "invoice_no": "#INV-014254",
+                  "line_item": "40HC",
+                  "expected_delivery_time": "00.00",
+                  "expected_ext_time": "03:00",
+                  "delivery_address": "2800 Camino Diabio, Byron CA",
+                  "color": "#CFCFCF"
+                }
+              ]
+            },
+            {
+              "date": "2/7/2019",
+              "daily_dispatches": [
+                {
+                  "title": "Jeff OAK",
+                  "invoice_no": "#INV-014254",
+                  "line_item": "40HC",
+                  "expected_delivery_time": "00.00",
+                  "expected_ext_time": "03:00",
+                  "delivery_address": "2800 Camino Diabio, Byron CA",
+                  "color": "#CFCFCF"
+                }
+              ]
+            },
+            {
+              "date": "2/8/2019",
+              "daily_dispatches": [
+                {
+                  "title": "Jeff OAK",
+                  "invoice_no": "#INV-014254",
+                  "line_item": "40HC",
+                  "expected_delivery_time": "00.00",
+                  "expected_ext_time": "03:00",
+                  "delivery_address": "2800 Camino Diabio, Byron CA",
+                  "color": "#CFCFCF"
+                }
+              ]
+            },
+            {
+              "date": "2/9/2019",
+              "daily_dispatches": [
+                {
+                  "title": "Jeff OAK",
+                  "invoice_no": "#INV-014254",
+                  "line_item": "40HC",
+                  "expected_delivery_time": "00.00",
+                  "expected_ext_time": "03:00",
+                  "delivery_address": "2800 Camino Diabio, Byron CA",
+                  "color": "#CFCFCF"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Habib Nurmagomedov",
+          "default_color": "#FAFAFA",
+          "phone_number": "+1 609 234 4567",
+          "dispatches": [
+            {
+              "date": "2/3/2019",
+              "daily_dispatches": [
+                {
+                  "title": "Jeff OAK",
+                  "invoice_no": "#INV-014254",
+                  "line_item": "40HC",
+                  "expected_delivery_time": "00.00",
+                  "expected_ext_time": "03:00",
+                  "delivery_address": "2800 Camino Diabio, Byron CA",
+                  "color": "#CFCFCF"
+                }
+              ]
+            },
+            {
+              "date": "2/4/2019",
+              "daily_dispatches": [
+                {
+                  "title": "Jeff OAK",
+                  "invoice_no": "#INV-014254",
+                  "line_item": "40HC",
+                  "expected_delivery_time": "00.00",
+                  "expected_ext_time": "03:00",
+                  "delivery_address": "2800 Camino Diabio, Byron CA",
+                  "color": "#CFCFCF"
+                }
+              ]
+            },
+            {
+              "date": "2/5/2019",
+              "daily_dispatches": [
+                {
+                  "title": "Jeff OAK",
+                  "invoice_no": "#INV-014254",
+                  "line_item": "40HC",
+                  "expected_delivery_time": "00.00",
+                  "expected_ext_time": "03:00",
+                  "delivery_address": "2800 Camino Diabio, Byron CA",
+                  "color": "#CFCFCF"
+                }
+              ]
+            },
+            {
+              "date": "2/6/2019",
+              "daily_dispatches": [
+                {
+                  "title": "Jeff OAK",
+                  "invoice_no": "#INV-014254",
+                  "line_item": "40HC",
+                  "expected_delivery_time": "00.00",
+                  "expected_ext_time": "03:00",
+                  "delivery_address": "2800 Camino Diabio, Byron CA",
+                  "color": "#CFCFCF"
+                }
+              ]
+            },
+            {
+              "date": "2/7/2019",
+              "daily_dispatches": [
+                {
+                  "title": "Jeff OAK",
+                  "invoice_no": "#INV-014254",
+                  "line_item": "40HC",
+                  "expected_delivery_time": "00.00",
+                  "expected_ext_time": "03:00",
+                  "delivery_address": "2800 Camino Diabio, Byron CA",
+                  "color": "#CFCFCF"
+                }
+              ]
+            },
+            {
+              "date": "2/8/2019",
+              "daily_dispatches": [
+                {
+                  "title": "Jeff OAK",
+                  "invoice_no": "#INV-014254",
+                  "line_item": "40HC",
+                  "expected_delivery_time": "00.00",
+                  "expected_ext_time": "03:00",
+                  "delivery_address": "2800 Camino Diabio, Byron CA",
+                  "color": "#CFCFCF"
+                }
+              ]
+            },
+            {
+              "date": "2/9/2019",
+              "daily_dispatches": [
+                {
+                  "title": "Jeff OAK",
+                  "invoice_no": "#INV-014254",
+                  "line_item": "40HC",
+                  "expected_delivery_time": "00.00",
+                  "expected_ext_time": "03:00",
+                  "delivery_address": "2800 Camino Diabio, Byron CA",
+                  "color": "#CFCFCF"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "location": "CHI",
+      "drivers": [
+        {
+          "name": "Habib Nurmagomedov",
+          "default_color": "#F3F3F3",
+          "phone_number": "+1 609 223 2323",
+          "dispatches": [
+            {
+              "date": "2/3/2019",
+              "daily_dispatches": [
+                {
+                  "title": "Jeff OAK",
+                  "invoice_no": "#INV-014254",
+                  "line_item": "40HC",
+                  "expected_delivery_time": "00.00",
+                  "expected_ext_time": "03:00",
+                  "delivery_address": "2800 Camino Diabio, Byron CA",
+                  "color": "#CFCFCF"
+                },
+                {
+                  "title": "Pickup",
+                  "invoice_no": "#INV-014254",
+                  "line_item": "40HC",
+                  "expected_delivery_time": "00.00",
+                  "expected_ext_time": "03:00",
+                  "delivery_address": "2800 Camino Diabio, Byron CA",
+                  "color": "#FF3333"
+                }
+              ]
+            },
+            {
+              "date": "2/4/2019",
+              "daily_dispatches": [
+                {
+                  "title": "Jeff OAK",
+                  "invoice_no": "#INV-014254",
+                  "line_item": "40HC",
+                  "expected_delivery_time": "00.00",
+                  "expected_ext_time": "03:00",
+                  "delivery_address": "2800 Camino Diabio, Byron CA",
+                  "color": "#CFCFCF"
+                }
+              ]
+            },
+            {
+              "date": "2/5/2019",
+              "daily_dispatches": [
+                {
+                  "title": "Jeff OAK",
+                  "invoice_no": "#INV-014254",
+                  "line_item": "40HC",
+                  "expected_delivery_time": "00.00",
+                  "expected_ext_time": "03:00",
+                  "delivery_address": "2800 Camino Diabio, Byron CA",
+                  "color": "#CFCFCF"
+                }
+              ]
+            },
+            {
+              "date": "2/6/2019",
+              "daily_dispatches": [
+                {
+                  "title": "Jeff OAK",
+                  "invoice_no": "#INV-014254",
+                  "line_item": "40HC",
+                  "expected_delivery_time": "00.00",
+                  "expected_ext_time": "03:00",
+                  "delivery_address": "2800 Camino Diabio, Byron CA",
+                  "color": "#CFCFCF"
+                }
+              ]
+            },
+            {
+              "date": "2/7/2019",
+              "daily_dispatches": [
+                {
+                  "title": "Jeff OAK",
+                  "invoice_no": "#INV-014254",
+                  "line_item": "40HC",
+                  "expected_delivery_time": "00.00",
+                  "expected_ext_time": "03:00",
+                  "delivery_address": "2800 Camino Diabio, Byron CA",
+                  "color": "#CFCFCF"
+                }
+              ]
+            },
+            {
+              "date": "2/8/2019",
+              "daily_dispatches": [
+                {
+                  "title": "Jeff OAK",
+                  "invoice_no": "#INV-014254",
+                  "line_item": "40HC",
+                  "expected_delivery_time": "00.00",
+                  "expected_ext_time": "03:00",
+                  "delivery_address": "2800 Camino Diabio, Byron CA",
+                  "color": "#CFCFCF"
+                }
+              ]
+            },
+            {
+              "date": "2/9/2019",
+              "daily_dispatches": [
+                {
+                  "title": "Jeff OAK",
+                  "invoice_no": "#INV-014254",
+                  "line_item": "40HC",
+                  "expected_delivery_time": "00.00",
+                  "expected_ext_time": "03:00",
+                  "delivery_address": "2800 Camino Diabio, Byron CA",
+                  "color": "#CFCFCF"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Vitali Barkouski",
+          "default_color": "#FAFAFA",
+          "phone_number": "+1 609 234 4567",
+          "dispatches": [
+            {
+              "date": "2/3/2019",
+              "daily_dispatches": [
+                {
+                  "title": "Jeff OAK",
+                  "invoice_no": "#INV-014254",
+                  "line_item": "40HC",
+                  "expected_delivery_time": "00.00",
+                  "expected_ext_time": "03:00",
+                  "delivery_address": "2800 Camino Diabio, Byron CA",
+                  "color": "#CFCFCF"
+                }
+              ]
+            },
+            {
+              "date": "2/4/2019",
+              "daily_dispatches": [
+                {
+                  "title": "Jeff OAK",
+                  "invoice_no": "#INV-014254",
+                  "line_item": "40HC",
+                  "expected_delivery_time": "00.00",
+                  "expected_ext_time": "03:00",
+                  "delivery_address": "2800 Camino Diabio, Byron CA",
+                  "color": "#CFCFCF"
+                }
+              ]
+            },
+            {
+              "date": "2/5/2019",
+              "daily_dispatches": [
+                {
+                  "title": "Jeff OAK",
+                  "invoice_no": "#INV-014254",
+                  "line_item": "40HC",
+                  "expected_delivery_time": "00.00",
+                  "expected_ext_time": "03:00",
+                  "delivery_address": "2800 Camino Diabio, Byron CA",
+                  "color": "#CFCFCF"
+                }
+              ]
+            },
+            {
+              "date": "2/6/2019",
+              "daily_dispatches": [
+                {
+                  "title": "Jeff OAK",
+                  "invoice_no": "#INV-014254",
+                  "line_item": "40HC",
+                  "expected_delivery_time": "00.00",
+                  "expected_ext_time": "03:00",
+                  "delivery_address": "2800 Camino Diabio, Byron CA",
+                  "color": "#CFCFCF"
+                }
+              ]
+            },
+            {
+              "date": "2/7/2019",
+              "daily_dispatches": [
+                {
+                  "title": "Jeff OAK",
+                  "invoice_no": "#INV-014254",
+                  "line_item": "40HC",
+                  "expected_delivery_time": "00.00",
+                  "expected_ext_time": "03:00",
+                  "delivery_address": "2800 Camino Diabio, Byron CA",
+                  "color": "#CFCFCF"
+                }
+              ]
+            },
+            {
+              "date": "2/8/2019",
+              "daily_dispatches": [
+                {
+                  "title": "Jeff OAK",
+                  "invoice_no": "#INV-014254",
+                  "line_item": "40HC",
+                  "expected_delivery_time": "00.00",
+                  "expected_ext_time": "03:00",
+                  "delivery_address": "2800 Camino Diabio, Byron CA",
+                  "color": "#CFCFCF"
+                }
+              ]
+            },
+            {
+              "date": "2/9/2019",
+              "daily_dispatches": [
+                {
+                  "title": "Jeff OAK",
+                  "invoice_no": "#INV-014254",
+                  "line_item": "40HC",
+                  "expected_delivery_time": "00.00",
+                  "expected_ext_time": "03:00",
+                  "delivery_address": "2800 Camino Diabio, Byron CA",
+                  "color": "#CFCFCF"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

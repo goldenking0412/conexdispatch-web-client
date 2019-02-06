@@ -24,24 +24,23 @@ class TabcontentContainer extends React.Component {
     }
 
     render() {
-        const drivers = this.props.drivers;
         const content = [];
         const { activeSelected } = this.state;
-        for (let i = 0; i < drivers.length; i+=1) {
+        for (let i = 0; i < this.props.drivers.length; i+=1) {
             const classname = classnames({
                 'driver-wrapper' : true, 
-                'selected' : activeSelected === this.props.drivers[i]
+                'selected' : activeSelected === this.props.drivers[i].name
             });
             content.push(
                 <div 
                   className={classname}
                   key={i}
-                  onClick={() => this.setState({ activeSelected : activeSelected === drivers[i] ? '' : drivers[i] })} 
+                  onClick={() => this.setState({ activeSelected : activeSelected === this.props.drivers[i].name ? '' : this.props.drivers[i].name })} 
                 >
                     <div className="driver cell">
-                        {drivers[i]}
+                        {this.props.drivers[i].name}
                     </div>
-                    <DispatchRow height={100} />
+                    <DispatchRow height={100} data={this.props.drivers[i].dispatches} />
                 </div>
             )
         }
@@ -51,7 +50,27 @@ class TabcontentContainer extends React.Component {
 
 TabcontentContainer.propTypes = {
     drivers: PropTypes.arrayOf(
-        PropTypes.string
+        PropTypes.shape({
+            name: PropTypes.string,
+            default_color: PropTypes.string,
+            phone_number: PropTypes.string,
+            dispatches: PropTypes.arrayOf(
+                PropTypes.shape({
+                    date: PropTypes.string,
+                    daily_dispatches: PropTypes.arrayOf(
+                        PropTypes.shape({
+                            title: PropTypes.string,
+                            invoice_no: PropTypes.string,
+                            line_item: PropTypes.string,
+                            expected_delivery_time: PropTypes.string,
+                            expected_ext_time: PropTypes.string,
+                            delivery_address: PropTypes.string,
+                            color: PropTypes.string
+                        })
+                    )
+                })
+            )
+        })
     )
 };
 

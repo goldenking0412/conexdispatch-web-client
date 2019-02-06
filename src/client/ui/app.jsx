@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import React from "react";
 import { connect } from "react-redux";
 import Calendar from "react-calendar";
+import Dragula from 'react-dragula';
 
 import { EVENTS_NS } from "../config";
 
@@ -18,8 +19,8 @@ import CalendarToolbar from "./calendar_toolbar";
 import EventTooltip from "./event_tooltip/base";
 import SettingsModal from "./settings_modal/base";
 import Tabs from "./tabs";
-import DispatchRow from "./dispatch_row";
 import TabcontentContainer from "./tabcontent_container";
+import UnassignedContainer from "./unassigned_container";
 
 class App extends React.Component {
     constructor(props) {
@@ -49,10 +50,10 @@ class App extends React.Component {
 
     _render_main() {
         const main_content = [];
-        for (let i =  0; i < this.props.data.length; i+=1) {
+        for (let i =  0; i < this.props.data.assigned_data.length; i+=1) {
             main_content.push(
-                <div label={this.props.data[i].location} key={i}>
-                    <TabcontentContainer drivers={this.props.data[i].drivers} />
+                <div label={this.props.data.assigned_data[i].location} key={i}>
+                    <TabcontentContainer drivers={this.props.data.assigned_data[i].drivers} />
                 </div>
             )
         }
@@ -60,12 +61,29 @@ class App extends React.Component {
         return main_content;
     }
 
+    dragulaDecorator = () => {
+        const options = {
+            isContainer(el) { return el.classList.contains('dragula-container'); },
+            moves() { return true; },
+            accepts() { return true; },
+            invalid() { return false; },
+            direction: 'vertical',             // Y axis is considered when determining where an element would be dropped
+            copy: false,                       // elements are moved by default, not copied
+            copySortSource: false,             // elements in copy-source containers can be reordered
+            revertOnSpill: false,              // spilling will put the element back where it was dragged from, if this is true
+            removeOnSpill: false,              // spilling will `.remove` the element, if this is true
+            mirrorContainer: document.body,    // set the element that gets mirror elements appended
+            ignoreInputTextSelection: true     // allows users to select input text, see details below
+        };
+        Dragula([...document.querySelectorAll('.draggable-container')], options);
+    };
+
     render() {
         const content_classes = classnames("content", { margin: this.props.sidebar.show }, "float-left");
         const aside_classes = classnames({ show: this.props.sidebar.show }, "float-left");
 
         return (
-            <div>
+            <div ref={this.dragulaDecorator}>
                 <CalendarToolbar />
                 <div className="main-content">
                     <aside className={aside_classes}>
@@ -76,9 +94,7 @@ class App extends React.Component {
                     </aside>
                     <div className="upper-content">
                         <div id="calendar" />
-                        <DispatchRow 
-                          unassigned_task
-                        />
+                        <UnassignedContainer data={this.props.data.unassigned_data} />
                     </div>
                 </div>
 
@@ -100,14 +116,51 @@ App.propTypes = {
     sidebar: PropTypes.shape({
         show: PropTypes.bool
     }),
-    data: PropTypes.arrayOf(
-        PropTypes.shape({
-            location: PropTypes.string,
-            drivers: PropTypes.arrayOf(
-                PropTypes.string
-            )
-        })
-    )
+    data: PropTypes.shape({
+        unassigned_data: PropTypes.arrayOf(
+            PropTypes.shape({
+                date: PropTypes.string,
+                daily_dispatches: PropTypes.arrayOf(
+                    PropTypes.shape({
+                        title: PropTypes.string,
+                        invoice_no: PropTypes.string,
+                        line_item: PropTypes.string,
+                        payment_gateway: PropTypes.string,
+                        payment_type: PropTypes.string,
+                        delivery_address: PropTypes.string
+                    })
+                )
+            })
+        ),
+        assigned_data: PropTypes.arrayOf(
+            PropTypes.shape({
+                location: PropTypes.string,
+                drivers: PropTypes.arrayOf(
+                    PropTypes.shape({
+                        name: PropTypes.string,
+                        default_color: PropTypes.string,
+                        phone_number: PropTypes.string,
+                        dispatches: PropTypes.arrayOf(
+                            PropTypes.shape({
+                                date: PropTypes.string,
+                                daily_dispatches: PropTypes.arrayOf(
+                                    PropTypes.shape({
+                                        title: PropTypes.string,
+                                        invoice_no: PropTypes.string,
+                                        line_item: PropTypes.string,
+                                        expected_delivery_time: PropTypes.string,
+                                        expected_ext_time: PropTypes.string,
+                                        delivery_address: PropTypes.string,
+                                        color: PropTypes.string
+                                    })
+                                )
+                            })
+                        )
+                    })
+                )
+            })
+        )
+    })
 };
 
 function map_state_props(state) {
