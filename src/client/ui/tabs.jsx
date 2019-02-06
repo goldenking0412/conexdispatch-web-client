@@ -30,6 +30,7 @@ class Tabs extends Component {
                 activeTab,
             }
         } = this;
+        let counter = 0;
 
         return (
             <div className="tabs float-left auto-scroll">
@@ -49,8 +50,15 @@ class Tabs extends Component {
                 </ol>
                 <div className="tab-content cell">
                     {children.map((child) => {
-                        if (child.props.label !== activeTab) return undefined;
-                        return child.props.children;
+                        let style={ display: "block" };
+                        counter += 1;
+                        if (child.props.label !== activeTab) 
+                            style={ display: "none" };
+                        return (
+                            <div style={style} key={counter}>
+                                {child.props.children}
+                            </div>
+                        );
                     })}
                 </div>
             </div>

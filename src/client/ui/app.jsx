@@ -30,6 +30,7 @@ class App extends React.Component {
     }
 
     componentDidMount() {
+        this.dragulaDecorator();
         $(document).on(`keydown.${EVENTS_NS}`, this.keydown_handler);
     }
 
@@ -82,8 +83,11 @@ class App extends React.Component {
         const content_classes = classnames("content", { margin: this.props.sidebar.show }, "float-left");
         const aside_classes = classnames({ show: this.props.sidebar.show }, "float-left");
 
+        // this.drake = this.dragulaDecorator();
+        // console.log(2);
+
         return (
-            <div ref={this.dragulaDecorator}>
+            <div>
                 <CalendarToolbar />
                 <div className="main-content">
                     <aside className={aside_classes}>
@@ -98,7 +102,7 @@ class App extends React.Component {
                     </div>
                 </div>
 
-                <Tabs >
+                <Tabs>
                     {this._render_main()}
                 </Tabs>
 
