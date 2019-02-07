@@ -40,6 +40,7 @@ ol {
         width: 100%;
         overflow: auto;
         .driver {
+            position: relative;
             width: 201px;
 
             padding: 8px 12px;
@@ -47,6 +48,17 @@ ol {
             border-top-width: 0;
             border-left-width: 0;
             float: left;
+
+            input.switch-view-type {
+                position: absolute;
+                bottom: 5px;
+                border-radius: 0;
+            }
+
+            .driver-phone-area {
+                font-size: 14px;
+                color: $medium-gray;
+            }
         }
         .driver-task-wrapper {
             margin-left: $sidebar-width - $tab-list-width + 1px;
@@ -71,5 +83,5 @@ ol {
 }
 
 .auto-scroll {
-    overflow: scroll;
+    overflow: auto;
 }

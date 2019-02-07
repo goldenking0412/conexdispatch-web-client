@@ -5,9 +5,9 @@
       "daily_dispatches": [
         {
           "payment_status": "paid", 
-          "payment_gateway": "",    
-          "title": "Jeff OAK",
-          "invoice_no": "#INV-014254",
+          "payment_gateway": "CCD",    
+          "title": "OOS OAK",
+          "invoice_no": "#INV-190001",
           "line_item": "40HC",
           "expected_delivery_time": "00.00",
           "expected_ext_time": "03:00",
@@ -23,7 +23,7 @@
           "payment_status": "paid", 
           "payment_gateway": "",    
           "title": "Jeff CAR",
-          "invoice_no": "#INV-014254",
+          "invoice_no": "#INV-190002",
           "line_item": "40HC",
           "expected_delivery_time": "00.00",
           "expected_ext_time": "03:00",
@@ -39,7 +39,7 @@
           "payment_status": "paid", 
           "payment_gateway": "",    
           "title": "Jeff OAK",
-          "invoice_no": "#INV-014254",
+          "invoice_no": "#INV-190003",
           "line_item": "40HC",
           "expected_delivery_time": "00.00",
           "expected_ext_time": "03:00",
@@ -55,7 +55,7 @@
           "payment_status": "paid", 
           "payment_gateway": "",    
           "title": "Jeff OAK",
-          "invoice_no": "#INV-014254",
+          "invoice_no": "#INV-190004",
           "line_item": "40HC",
           "expected_delivery_time": "00.00",
           "expected_ext_time": "03:00",
@@ -71,12 +71,78 @@
           "payment_status": "paid", 
           "payment_gateway": "",    
           "title": "Jeff OAK",
-          "invoice_no": "#INV-014254",
+          "invoice_no": "#INV-190005",
           "line_item": "40HC",
           "expected_delivery_time": "00.00",
           "expected_ext_time": "03:00",
           "delivery_address": "2800 Camino Diabio, Byron CA",
           "color": "#CFCFCF"
+        },
+        {
+          "payment_status": "paid", 
+          "payment_gateway": "CCD",    
+          "title": "Jeff OAK",
+          "invoice_no": "#INV-190006",
+          "line_item": "40HC",
+          "expected_delivery_time": "00.00",
+          "expected_ext_time": "03:00",
+          "delivery_address": "2800 Camino Diabio, Byron CA",
+          "color": "#CFCFCF"
+        },
+        {
+          "payment_status": "partial-paid", 
+          "payment_gateway": "SC",    
+          "title": "Jeff OAK",
+          "invoice_no": "#INV-190007",
+          "line_item": "40HC",
+          "expected_delivery_time": "00.00",
+          "expected_ext_time": "03:00",
+          "delivery_address": "2800 Camino Diabio, Byron CA",
+          "color": "#CFCFCF"
+        },
+        {
+          "payment_status": "paid", 
+          "payment_gateway": "CCD",    
+          "title": "Jeff OAK",
+          "invoice_no": "#INV-190008",
+          "line_item": "40HC",
+          "expected_delivery_time": "00.00",
+          "expected_ext_time": "03:00",
+          "delivery_address": "2800 Camino Diabio, Byron CA",
+          "color": "#CFCFCF"
+        },
+        {
+          "payment_status": "paid", 
+          "payment_gateway": "CCD",    
+          "title": "Jeff OAK",
+          "invoice_no": "#INV-190009",
+          "line_item": "40HC",
+          "expected_delivery_time": "00.00",
+          "expected_ext_time": "03:00",
+          "delivery_address": "2800 Camino Diabio, Byron CA",
+          "color": "#CFCFCF"
+        },
+        {
+          "payment_status": "partial-paid", 
+          "payment_gateway": "SC",    
+          "title": "Jeff OAK",
+          "invoice_no": "#INV-190010",
+          "line_item": "40HC",
+          "expected_delivery_time": "00.00",
+          "expected_ext_time": "03:00",
+          "delivery_address": "2800 Camino Diabio, Byron CA",
+          "color": "#CFCFCF"
+        },
+        {
+          "payment_status": "unpaid", 
+          "payment_gateway": "",    
+          "title": "Jeff OAK",
+          "invoice_no": "#INV-190011",
+          "line_item": "40HC",
+          "expected_delivery_time": "00.00",
+          "expected_ext_time": "03:00",
+          "delivery_address": "2800 Camino Diabio, Byron CA",
+          "color": "#CCCACA"
         }
       ]
     },
@@ -87,7 +153,7 @@
           "payment_status": "paid", 
           "payment_gateway": "",    
           "title": "Jeff OAK",
-          "invoice_no": "#INV-014254",
+          "invoice_no": "#INV-190012",
           "line_item": "40HC",
           "expected_delivery_time": "00.00",
           "expected_ext_time": "03:00",
@@ -103,7 +169,7 @@
           "payment_status": "paid", 
           "payment_gateway": "",    
           "title": "Jeff OAK",
-          "invoice_no": "#INV-014254",
+          "invoice_no": "#INV-190013",
           "line_item": "40HC",
           "expected_delivery_time": "00.00",
           "expected_ext_time": "03:00",
@@ -127,7 +193,7 @@
               "daily_dispatches": [
                 {
                   "title": "Jeff OAK",
-                  "invoice_no": "#INV-014254",
+                  "invoice_no": "#INV-190014",
                   "line_item": "40HC",
                   "expected_delivery_time": "00.00",
                   "expected_ext_time": "03:00",
@@ -136,7 +202,7 @@
                 },
                 {
                   "title": "Pickup",
-                  "invoice_no": "#INV-014254",
+                  "invoice_no": "#INV-190015",
                   "line_item": "40HC",
                   "expected_delivery_time": "00.00",
                   "expected_ext_time": "03:00",
@@ -150,7 +216,7 @@
               "daily_dispatches": [
                 {
                   "title": "Jeff OAK",
-                  "invoice_no": "#INV-014254",
+                  "invoice_no": "#INV-190016",
                   "line_item": "40HC",
                   "expected_delivery_time": "00.00",
                   "expected_ext_time": "03:00",
@@ -164,12 +230,12 @@
               "daily_dispatches": [
                 {
                   "title": "Jeff OAK",
-                  "invoice_no": "#INV-014254",
+                  "invoice_no": "#INV-190017",
                   "line_item": "40HC",
                   "expected_delivery_time": "00.00",
                   "expected_ext_time": "03:00",
                   "delivery_address": "2800 Camino Diabio, Byron CA",
-                  "color": "#CFCFCF"
+                  "color": "#CACACA"
                 }
               ]
             },
@@ -178,12 +244,12 @@
               "daily_dispatches": [
                 {
                   "title": "Jeff OAK",
-                  "invoice_no": "#INV-014254",
+                  "invoice_no": "#INV-190018",
                   "line_item": "40HC",
                   "expected_delivery_time": "00.00",
                   "expected_ext_time": "03:00",
                   "delivery_address": "2800 Camino Diabio, Byron CA",
-                  "color": "#CFCFCF"
+                  "color": "#3D3D3D"
                 }
               ]
             },
@@ -192,12 +258,12 @@
               "daily_dispatches": [
                 {
                   "title": "Jeff OAK",
-                  "invoice_no": "#INV-014254",
+                  "invoice_no": "#INV-190019",
                   "line_item": "40HC",
                   "expected_delivery_time": "00.00",
                   "expected_ext_time": "03:00",
                   "delivery_address": "2800 Camino Diabio, Byron CA",
-                  "color": "#CFCFCF"
+                  "color": "#9A9A9A"
                 }
               ]
             },
@@ -206,12 +272,12 @@
               "daily_dispatches": [
                 {
                   "title": "Jeff OAK",
-                  "invoice_no": "#INV-014254",
+                  "invoice_no": "#INV-190020",
                   "line_item": "40HC",
                   "expected_delivery_time": "00.00",
                   "expected_ext_time": "03:00",
                   "delivery_address": "2800 Camino Diabio, Byron CA",
-                  "color": "#CFCFCF"
+                  "color": "#ABCDEF"
                 }
               ]
             },
@@ -220,12 +286,12 @@
               "daily_dispatches": [
                 {
                   "title": "Jeff OAK",
-                  "invoice_no": "#INV-014254",
+                  "invoice_no": "#INV-190022",
                   "line_item": "40HC",
                   "expected_delivery_time": "00.00",
                   "expected_ext_time": "03:00",
                   "delivery_address": "2800 Camino Diabio, Byron CA",
-                  "color": "#CFCFCF"
+                  "color": "#123456"
                 }
               ]
             }
@@ -241,12 +307,12 @@
               "daily_dispatches": [
                 {
                   "title": "Jeff OAK",
-                  "invoice_no": "#INV-014254",
+                  "invoice_no": "#INV-190023",
                   "line_item": "40HC",
                   "expected_delivery_time": "00.00",
                   "expected_ext_time": "03:00",
                   "delivery_address": "2800 Camino Diabio, Byron CA",
-                  "color": "#CFCFCF"
+                  "color": "#765432"
                 }
               ]
             },
@@ -255,12 +321,12 @@
               "daily_dispatches": [
                 {
                   "title": "Jeff OAK",
-                  "invoice_no": "#INV-014254",
+                  "invoice_no": "#INV-190024",
                   "line_item": "40HC",
                   "expected_delivery_time": "00.00",
                   "expected_ext_time": "03:00",
                   "delivery_address": "2800 Camino Diabio, Byron CA",
-                  "color": "#CFCFCF"
+                  "color": "#A12BC3"
                 }
               ]
             },
@@ -269,12 +335,12 @@
               "daily_dispatches": [
                 {
                   "title": "Jeff OAK",
-                  "invoice_no": "#INV-014254",
+                  "invoice_no": "#INV-190025",
                   "line_item": "40HC",
                   "expected_delivery_time": "00.00",
                   "expected_ext_time": "03:00",
                   "delivery_address": "2800 Camino Diabio, Byron CA",
-                  "color": "#CFCFCF"
+                  "color": "#948727"
                 }
               ]
             },
@@ -283,7 +349,7 @@
               "daily_dispatches": [
                 {
                   "title": "Jeff OAK",
-                  "invoice_no": "#INV-014254",
+                  "invoice_no": "#INV-190026",
                   "line_item": "40HC",
                   "expected_delivery_time": "00.00",
                   "expected_ext_time": "03:00",
@@ -297,7 +363,7 @@
               "daily_dispatches": [
                 {
                   "title": "Jeff OAK",
-                  "invoice_no": "#INV-014254",
+                  "invoice_no": "#INV-190027",
                   "line_item": "40HC",
                   "expected_delivery_time": "00.00",
                   "expected_ext_time": "03:00",
@@ -311,7 +377,7 @@
               "daily_dispatches": [
                 {
                   "title": "Jeff OAK",
-                  "invoice_no": "#INV-014254",
+                  "invoice_no": "#INV-190028",
                   "line_item": "40HC",
                   "expected_delivery_time": "00.00",
                   "expected_ext_time": "03:00",
@@ -325,7 +391,7 @@
               "daily_dispatches": [
                 {
                   "title": "Jeff OAK",
-                  "invoice_no": "#INV-014254",
+                  "invoice_no": "#INV-190029",
                   "line_item": "40HC",
                   "expected_delivery_time": "00.00",
                   "expected_ext_time": "03:00",
@@ -351,7 +417,7 @@
               "daily_dispatches": [
                 {
                   "title": "Jeff OAK",
-                  "invoice_no": "#INV-014254",
+                  "invoice_no": "#INV-190030",
                   "line_item": "40HC",
                   "expected_delivery_time": "00.00",
                   "expected_ext_time": "03:00",
@@ -360,7 +426,7 @@
                 },
                 {
                   "title": "Pickup",
-                  "invoice_no": "#INV-014254",
+                  "invoice_no": "#INV-190031",
                   "line_item": "40HC",
                   "expected_delivery_time": "00.00",
                   "expected_ext_time": "03:00",
@@ -374,7 +440,7 @@
               "daily_dispatches": [
                 {
                   "title": "Jeff OAK",
-                  "invoice_no": "#INV-014254",
+                  "invoice_no": "#INV-190032",
                   "line_item": "40HC",
                   "expected_delivery_time": "00.00",
                   "expected_ext_time": "03:00",
@@ -388,7 +454,7 @@
               "daily_dispatches": [
                 {
                   "title": "Jeff OAK",
-                  "invoice_no": "#INV-014254",
+                  "invoice_no": "#INV-190033",
                   "line_item": "40HC",
                   "expected_delivery_time": "00.00",
                   "expected_ext_time": "03:00",
@@ -402,7 +468,7 @@
               "daily_dispatches": [
                 {
                   "title": "Jeff OAK",
-                  "invoice_no": "#INV-014254",
+                  "invoice_no": "#INV-190034",
                   "line_item": "40HC",
                   "expected_delivery_time": "00.00",
                   "expected_ext_time": "03:00",
@@ -416,7 +482,7 @@
               "daily_dispatches": [
                 {
                   "title": "Jeff OAK",
-                  "invoice_no": "#INV-014254",
+                  "invoice_no": "#INV-190035",
                   "line_item": "40HC",
                   "expected_delivery_time": "00.00",
                   "expected_ext_time": "03:00",
@@ -430,7 +496,7 @@
               "daily_dispatches": [
                 {
                   "title": "Jeff OAK",
-                  "invoice_no": "#INV-014254",
+                  "invoice_no": "#INV-190036",
                   "line_item": "40HC",
                   "expected_delivery_time": "00.00",
                   "expected_ext_time": "03:00",
@@ -444,7 +510,7 @@
               "daily_dispatches": [
                 {
                   "title": "Jeff OAK",
-                  "invoice_no": "#INV-014254",
+                  "invoice_no": "#INV-190037",
                   "line_item": "40HC",
                   "expected_delivery_time": "00.00",
                   "expected_ext_time": "03:00",
@@ -465,7 +531,7 @@
               "daily_dispatches": [
                 {
                   "title": "Jeff OAK",
-                  "invoice_no": "#INV-014254",
+                  "invoice_no": "#INV-190038",
                   "line_item": "40HC",
                   "expected_delivery_time": "00.00",
                   "expected_ext_time": "03:00",
@@ -479,7 +545,7 @@
               "daily_dispatches": [
                 {
                   "title": "Jeff OAK",
-                  "invoice_no": "#INV-014254",
+                  "invoice_no": "#INV-190039",
                   "line_item": "40HC",
                   "expected_delivery_time": "00.00",
                   "expected_ext_time": "03:00",
@@ -493,7 +559,7 @@
               "daily_dispatches": [
                 {
                   "title": "Jeff OAK",
-                  "invoice_no": "#INV-014254",
+                  "invoice_no": "#INV-190040",
                   "line_item": "40HC",
                   "expected_delivery_time": "00.00",
                   "expected_ext_time": "03:00",
@@ -507,7 +573,7 @@
               "daily_dispatches": [
                 {
                   "title": "Jeff OAK",
-                  "invoice_no": "#INV-014254",
+                  "invoice_no": "#INV-190041",
                   "line_item": "40HC",
                   "expected_delivery_time": "00.00",
                   "expected_ext_time": "03:00",
@@ -521,7 +587,7 @@
               "daily_dispatches": [
                 {
                   "title": "Jeff OAK",
-                  "invoice_no": "#INV-014254",
+                  "invoice_no": "#INV-190042",
                   "line_item": "40HC",
                   "expected_delivery_time": "00.00",
                   "expected_ext_time": "03:00",
@@ -535,7 +601,7 @@
               "daily_dispatches": [
                 {
                   "title": "Jeff OAK",
-                  "invoice_no": "#INV-014254",
+                  "invoice_no": "#INV-190043",
                   "line_item": "40HC",
                   "expected_delivery_time": "00.00",
                   "expected_ext_time": "03:00",
@@ -549,7 +615,7 @@
               "daily_dispatches": [
                 {
                   "title": "Jeff OAK",
-                  "invoice_no": "#INV-014254",
+                  "invoice_no": "#INV-190044",
                   "line_item": "40HC",
                   "expected_delivery_time": "00.00",
                   "expected_ext_time": "03:00",

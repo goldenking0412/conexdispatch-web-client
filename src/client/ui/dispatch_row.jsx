@@ -31,42 +31,49 @@ export default function DispatchRow(props) {
                             <DraggableContainer 
                               type={1} 
                               dispatches={props.data[0].daily_dispatches} 
+                              view_type={props.view_type}
                             />
                         </th>
                         <th className={day_dispatch_container_classes}>
                             <DraggableContainer 
                               type={1} 
                               dispatches={props.data[1].daily_dispatches} 
+                              view_type={props.view_type}
                             />
                         </th>
                         <th className={day_dispatch_container_classes}>
                             <DraggableContainer 
                               type={1} 
                               dispatches={props.data[2].daily_dispatches} 
+                              view_type={props.view_type}
                             />
                         </th>
                         <th className={day_dispatch_container_classes}>
                             <DraggableContainer 
                               type={1} 
                               dispatches={props.data[3].daily_dispatches} 
+                              view_type={props.view_type}
                             />
                         </th>
                         <th className={day_dispatch_container_classes}>
                             <DraggableContainer 
                               type={1} 
                               dispatches={props.data[4].daily_dispatches} 
+                              view_type={props.view_type}
                             />
                         </th>
                         <th className={day_dispatch_container_classes}>
                             <DraggableContainer 
                               type={1} 
                               dispatches={props.data[5].daily_dispatches} 
+                              view_type={props.view_type}
                             />
                         </th>
                         <th className={day_dispatch_container_classes}>
                             <DraggableContainer 
                               type={1} 
                               dispatches={props.data[6].daily_dispatches} 
+                              view_type={props.view_type}
                             />
                         </th>
                     </tr>
@@ -93,5 +100,6 @@ DispatchRow.propTypes = {
                 })
             )
         })
-    )
+    ),
+    view_type: PropTypes.number
 }

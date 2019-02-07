@@ -34,6 +34,10 @@ class App extends React.Component {
         $(document).on(`keydown.${EVENTS_NS}`, this.keydown_handler);
     }
 
+    onDrop(el) {
+        console.log(el);
+    }
+
     componentWillUnMount() {
         $(document).off(`keydown.${EVENTS_NS}`);
     }
@@ -73,18 +77,16 @@ class App extends React.Component {
             copySortSource: false,             // elements in copy-source containers can be reordered
             revertOnSpill: false,              // spilling will put the element back where it was dragged from, if this is true
             removeOnSpill: false,              // spilling will `.remove` the element, if this is true
-            mirrorContainer: document.body,    // set the element that gets mirror elements appended
+            mirrorContainer: document.querySelector('.draggable-container'),    // set the element that gets mirror elements appended
             ignoreInputTextSelection: true     // allows users to select input text, see details below
         };
-        Dragula([...document.querySelectorAll('.draggable-container')], options);
+        Dragula([...document.querySelectorAll('.draggable-container')], options)
+            .on('drop', this.onDrop);
     };
 
     render() {
         const content_classes = classnames("content", { margin: this.props.sidebar.show }, "float-left");
         const aside_classes = classnames({ show: this.props.sidebar.show }, "float-left");
-
-        // this.drake = this.dragulaDecorator();
-        // console.log(2);
 
         return (
             <div>

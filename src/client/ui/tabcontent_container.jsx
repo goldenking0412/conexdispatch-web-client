@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classnames from "classnames";
 import React from "react";
 
-import DispatchRow from "./dispatch_row";
+import DriverContainer from "./driver_container";
 
 class TabcontentContainer extends React.Component {
     constructor(props) {
@@ -37,10 +37,7 @@ class TabcontentContainer extends React.Component {
                   key={i}
                   onClick={() => this.setState({ activeSelected : activeSelected === this.props.drivers[i].name ? '' : this.props.drivers[i].name })} 
                 >
-                    <div className="driver cell">
-                        {this.props.drivers[i].name}
-                    </div>
-                    <DispatchRow height={100} data={this.props.drivers[i].dispatches} />
+                    <DriverContainer driver={this.props.drivers[i]} />
                 </div>
             )
         }
