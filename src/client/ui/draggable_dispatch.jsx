@@ -2,13 +2,21 @@ import * as React from "react";
 import PropTypes from 'prop-types';
 
 export default function DraggableDispatch(props) {
-    const style = { 
+    const unassigned_style = { 
         borderColor: props.dispatch.color,
-        background: `-webkit-linear-gradient(left, ${props.dispatch.color} 0%, ${props.dispatch.color} 60%, #ffffff 60%, #ffffff 60%, #ffffff 100%)`
+        backgroundColor: props.dispatch.color
     };
-    const unassigned = 0;
+    const assigned_style = {
+        borderColor: props.dispatch.color,
+        background: `-webkit-linear-gradient(left, 
+            ${props.dispatch.color} 0%, 
+            ${props.dispatch.color} ${props.dispatch.delivery_progress}, 
+            #ffffff ${props.dispatch.delivery_progress}, 
+            #ffffff ${props.dispatch.delivery_progress}, 
+            #ffffff 100%)`
+    }
 
-    if (props.type === unassigned) {
+    if (props.unassigned) {
         let paid_status_class;
         if (props.dispatch.payment_status === "paid") {
             paid_status_class = "paid";
@@ -19,7 +27,7 @@ export default function DraggableDispatch(props) {
         else if (props.dispatch.payment_status === "unpaid") {
             paid_status_class = "unpaid";
         }
-        return (<div className='draggable-item' style={style}>
+        return (<div className='draggable-item' style={unassigned_style}>
             <span>{props.dispatch.title}, </span>
             <span>{props.dispatch.invoice_no} {props.dispatch.line_item}</span>
             <span className={paid_status_class}>
@@ -31,7 +39,7 @@ export default function DraggableDispatch(props) {
 
     // This means this dispatch is assigned
     if (props.view_type === 0) {
-        return (<div className='draggable-item' style={style}>
+        return (<div className='draggable-item' style={assigned_style}>
             <div>
                 <span>{props.dispatch.title},&nbsp;</span>
                 <span>{props.dispatch.invoice_no}&nbsp;</span>
@@ -44,7 +52,7 @@ export default function DraggableDispatch(props) {
             </div>
         </div>);
     }
-    return (<div className='draggable-item' style={style}>
+    return (<div className='draggable-item' style={assigned_style}>
         <div>
             <span>{props.dispatch.title},&nbsp;</span>
             <span>{props.dispatch.invoice_no}&nbsp;</span>
@@ -55,7 +63,7 @@ export default function DraggableDispatch(props) {
 }
 
 DraggableDispatch.propTypes = {
-    type: PropTypes.number, // 0: Unassigned, 1: Assigned
+    unassigned: PropTypes.bool, // 0: Unassigned, 1: Assigned
     dispatch: PropTypes.oneOfType([
         PropTypes.shape({
             title: PropTypes.string,
@@ -64,7 +72,8 @@ DraggableDispatch.propTypes = {
             expected_delivery_time: PropTypes.string,
             expected_ext_time: PropTypes.string,
             delivery_address: PropTypes.string,
-            color: PropTypes.string
+            color: PropTypes.string,
+            delivery_progress: PropTypes.string
         }),
         PropTypes.shape({
             title: PropTypes.string,

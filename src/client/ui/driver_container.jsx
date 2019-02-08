@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React from "react";
+import { connect } from "react-redux";
 
 import DispatchRow from "./dispatch_row";
 import DriverArea from "./driver_area";
@@ -11,6 +12,8 @@ class DriverContainer extends React.Component {
             view_type: 0 // 0: standard view, 1: meaning view
         }
         this.changeViewType = this.changeViewType.bind(this);
+    }
+    componentDidUpdate() {
     }
     changeViewType(view_type) {
         console.log(view_type);
@@ -30,6 +33,7 @@ class DriverContainer extends React.Component {
                   height={100} 
                   data={this.props.driver.dispatches} 
                   view_type={this.state.view_type} 
+                  update_draggable_container_list={this.props.update_draggable_container_list}
                 />
             </div>
         )
@@ -37,6 +41,13 @@ class DriverContainer extends React.Component {
 }
 
 DriverContainer.propTypes = {
+    full_calendar: PropTypes.shape({
+        status: PropTypes.string,
+        view: PropTypes.shape({
+            name: PropTypes.string,
+            params: PropTypes.object
+        })
+    }),
     driver: PropTypes.shape({
         name: PropTypes.string,
         default_color: PropTypes.string,
@@ -52,12 +63,21 @@ DriverContainer.propTypes = {
                         expected_delivery_time: PropTypes.string,
                         expected_ext_time: PropTypes.string,
                         delivery_address: PropTypes.string,
-                        color: PropTypes.string
+                        color: PropTypes.string,
+                        delivery_progress: PropTypes.string
                     })
                 )
             })
         )
-    })
+    }),
+    update_draggable_container_list: PropTypes.func
 }
 
-export default DriverContainer;
+function map_state_props(state) {
+    return {
+        full_calendar: state.ui.full_calendar
+    };
+}
+
+const DriverWrapperContainer = connect(map_state_props)(DriverContainer);
+export default DriverWrapperContainer;

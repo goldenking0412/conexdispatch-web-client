@@ -2,6 +2,7 @@
 import PropTypes from 'prop-types';
 import classnames from "classnames";
 import React from "react";
+import { connect } from "react-redux";
 
 import DriverContainer from "./driver_container";
 
@@ -15,6 +16,8 @@ class TabcontentContainer extends React.Component {
     }
     componentDidMount(){
         global.document.addEventListener( 'click', this.handleClick, false )
+    }
+    componentDidUpdate() {
     }
     componentWillUnmount(){
         global.document.removeEventListener( 'click', this.handleClick, false )
@@ -37,7 +40,10 @@ class TabcontentContainer extends React.Component {
                   key={i}
                   onClick={() => this.setState({ activeSelected : activeSelected === this.props.drivers[i].name ? '' : this.props.drivers[i].name })} 
                 >
-                    <DriverContainer driver={this.props.drivers[i]} />
+                    <DriverContainer 
+                      driver={this.props.drivers[i]} 
+                      update_draggable_container_list={this.props.update_draggable_container_list}
+                    />
                 </div>
             )
         }
@@ -46,6 +52,13 @@ class TabcontentContainer extends React.Component {
 }
 
 TabcontentContainer.propTypes = {
+    full_calendar: PropTypes.shape({
+        status: PropTypes.string,
+        view: PropTypes.shape({
+            name: PropTypes.string,
+            params: PropTypes.object
+        })
+    }),
     drivers: PropTypes.arrayOf(
         PropTypes.shape({
             name: PropTypes.string,
@@ -62,13 +75,22 @@ TabcontentContainer.propTypes = {
                             expected_delivery_time: PropTypes.string,
                             expected_ext_time: PropTypes.string,
                             delivery_address: PropTypes.string,
-                            color: PropTypes.string
+                            color: PropTypes.string,
+                            delivery_progress: PropTypes.string
                         })
                     )
                 })
             )
         })
-    )
+    ),
+    update_draggable_container_list: PropTypes.func
 };
 
-export default TabcontentContainer;
+function map_state_props(state) {
+    return {
+        full_calendar: state.ui.full_calendar
+    };
+}
+
+const TabcontentWrapperContainer = connect(map_state_props)(TabcontentContainer);
+export default TabcontentWrapperContainer;

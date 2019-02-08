@@ -10,9 +10,6 @@ export default class DriverArea extends React.Component {
     }
 
     switchViewType(event) {
-        console.log("aaaa");
-        console.log(event.nativeEvent);
-        console.log("aaaa");
         event.nativeEvent.preventDefault();
         this.viewType = 1 - this.viewType;
         this.props.changeViewType(this.viewType);

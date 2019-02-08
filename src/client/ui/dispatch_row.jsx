@@ -2,88 +2,102 @@
 import React from 'react';
 import classnames from "classnames";
 import PropTypes from 'prop-types';
+import { connect } from "react-redux";
 
 import DraggableContainer from './draggable_container';
 
+import {
+    get_full_calendar_view
+} from "../actions/ui";
 
-export default function DispatchRow(props) {
-    const display_flex = "display-flex";
-    const dispatch_row_container_classes = classnames("driver-task-wrapper");
-    const height = props.height;
-    let day_dispatch_container_classes;
-    let table_class="";
-    let style = {};
-    if (height) {
-        day_dispatch_container_classes = classnames("box-container", { height: props.height });
-        style = {
-            height: props.height
-        };
-    } else {
-        day_dispatch_container_classes = classnames("box-container");
-        table_class = classnames("cell");
+class DispatchRow extends React.Component {
+
+    componentDidUpdate() {
+        this.props.update_draggable_container_list();
     }
-    return (
-        <div className={dispatch_row_container_classes}>
-            <table className={table_class}>
-                <thead>
-                    <tr className={display_flex}>
-                        <th className={day_dispatch_container_classes} style={style}>
+
+    render() {
+        const current_week = get_full_calendar_view();
+        if (current_week.name === undefined || current_week.params.start === undefined) {
+            return (<div />);
+        }
+        const display_flex = "display-flex";
+        const dispatch_row_container_classes = classnames("driver-task-wrapper");
+        const height = this.props.height;
+        let day_dispatch_container_classes;
+        let table_class="";
+        let style = {};
+        if (height) {
+            day_dispatch_container_classes = classnames("box-container", { height: this.props.height });
+            style = {
+                height: this.props.height
+            };
+        } else {
+            day_dispatch_container_classes = classnames("box-container");
+            table_class = classnames("cell");
+        }
+
+        const data = this.props.data;
+        const content = [];
+        const start_day = current_week.params.start.clone();
+        const end_day = current_week.params.end.add(1, "days");
+        const end_day_string = end_day.format("MM/DD/YYYY");
+        for (; start_day.format("MM/DD/YYYY") !== end_day_string; start_day.add(1, "days")) {
+            let i;
+            const compare_string = start_day.format("MM/DD/YYYY");
+            for (i = 0; i < data.length; i+=1) {
+                if (data[i].date === compare_string) {
+                    content.push(
+                        <th 
+                          className={day_dispatch_container_classes} 
+                          key={compare_string}
+                          style={style}
+                        >
                             <DraggableContainer 
-                              type={1} 
-                              dispatches={props.data[0].daily_dispatches} 
-                              view_type={props.view_type}
+                              dispatches={this.props.data[i].daily_dispatches} 
+                              view_type={this.props.view_type}
                             />
-                        </th>
-                        <th className={day_dispatch_container_classes}>
-                            <DraggableContainer 
-                              type={1} 
-                              dispatches={props.data[1].daily_dispatches} 
-                              view_type={props.view_type}
-                            />
-                        </th>
-                        <th className={day_dispatch_container_classes}>
-                            <DraggableContainer 
-                              type={1} 
-                              dispatches={props.data[2].daily_dispatches} 
-                              view_type={props.view_type}
-                            />
-                        </th>
-                        <th className={day_dispatch_container_classes}>
-                            <DraggableContainer 
-                              type={1} 
-                              dispatches={props.data[3].daily_dispatches} 
-                              view_type={props.view_type}
-                            />
-                        </th>
-                        <th className={day_dispatch_container_classes}>
-                            <DraggableContainer 
-                              type={1} 
-                              dispatches={props.data[4].daily_dispatches} 
-                              view_type={props.view_type}
-                            />
-                        </th>
-                        <th className={day_dispatch_container_classes}>
-                            <DraggableContainer 
-                              type={1} 
-                              dispatches={props.data[5].daily_dispatches} 
-                              view_type={props.view_type}
-                            />
-                        </th>
-                        <th className={day_dispatch_container_classes}>
-                            <DraggableContainer 
-                              type={1} 
-                              dispatches={props.data[6].daily_dispatches} 
-                              view_type={props.view_type}
-                            />
-                        </th>
-                    </tr>
-                </thead>
-            </table>
-        </div>
-    );
+                        </th>);
+                    break;
+                }
+            }
+            if (i === data.length) {
+                content.push(
+                    <th 
+                      className={day_dispatch_container_classes} 
+                      key={compare_string}
+                      style={style}
+                    >
+                        <DraggableContainer 
+                          view_type={this.props.view_type}
+                        />
+                    </th>);
+            }
+        }
+        return (
+            <div className={dispatch_row_container_classes}>
+                <table className={table_class}>
+                    <thead>
+                        <tr className={display_flex}>
+                            {content}
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        );
+    }
+
 }
 
 DispatchRow.propTypes = {
+    full_calendar: PropTypes.shape({
+        status: PropTypes.string,
+        view: PropTypes.shape({
+            name: PropTypes.string,
+            params: PropTypes.object
+        })
+    }),
+    update_draggable_container_list: PropTypes.func,
     height: PropTypes.number,
     data: PropTypes.arrayOf(
         PropTypes.shape({
@@ -96,10 +110,20 @@ DispatchRow.propTypes = {
                     expected_delivery_time: PropTypes.string,
                     expected_ext_time: PropTypes.string,
                     delivery_address: PropTypes.string,
-                    color: PropTypes.string
+                    color: PropTypes.string,
+                    delivery_progress: PropTypes.string
                 })
             )
         })
     ),
     view_type: PropTypes.number
 }
+
+function map_state_props(state) {
+    return {
+        full_calendar: state.ui.full_calendar
+    };
+}
+
+const DispatchRowContainer = connect(map_state_props)(DispatchRow);
+export default DispatchRowContainer;

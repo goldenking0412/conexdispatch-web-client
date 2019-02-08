@@ -5,12 +5,7 @@ import DraggableDispatch from './draggable_dispatch';
 export default class DraggableContainer extends React.Component {
     constructor(props) {
         super(props);
-        this.unassigned = (props.type === 0);
-        this.dispatches = [];
         this.showMore = this.showMore.bind(this);
-        for (let i = 0; i < this.props.dispatches.length; i+=1) {
-            this.dispatches.push(this.props.dispatches[i]);
-        }
     }
 
     showMore(e) {
@@ -18,46 +13,65 @@ export default class DraggableContainer extends React.Component {
     }
 
     render() {
+        if (this.props.dispatches === undefined) {
+            return (<div className="draggable-container" />);
+        }
+        const dispatches = [];
         const content = [];
         let additional_content;
-        const length = this.dispatches.length > 6 ? 6 : this.dispatches.length;
-        for (let i = 0; i < length; i+=1) {
-            content.push(
-                <DraggableDispatch 
-                  key={i}
-                  type={this.props.type}
-                  dispatch={this.dispatches[i]}
-                  view_type={this.props.view_type}
-                />
-            )
-        }
-        if (this.dispatches.length > 6) {
-            console.log("XXXXXX");
-            additional_content = (<div className="view-more">
-                <span className="float-left">{this.dispatches.length - 6} more</span>
-                <input 
-                  type="button"
-                  className="float-right"
-                  onClick={this.showMore}
-                  value="view more"
-                />
-            </div>);
+        for (let i = 0; i < this.props.dispatches.length; i+=1) {
+            dispatches.push(this.props.dispatches[i]);
         }
 
-        if (this.unassigned) {
+        if (this.props.unassigned) {
+            const length = dispatches.length > 6 ? 6 : dispatches.length;
+            for (let i = 0; i < length; i+=1) {
+                content.push(
+                    <DraggableDispatch 
+                      key={i}
+                      unassigned={this.props.unassigned}
+                      dispatch={dispatches[i]}
+                      view_type={this.props.view_type}
+                    />
+                )
+            }
+            if (dispatches.length > 6) {
+                additional_content = (<div className="view-more">
+                    <span className="float-left">{dispatches.length - 6} more</span>
+                    <input 
+                      type="button"
+                      className="float-right"
+                      onClick={this.showMore}
+                      value="view more"
+                    />
+                </div>);
+            }
             return (<div className='draggable-container'>
                 {content}
                 {additional_content}
             </div>);
         }
+        
+        // Assigned Dispatch Container        
+        for (let i = 0; i < dispatches.length; i+=1) {
+            content.push(
+                <DraggableDispatch 
+                  key={i}
+                  unassigned={this.props.unassigned}
+                  dispatch={dispatches[i]}
+                  view_type={this.props.view_type}
+                />
+            )
+        }
         return (<div className='draggable-container'>
             {content}
         </div>);
+
     }
 }
 
 DraggableContainer.propTypes = {
-    type: PropTypes.number, // 0: Unassigned, 1: Assigned
+    unassigned: PropTypes.bool,
     dispatches: PropTypes.oneOfType([
         PropTypes.arrayOf(
             PropTypes.shape({
@@ -67,7 +81,8 @@ DraggableContainer.propTypes = {
                 expected_delivery_time: PropTypes.string,
                 expected_ext_time: PropTypes.string,
                 delivery_address: PropTypes.string,
-                color: PropTypes.string
+                color: PropTypes.string,
+                delivery_progress: PropTypes.string
             })
         ),
         PropTypes.arrayOf(

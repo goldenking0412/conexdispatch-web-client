@@ -1,7 +1,7 @@
 {
   "unassigned_data": [
     {
-      "date": "2/3/2019",
+      "date": "02/03/2019",
       "daily_dispatches": [
         {
           "payment_status": "paid", 
@@ -17,10 +17,10 @@
       ]
     },
     {
-      "date": "2/4/2019",
+      "date": "02/04/2019",
       "daily_dispatches": [
         {
-          "payment_status": "paid", 
+          "payment_status": "unpaid", 
           "payment_gateway": "",    
           "title": "Jeff CAR",
           "invoice_no": "#INV-190002",
@@ -33,7 +33,7 @@
       ]
     },
     {
-      "date": "2/5/2019",
+      "date": "02/05/2019",
       "daily_dispatches": [
         {
           "payment_status": "paid", 
@@ -49,7 +49,7 @@
       ]
     },
     {
-      "date": "2/6/2019",
+      "date": "02/06/2019",
       "daily_dispatches": [
         {
           "payment_status": "paid", 
@@ -65,7 +65,7 @@
       ]
     },
     {
-      "date": "2/7/2019",
+      "date": "02/07/2019",
       "daily_dispatches": [
         {
           "payment_status": "paid", 
@@ -101,7 +101,7 @@
           "color": "#CFCFCF"
         },
         {
-          "payment_status": "paid", 
+          "payment_status": "unpaid", 
           "payment_gateway": "CCD",    
           "title": "Jeff OAK",
           "invoice_no": "#INV-190008",
@@ -147,29 +147,13 @@
       ]
     },
     {
-      "date": "2/8/2019",
+      "date": "02/08/2019",
       "daily_dispatches": [
         {
           "payment_status": "paid", 
           "payment_gateway": "",    
           "title": "Jeff OAK",
           "invoice_no": "#INV-190012",
-          "line_item": "40HC",
-          "expected_delivery_time": "00.00",
-          "expected_ext_time": "03:00",
-          "delivery_address": "2800 Camino Diabio, Byron CA",
-          "color": "#CFCFCF"
-        }
-      ]
-    },
-    {
-      "date": "2/9/2019",
-      "daily_dispatches": [
-        {
-          "payment_status": "paid", 
-          "payment_gateway": "",    
-          "title": "Jeff OAK",
-          "invoice_no": "#INV-190013",
           "line_item": "40HC",
           "expected_delivery_time": "00.00",
           "expected_ext_time": "03:00",
@@ -189,7 +173,7 @@
           "phone_number": "+1 609 223 2323",
           "dispatches": [
             {
-              "date": "2/3/2019",
+              "date": "02/03/2019",
               "daily_dispatches": [
                 {
                   "title": "Jeff OAK",
@@ -198,7 +182,8 @@
                   "expected_delivery_time": "00.00",
                   "expected_ext_time": "03:00",
                   "delivery_address": "2800 Camino Diabio, Byron CA",
-                  "color": "#CFCFCF"
+                  "color": "#CFCFCF",
+                  "delivery_progress": "30%"
                 },
                 {
                   "title": "Pickup",
@@ -207,12 +192,13 @@
                   "expected_delivery_time": "00.00",
                   "expected_ext_time": "03:00",
                   "delivery_address": "2800 Camino Diabio, Byron CA",
-                  "color": "#FF3333"
+                  "color": "#FF3333",
+                  "delivery_progress": "40%"
                 }
               ]
             },
             {
-              "date": "2/4/2019",
+              "date": "02/04/2019",
               "daily_dispatches": [
                 {
                   "title": "Jeff OAK",
@@ -221,12 +207,13 @@
                   "expected_delivery_time": "00.00",
                   "expected_ext_time": "03:00",
                   "delivery_address": "2800 Camino Diabio, Byron CA",
-                  "color": "#CFCFCF"
+                  "color": "#CFCFCF",
+                  "delivery_progress": "35%"
                 }
               ]
             },
             {
-              "date": "2/5/2019",
+              "date": "02/05/2019",
               "daily_dispatches": [
                 {
                   "title": "Jeff OAK",
@@ -235,12 +222,13 @@
                   "expected_delivery_time": "00.00",
                   "expected_ext_time": "03:00",
                   "delivery_address": "2800 Camino Diabio, Byron CA",
-                  "color": "#CACACA"
+                  "color": "#CACACA",
+                  "delivery_progress": "100%"
                 }
               ]
             },
             {
-              "date": "2/6/2019",
+              "date": "02/06/2019",
               "daily_dispatches": [
                 {
                   "title": "Jeff OAK",
@@ -249,12 +237,13 @@
                   "expected_delivery_time": "00.00",
                   "expected_ext_time": "03:00",
                   "delivery_address": "2800 Camino Diabio, Byron CA",
-                  "color": "#3D3D3D"
+                  "color": "#3D3D3D",
+                  "delivery_progress": "15%"
                 }
               ]
             },
             {
-              "date": "2/7/2019",
+              "date": "02/07/2019",
               "daily_dispatches": [
                 {
                   "title": "Jeff OAK",
@@ -263,12 +252,13 @@
                   "expected_delivery_time": "00.00",
                   "expected_ext_time": "03:00",
                   "delivery_address": "2800 Camino Diabio, Byron CA",
-                  "color": "#9A9A9A"
+                  "color": "#9A9A9A",
+                  "delivery_progress": "95%"
                 }
               ]
             },
             {
-              "date": "2/8/2019",
+              "date": "02/08/2019",
               "daily_dispatches": [
                 {
                   "title": "Jeff OAK",
@@ -277,12 +267,13 @@
                   "expected_delivery_time": "00.00",
                   "expected_ext_time": "03:00",
                   "delivery_address": "2800 Camino Diabio, Byron CA",
-                  "color": "#ABCDEF"
+                  "color": "#ABCDEF",
+                  "delivery_progress": "85%"
                 }
               ]
             },
             {
-              "date": "2/9/2019",
+              "date": "02/09/2019",
               "daily_dispatches": [
                 {
                   "title": "Jeff OAK",
@@ -291,7 +282,8 @@
                   "expected_delivery_time": "00.00",
                   "expected_ext_time": "03:00",
                   "delivery_address": "2800 Camino Diabio, Byron CA",
-                  "color": "#123456"
+                  "color": "#123456",
+                  "delivery_progress": "100%"
                 }
               ]
             }
@@ -303,7 +295,7 @@
           "phone_number": "+1 609 234 4567",
           "dispatches": [
             {
-              "date": "2/3/2019",
+              "date": "02/03/2019",
               "daily_dispatches": [
                 {
                   "title": "Jeff OAK",
@@ -312,12 +304,13 @@
                   "expected_delivery_time": "00.00",
                   "expected_ext_time": "03:00",
                   "delivery_address": "2800 Camino Diabio, Byron CA",
-                  "color": "#765432"
+                  "color": "#765432",
+                  "delivery_progress": "100%"
                 }
               ]
             },
             {
-              "date": "2/4/2019",
+              "date": "02/04/2019",
               "daily_dispatches": [
                 {
                   "title": "Jeff OAK",
@@ -326,12 +319,13 @@
                   "expected_delivery_time": "00.00",
                   "expected_ext_time": "03:00",
                   "delivery_address": "2800 Camino Diabio, Byron CA",
-                  "color": "#A12BC3"
+                  "color": "#A12BC3",
+                  "delivery_progress": "100%"
                 }
               ]
             },
             {
-              "date": "2/5/2019",
+              "date": "02/05/2019",
               "daily_dispatches": [
                 {
                   "title": "Jeff OAK",
@@ -340,12 +334,13 @@
                   "expected_delivery_time": "00.00",
                   "expected_ext_time": "03:00",
                   "delivery_address": "2800 Camino Diabio, Byron CA",
-                  "color": "#948727"
+                  "color": "#948727",
+                  "delivery_progress": "100%"
                 }
               ]
             },
             {
-              "date": "2/6/2019",
+              "date": "02/06/2019",
               "daily_dispatches": [
                 {
                   "title": "Jeff OAK",
@@ -354,12 +349,13 @@
                   "expected_delivery_time": "00.00",
                   "expected_ext_time": "03:00",
                   "delivery_address": "2800 Camino Diabio, Byron CA",
-                  "color": "#CFCFCF"
+                  "color": "#CFCFCF",
+                  "delivery_progress": "100%"
                 }
               ]
             },
             {
-              "date": "2/7/2019",
+              "date": "02/07/2019",
               "daily_dispatches": [
                 {
                   "title": "Jeff OAK",
@@ -368,12 +364,13 @@
                   "expected_delivery_time": "00.00",
                   "expected_ext_time": "03:00",
                   "delivery_address": "2800 Camino Diabio, Byron CA",
-                  "color": "#CFCFCF"
+                  "color": "#CFCFCF",
+                  "delivery_progress": "100%"
                 }
               ]
             },
             {
-              "date": "2/8/2019",
+              "date": "02/08/2019",
               "daily_dispatches": [
                 {
                   "title": "Jeff OAK",
@@ -382,12 +379,13 @@
                   "expected_delivery_time": "00.00",
                   "expected_ext_time": "03:00",
                   "delivery_address": "2800 Camino Diabio, Byron CA",
-                  "color": "#CFCFCF"
+                  "color": "#CFCFCF",
+                  "delivery_progress": "100%"
                 }
               ]
             },
             {
-              "date": "2/9/2019",
+              "date": "02/09/2019",
               "daily_dispatches": [
                 {
                   "title": "Jeff OAK",
@@ -396,7 +394,8 @@
                   "expected_delivery_time": "00.00",
                   "expected_ext_time": "03:00",
                   "delivery_address": "2800 Camino Diabio, Byron CA",
-                  "color": "#CFCFCF"
+                  "color": "#CFCFCF",
+                  "delivery_progress": "100%"
                 }
               ]
             }
@@ -413,7 +412,7 @@
           "phone_number": "+1 609 223 2323",
           "dispatches": [
             {
-              "date": "2/3/2019",
+              "date": "02/03/2019",
               "daily_dispatches": [
                 {
                   "title": "Jeff OAK",
@@ -422,7 +421,8 @@
                   "expected_delivery_time": "00.00",
                   "expected_ext_time": "03:00",
                   "delivery_address": "2800 Camino Diabio, Byron CA",
-                  "color": "#CFCFCF"
+                  "color": "#CFCFCF",
+                  "delivery_progress": "100%"
                 },
                 {
                   "title": "Pickup",
@@ -431,12 +431,13 @@
                   "expected_delivery_time": "00.00",
                   "expected_ext_time": "03:00",
                   "delivery_address": "2800 Camino Diabio, Byron CA",
-                  "color": "#FF3333"
+                  "color": "#FF3333",
+                  "delivery_progress": "100%"
                 }
               ]
             },
             {
-              "date": "2/4/2019",
+              "date": "02/04/2019",
               "daily_dispatches": [
                 {
                   "title": "Jeff OAK",
@@ -445,12 +446,13 @@
                   "expected_delivery_time": "00.00",
                   "expected_ext_time": "03:00",
                   "delivery_address": "2800 Camino Diabio, Byron CA",
-                  "color": "#CFCFCF"
+                  "color": "#CFCFCF",
+                  "delivery_progress": "100%"
                 }
               ]
             },
             {
-              "date": "2/5/2019",
+              "date": "02/05/2019",
               "daily_dispatches": [
                 {
                   "title": "Jeff OAK",
@@ -459,12 +461,13 @@
                   "expected_delivery_time": "00.00",
                   "expected_ext_time": "03:00",
                   "delivery_address": "2800 Camino Diabio, Byron CA",
-                  "color": "#CFCFCF"
+                  "color": "#CFCFCF",
+                  "delivery_progress": "100%"
                 }
               ]
             },
             {
-              "date": "2/6/2019",
+              "date": "02/06/2019",
               "daily_dispatches": [
                 {
                   "title": "Jeff OAK",
@@ -473,12 +476,13 @@
                   "expected_delivery_time": "00.00",
                   "expected_ext_time": "03:00",
                   "delivery_address": "2800 Camino Diabio, Byron CA",
-                  "color": "#CFCFCF"
+                  "color": "#CFCFCF",
+                  "delivery_progress": "100%"
                 }
               ]
             },
             {
-              "date": "2/7/2019",
+              "date": "02/07/2019",
               "daily_dispatches": [
                 {
                   "title": "Jeff OAK",
@@ -487,12 +491,13 @@
                   "expected_delivery_time": "00.00",
                   "expected_ext_time": "03:00",
                   "delivery_address": "2800 Camino Diabio, Byron CA",
-                  "color": "#CFCFCF"
+                  "color": "#CFCFCF",
+                  "delivery_progress": "100%"
                 }
               ]
             },
             {
-              "date": "2/8/2019",
+              "date": "02/08/2019",
               "daily_dispatches": [
                 {
                   "title": "Jeff OAK",
@@ -501,12 +506,13 @@
                   "expected_delivery_time": "00.00",
                   "expected_ext_time": "03:00",
                   "delivery_address": "2800 Camino Diabio, Byron CA",
-                  "color": "#CFCFCF"
+                  "color": "#CFCFCF",
+                  "delivery_progress": "100%"
                 }
               ]
             },
             {
-              "date": "2/9/2019",
+              "date": "02/09/2019",
               "daily_dispatches": [
                 {
                   "title": "Jeff OAK",
@@ -515,7 +521,8 @@
                   "expected_delivery_time": "00.00",
                   "expected_ext_time": "03:00",
                   "delivery_address": "2800 Camino Diabio, Byron CA",
-                  "color": "#CFCFCF"
+                  "color": "#CFCFCF",
+                  "delivery_progress": "100%"
                 }
               ]
             }
@@ -527,7 +534,7 @@
           "phone_number": "+1 609 234 4567",
           "dispatches": [
             {
-              "date": "2/3/2019",
+              "date": "02/03/2019",
               "daily_dispatches": [
                 {
                   "title": "Jeff OAK",
@@ -536,12 +543,13 @@
                   "expected_delivery_time": "00.00",
                   "expected_ext_time": "03:00",
                   "delivery_address": "2800 Camino Diabio, Byron CA",
-                  "color": "#CFCFCF"
+                  "color": "#CFCFCF",
+                  "delivery_progress": "100%"
                 }
               ]
             },
             {
-              "date": "2/4/2019",
+              "date": "02/04/2019",
               "daily_dispatches": [
                 {
                   "title": "Jeff OAK",
@@ -550,12 +558,13 @@
                   "expected_delivery_time": "00.00",
                   "expected_ext_time": "03:00",
                   "delivery_address": "2800 Camino Diabio, Byron CA",
-                  "color": "#CFCFCF"
+                  "color": "#CFCFCF",
+                  "delivery_progress": "100%"
                 }
               ]
             },
             {
-              "date": "2/5/2019",
+              "date": "02/05/2019",
               "daily_dispatches": [
                 {
                   "title": "Jeff OAK",
@@ -564,12 +573,13 @@
                   "expected_delivery_time": "00.00",
                   "expected_ext_time": "03:00",
                   "delivery_address": "2800 Camino Diabio, Byron CA",
-                  "color": "#CFCFCF"
+                  "color": "#CFCFCF",
+                  "delivery_progress": "100%"
                 }
               ]
             },
             {
-              "date": "2/6/2019",
+              "date": "02/06/2019",
               "daily_dispatches": [
                 {
                   "title": "Jeff OAK",
@@ -578,12 +588,13 @@
                   "expected_delivery_time": "00.00",
                   "expected_ext_time": "03:00",
                   "delivery_address": "2800 Camino Diabio, Byron CA",
-                  "color": "#CFCFCF"
+                  "color": "#CFCFCF",
+                  "delivery_progress": "100%"
                 }
               ]
             },
             {
-              "date": "2/7/2019",
+              "date": "02/07/2019",
               "daily_dispatches": [
                 {
                   "title": "Jeff OAK",
@@ -592,12 +603,13 @@
                   "expected_delivery_time": "00.00",
                   "expected_ext_time": "03:00",
                   "delivery_address": "2800 Camino Diabio, Byron CA",
-                  "color": "#CFCFCF"
+                  "color": "#CFCFCF",
+                  "delivery_progress": "100%"
                 }
               ]
             },
             {
-              "date": "2/8/2019",
+              "date": "02/08/2019",
               "daily_dispatches": [
                 {
                   "title": "Jeff OAK",
@@ -606,12 +618,13 @@
                   "expected_delivery_time": "00.00",
                   "expected_ext_time": "03:00",
                   "delivery_address": "2800 Camino Diabio, Byron CA",
-                  "color": "#CFCFCF"
+                  "color": "#CFCFCF",
+                  "delivery_progress": "100%"
                 }
               ]
             },
             {
-              "date": "2/9/2019",
+              "date": "02/09/2019",
               "daily_dispatches": [
                 {
                   "title": "Jeff OAK",
@@ -620,7 +633,8 @@
                   "expected_delivery_time": "00.00",
                   "expected_ext_time": "03:00",
                   "delivery_address": "2800 Camino Diabio, Byron CA",
-                  "color": "#CFCFCF"
+                  "color": "#CFCFCF",
+                  "delivery_progress": "100%"
                 }
               ]
             }

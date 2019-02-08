@@ -1,19 +1,19 @@
 $tab-list-width: 50px;
 $sidebar-width: 250px;
-.tab-list {
+.ptab-list {
     padding-left: 0;
     width: 50px;
     float: left;
 }
 
-.tab-list-item {
+.ptab-list-item {
     list-style: none;
     padding: 8px 12px;
     border: 1px solid $border-light-gray;;
     border-top-width: 0;
 }
 
-.tab-list-active {
+.ptab-list-active {
     background-color: white;
     border-left-width: 3px;
     border-left-color: #00FF00;
@@ -24,7 +24,7 @@ ol {
     line-height: 1.5;
 }
 
-.tabs {
+.ptabs {
     background-color: white;
     border: none;
     width: 100%;
@@ -32,7 +32,7 @@ ol {
 }
 
 
-.tab-content {
+.ptab-content {
     float: left;
     width: calc(100% - #{$tab-list-width});
 

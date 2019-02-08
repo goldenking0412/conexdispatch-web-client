@@ -222,7 +222,7 @@ CalendarToolbar.propTypes = {
     full_calendar: PropTypes.shape({
         status: PropTypes.string,
         view: PropTypes.shape({
-            name: PropTypes.strng,
+            name: PropTypes.string,
             params: PropTypes.object
         })
     }),

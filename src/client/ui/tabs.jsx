@@ -33,8 +33,8 @@ class Tabs extends Component {
         let counter = 0;
 
         return (
-            <div className="tabs float-left auto-scroll">
-                <ol className="tab-list cell">
+            <div className="ptabs float-left auto-scroll">
+                <ol className="ptab-list cell">
                     {children.map((child) => {
                         const { label } = child.props;
 
@@ -48,7 +48,7 @@ class Tabs extends Component {
                         );
                     })}
                 </ol>
-                <div className="tab-content cell">
+                <div className="ptab-content cell">
                     {children.map((child) => {
                         let style={ display: "block" };
                         counter += 1;

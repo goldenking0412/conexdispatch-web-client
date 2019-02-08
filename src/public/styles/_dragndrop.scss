@@ -9,10 +9,10 @@
         border: 1px solid #013FCE;
         position: relative;
         .paid {
-            color: #FF0000;
+            color: #00B239;
         }
         .unpaid {
-            color: #00FF00;
+            color: #DD0000;
         }
         .partial-paid {
             color: #FFFF00;
@@ -43,6 +43,7 @@
         position: absolute;
         bottom: 4px;
         width: 100%;
+        color: $medium-gray;
         input {
             border-radius: 0;
             margin-right: 10px;

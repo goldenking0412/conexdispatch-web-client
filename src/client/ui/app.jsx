@@ -58,7 +58,10 @@ class App extends React.Component {
         for (let i =  0; i < this.props.data.assigned_data.length; i+=1) {
             main_content.push(
                 <div label={this.props.data.assigned_data[i].location} key={i}>
-                    <TabcontentContainer drivers={this.props.data.assigned_data[i].drivers} />
+                    <TabcontentContainer 
+                      drivers={this.props.data.assigned_data[i].drivers} 
+                      update_draggable_container_list={this.dragulaDecorator}
+                    />
                 </div>
             )
         }
@@ -100,7 +103,10 @@ class App extends React.Component {
                     </aside>
                     <div className="upper-content">
                         <div id="calendar" />
-                        <UnassignedContainer data={this.props.data.unassigned_data} />
+                        <UnassignedContainer 
+                          data={this.props.data.unassigned_data} 
+                          update_draggable_container_list={this.dragulaDecorator} 
+                        />
                     </div>
                 </div>
 
@@ -157,7 +163,8 @@ App.propTypes = {
                                         expected_delivery_time: PropTypes.string,
                                         expected_ext_time: PropTypes.string,
                                         delivery_address: PropTypes.string,
-                                        color: PropTypes.string
+                                        color: PropTypes.string,
+                                        delivery_progress: PropTypes.string
                                     })
                                 )
                             })
