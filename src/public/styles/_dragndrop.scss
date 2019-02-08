@@ -1,7 +1,7 @@
 .draggable-container {
     padding: 5px;
     height: 100%;
-    font-size: 13px;
+    font-size: 0.8vw;
     position: relative;
 
     .draggable-item {
@@ -18,7 +18,7 @@
             color: #FFFF00;
         }
         .dispatch-details {
-            font-size: 12px;
+            font-size: 0.7vw;
             color: $medium-gray;
             margin-top: -3px;
         }
