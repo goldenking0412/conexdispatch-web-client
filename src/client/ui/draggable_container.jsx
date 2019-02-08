@@ -6,15 +6,24 @@ export default class DraggableContainer extends React.Component {
     constructor(props) {
         super(props);
         this.showMore = this.showMore.bind(this);
+        this.addNewDispatch = this.addNewDispatch.bind(this);
     }
 
     showMore(e) {
         console.log(e);
     }
 
+    addNewDispatch(e) {
+        console.log("Add New Dispatch?");
+        e.preventDefault();
+    }
+
     render() {
         if (this.props.dispatches === undefined) {
-            return (<div className="draggable-container" />);
+            return (
+                <div className="daily-container">
+                    <div className="draggable-container" onClick={this.addNewDispatch} />
+                </div>);
         }
         const dispatches = [];
         const content = [];
@@ -48,7 +57,10 @@ export default class DraggableContainer extends React.Component {
             }
             return (
                 <div className='daily-container'>
-                    <div className='draggable-container'>
+                    <div 
+                      className='draggable-container' 
+                      onClick={this.addNewDispatch}
+                    >
                         {content}
                     </div>
                     {additional_content}
@@ -68,7 +80,10 @@ export default class DraggableContainer extends React.Component {
         }
         return (
             <div className='daily-container'>
-                <div className='draggable-container'>
+                <div 
+                  className='draggable-container' 
+                  onClick={this.addNewDispatch}
+                >
                     {content}
                 </div>
             </div>);
