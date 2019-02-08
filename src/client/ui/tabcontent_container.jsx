@@ -2,7 +2,6 @@
 import PropTypes from 'prop-types';
 import classnames from "classnames";
 import React from "react";
-import { connect } from "react-redux";
 
 import DriverContainer from "./driver_container";
 
@@ -86,11 +85,4 @@ TabcontentContainer.propTypes = {
     update_draggable_container_list: PropTypes.func
 };
 
-function map_state_props(state) {
-    return {
-        full_calendar: state.ui.full_calendar
-    };
-}
-
-const TabcontentWrapperContainer = connect(map_state_props)(TabcontentContainer);
-export default TabcontentWrapperContainer;
+export default TabcontentContainer;

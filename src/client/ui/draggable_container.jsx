@@ -46,10 +46,13 @@ export default class DraggableContainer extends React.Component {
                     />
                 </div>);
             }
-            return (<div className='draggable-container'>
-                {content}
-                {additional_content}
-            </div>);
+            return (
+                <div className='daily-container'>
+                    <div className='draggable-container'>
+                        {content}
+                    </div>
+                    {additional_content}
+                </div>);
         }
         
         // Assigned Dispatch Container        
@@ -63,9 +66,12 @@ export default class DraggableContainer extends React.Component {
                 />
             )
         }
-        return (<div className='draggable-container'>
-            {content}
-        </div>);
+        return (
+            <div className='daily-container'>
+                <div className='draggable-container'>
+                    {content}
+                </div>
+            </div>);
 
     }
 }

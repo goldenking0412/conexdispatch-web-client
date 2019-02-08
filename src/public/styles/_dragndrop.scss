@@ -1,55 +1,58 @@
-.draggable-container {
-    padding: 5px;
+.daily-container {
     height: 100%;
+    padding: 5px;
     font-size: 0.75vw;
     position: relative;
-
-    .draggable-item {
+    display: flex;
+    flex-direction: column;
+    .draggable-container {
+        flex: 1;
         width: 100%;
-        border: 1px solid #013FCE;
-        position: relative;
-        .paid {
-            color: #00B239;
+
+        .draggable-item {
+            width: 100%;
+            border: 1px solid #013FCE;
+            position: relative;
+            .paid {
+                color: #00B239;
+            }
+            .unpaid {
+                color: #DD0000;
+            }
+            .partial-paid {
+                color: #FFFF00;
+            }
+            .dispatch-details {
+                font-size: 0.7vw;
+                color: $medium-gray;
+                margin-top: -3px;
+            }
+            .dispatch-background {
+                position: absolute;
+                top: 0px;
+                left: 0px;
+                height: 100%;
+                z-index: -1;
+            }
         }
-        .unpaid {
-            color: #DD0000;
+
+        .draggable-item:hover {
+            cursor: move;
         }
-        .partial-paid {
-            color: #FFFF00;
-        }
-        .dispatch-details {
-            font-size: 0.7vw;
-            color: $medium-gray;
-            margin-top: -3px;
-        }
-        .dispatch-background {
-            position: absolute;
-            top: 0px;
-            left: 0px;
-            height: 100%;
-            z-index: -1;
+
+        .draggable-item:not(:first-child) {
+            margin-top: 2px;
         }
     }
-
-    .draggable-item:hover {
-        cursor: move;
-    }
-
-    .draggable-item:not(:first-child) {
-        margin-top: 2px;
-    }
-
     .view-more {
-        position: absolute;
-        bottom: 4px;
         width: 100%;
         color: $medium-gray;
         input {
             border-radius: 0;
-            margin-right: 10px;
         }
     }
 }
+
 .gu-mirror {
     display: none;
 }

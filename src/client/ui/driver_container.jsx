@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import React from "react";
-import { connect } from "react-redux";
 
 import DispatchRow from "./dispatch_row";
 import DriverArea from "./driver_area";
@@ -41,13 +40,6 @@ class DriverContainer extends React.Component {
 }
 
 DriverContainer.propTypes = {
-    full_calendar: PropTypes.shape({
-        status: PropTypes.string,
-        view: PropTypes.shape({
-            name: PropTypes.string,
-            params: PropTypes.object
-        })
-    }),
     driver: PropTypes.shape({
         name: PropTypes.string,
         default_color: PropTypes.string,
@@ -73,11 +65,4 @@ DriverContainer.propTypes = {
     update_draggable_container_list: PropTypes.func
 }
 
-function map_state_props(state) {
-    return {
-        full_calendar: state.ui.full_calendar
-    };
-}
-
-const DriverWrapperContainer = connect(map_state_props)(DriverContainer);
-export default DriverWrapperContainer;
+export default DriverContainer;
