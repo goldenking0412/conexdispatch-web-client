@@ -15,7 +15,7 @@ export default class DraggableContainer extends React.Component {
 
     addNewDispatch(e) {
         console.log("Add New Dispatch?");
-        e.preventDefault();
+        e.stopPropagation();
     }
 
     render() {
