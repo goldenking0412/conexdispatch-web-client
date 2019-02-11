@@ -1,5 +1,6 @@
 import * as React from "react";
 import PropTypes from 'prop-types';
+import classnames from "classnames";
 
 export default class DraggableDispatch extends React.Component {
     constructor(props) {
@@ -14,8 +15,7 @@ export default class DraggableDispatch extends React.Component {
     }
 
     render() {
-        const unassigned_style = { 
-            borderColor: this.props.dispatch.color,
+        const unassigned_style = {
             backgroundColor: this.props.dispatch.color
         };
         const assigned_style = {
@@ -27,12 +27,17 @@ export default class DraggableDispatch extends React.Component {
                 #ffffff ${this.props.dispatch.delivery_progress}, 
                 #ffffff 100%)`
         }
-        let content;
+
+        const assigned_wrapper_style = {
+            borderColor: this.props.dispatch.color
+        }
         let style;
+        let content;
+        let wrapper_div_classes;
 
         if (this.props.unassigned) {
-            style = unassigned_style;
             let paid_status_class;
+
             if (this.props.dispatch.payment_status === "paid") {
                 paid_status_class = "paid";
             }
@@ -42,8 +47,16 @@ export default class DraggableDispatch extends React.Component {
             else if (this.props.dispatch.payment_status === "unpaid") {
                 paid_status_class = "unpaid";
             }
+
+            if (this.props.dispatch.ready === "true") {
+                wrapper_div_classes = classnames("draggable-item", "unassigned", "ready");
+            }
+            else {
+                wrapper_div_classes = classnames("draggable-item", "unassigned");
+            }
+
             content = (
-                <div>
+                <div style={unassigned_style}>
                     <span>{this.props.dispatch.title}, </span>
                     <span>{this.props.dispatch.invoice_no} {this.props.dispatch.line_item},</span>
                     <span className={paid_status_class}>
@@ -52,34 +65,33 @@ export default class DraggableDispatch extends React.Component {
                     </span>
                 </div>);
         }
-        else {
-
-            // This means this dispatch is assigned
-            style = assigned_style;
-            if (this.props.view_type === 0) {
-                content = (<div>
-                    <div>
-                        <span>{this.props.dispatch.title},&nbsp;</span>
-                        <span>{this.props.dispatch.invoice_no}&nbsp;</span>
-                        <span>{this.props.dispatch.line_item},&nbsp;</span>
-                        <span>{this.props.dispatch.expected_delivery_time}<br /></span>
-                    </div>
-                    <div className="dispatch-details">
-                        <span>{this.props.dispatch.expected_ext_time},&nbsp;</span>
-                        <span>{this.props.dispatch.delivery_address}</span>
-                    </div>
-                </div>);
-            }
-            else {
-                content = (<div>
+        else if (this.props.view_type === 0) {          // This means this dispatch is assigned
+            wrapper_div_classes = classnames("draggable-item", { "border-color": this.props.dispatch.color });
+            style = assigned_wrapper_style;
+            content = (<div style={assigned_style}>
+                <div>
                     <span>{this.props.dispatch.title},&nbsp;</span>
                     <span>{this.props.dispatch.invoice_no}&nbsp;</span>
                     <span>{this.props.dispatch.line_item},&nbsp;</span>
                     <span>{this.props.dispatch.expected_delivery_time}<br /></span>
-                </div>);
-            }
+                </div>
+                <div className="dispatch-details">
+                    <span>{this.props.dispatch.expected_ext_time},&nbsp;</span>
+                    <span>{this.props.dispatch.delivery_address}</span>
+                </div>
+            </div>);
         }
-        return (<div className='draggable-item' style={style} onClick={this.handleClick}>
+        else {
+            wrapper_div_classes = classnames("draggable-item", { "border-color": this.props.dispatch.color });
+            style = assigned_wrapper_style;
+            content = (<div style={assigned_style}>
+                <span>{this.props.dispatch.title},&nbsp;</span>
+                <span>{this.props.dispatch.invoice_no}&nbsp;</span>
+                <span>{this.props.dispatch.line_item},&nbsp;</span>
+                <span>{this.props.dispatch.expected_delivery_time}<br /></span>
+            </div>);
+        }
+        return (<div className={wrapper_div_classes} style={style} onClick={this.handleClick}>
             {content}
         </div>);
     }
@@ -99,12 +111,13 @@ DraggableDispatch.propTypes = {
             delivery_progress: PropTypes.string
         }),
         PropTypes.shape({
+            ready: PropTypes.string,
+            payment_status: PropTypes.string,
+            payment_gateway: PropTypes.string,
             title: PropTypes.string,
             invoice_no: PropTypes.string,
             line_item: PropTypes.string,
-            payment_gateway: PropTypes.string,
-            payment_status: PropTypes.string,
-            delivery_address: PropTypes.string
+            color: PropTypes.string
         })
     ]),
     view_type: PropTypes.number

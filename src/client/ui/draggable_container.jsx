@@ -5,12 +5,14 @@ import DraggableDispatch from './draggable_dispatch';
 export default class DraggableContainer extends React.Component {
     constructor(props) {
         super(props);
+        this.more_cont = React.createRef();
         this.showMore = this.showMore.bind(this);
         this.addNewDispatch = this.addNewDispatch.bind(this);
     }
 
     showMore(e) {
-        console.log(e);
+        e.stopPropagation();
+        this.more_cont.style.display = "block";
     }
 
     addNewDispatch(e) {
@@ -28,6 +30,7 @@ export default class DraggableContainer extends React.Component {
         }
         const dispatches = [];
         const content = [];
+        const more_content = [];
         let additional_content;
         for (let i = 0; i < this.props.dispatches.length; i+=1) {
             dispatches.push(this.props.dispatches[i]);
@@ -55,6 +58,18 @@ export default class DraggableContainer extends React.Component {
                       value="view more"
                     />
                 </div>);
+
+                for (let i = 6; i < dispatches.length; i+=1) {
+                    more_content.push(
+                        <DraggableDispatch 
+                          key={i}
+                          unassigned={this.props.unassigned}
+                          dispatch={dispatches[i]}
+                          view_type={this.props.view_type}
+                        />
+                    )
+                }
+                
             }
             return (
                 <div className='daily-container'>
@@ -65,6 +80,12 @@ export default class DraggableContainer extends React.Component {
                         {content}
                     </div>
                     {additional_content}
+                    <div 
+                      className="show-more-container draggable-container" 
+                      ref={this.more_cont}
+                    >
+                        {more_content}
+                    </div>
                 </div>);
         }
         
@@ -109,12 +130,13 @@ DraggableContainer.propTypes = {
         ),
         PropTypes.arrayOf(
             PropTypes.shape({
+                ready: PropTypes.string,
+                payment_status: PropTypes.string,
+                payment_gateway: PropTypes.string,
                 title: PropTypes.string,
                 invoice_no: PropTypes.string,
                 line_item: PropTypes.string,
-                payment_gateway: PropTypes.string,
-                payment_type: PropTypes.string,
-                delivery_address: PropTypes.string
+                color: PropTypes.string
             })
         )
     ]),

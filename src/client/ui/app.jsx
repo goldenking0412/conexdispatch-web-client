@@ -134,12 +134,13 @@ App.propTypes = {
                 date: PropTypes.string,
                 daily_dispatches: PropTypes.arrayOf(
                     PropTypes.shape({
+                        ready: PropTypes.string,
+                        payment_status: PropTypes.string,
+                        payment_gateway: PropTypes.string,
                         title: PropTypes.string,
                         invoice_no: PropTypes.string,
                         line_item: PropTypes.string,
-                        payment_gateway: PropTypes.string,
-                        payment_type: PropTypes.string,
-                        delivery_address: PropTypes.string
+                        color: PropTypes.string
                     })
                 )
             })
