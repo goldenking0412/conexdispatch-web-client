@@ -1,18 +1,36 @@
 import * as React from "react";
+import $ from "jquery";
 import PropTypes from 'prop-types';
 import DraggableDispatch from './draggable_dispatch';
 
 export default class DraggableContainer extends React.Component {
     constructor(props) {
         super(props);
-        this.more_cont = React.createRef();
+        // this.more_cont = React.createRef();
+        this.more_cont_id = this.guidGenerator();
         this.showMore = this.showMore.bind(this);
+        this.hideMore = this.hideMore.bind(this);
         this.addNewDispatch = this.addNewDispatch.bind(this);
+    }
+
+    guidGenerator() {
+        const S4 = function() {
+            return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
+        };
+        return `${S4()}${S4()}-${S4()}-${S4()}-${S4()}-${S4()}${S4()}${S4()}`;
     }
 
     showMore(e) {
         e.stopPropagation();
-        this.more_cont.style.display = "block";
+
+        $(`#${this.more_cont_id}`).css("display", "block");
+        const parent_width = $(`#${this.more_cont_id}`).parent().width();
+        $(`#${this.more_cont_id}`).width(parent_width);
+        console.log(`#${this.more_cont_id}`);
+    }
+    hideMore(e) {
+        e.stopPropagation();
+        $(`#${this.more_cont_id}`).css("display", "none");
     }
 
     addNewDispatch(e) {
@@ -81,10 +99,24 @@ export default class DraggableContainer extends React.Component {
                     </div>
                     {additional_content}
                     <div 
-                      className="show-more-container draggable-container" 
+                      className="show-more-container" 
                       ref={this.more_cont}
+                      id={this.more_cont_id}
                     >
-                        {more_content}
+                        <div className="draggable-container">
+                            {more_content}
+                        </div>
+
+                        <div 
+                          className="float-right" 
+                          key={this.more_cont_id}
+                        >
+                            <input 
+                              type="button" 
+                              value="cancel" 
+                              onClick={this.hideMore}
+                            />
+                        </div>
                     </div>
                 </div>);
         }
