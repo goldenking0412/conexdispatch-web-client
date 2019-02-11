@@ -22,7 +22,7 @@ export default class DriverArea extends React.Component {
 
     render() {
         return (<div className='driver cell'>
-            <span>{this.props.name}</span>
+            <span className='name'>{this.props.name}</span>
             <div className="driver-phone-area">
                 {this.props.phone}
             </div>

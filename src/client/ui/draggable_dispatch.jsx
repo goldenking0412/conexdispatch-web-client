@@ -9,6 +9,7 @@ export default class DraggableDispatch extends React.Component {
 
     handleClick(e){
         e.stopPropagation();
+        alert("Please open modify dialog");
         console.log("Please open modify dialog", e);
     }
 
@@ -44,7 +45,7 @@ export default class DraggableDispatch extends React.Component {
             content = (
                 <div>
                     <span>{this.props.dispatch.title}, </span>
-                    <span>{this.props.dispatch.invoice_no} {this.props.dispatch.line_item}</span>
+                    <span>{this.props.dispatch.invoice_no} {this.props.dispatch.line_item},</span>
                     <span className={paid_status_class}>
                         <span className="float-right">$</span>
                         <span className="float-right">{this.props.dispatch.payment_gateway}&nbsp;</span>

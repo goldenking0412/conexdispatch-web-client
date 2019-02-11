@@ -70,10 +70,14 @@ ol {
     }
 
     .driver-wrapper.selected {
-        border: 1px solid $selected-border-color;
+        border: 1px solid $selected-border-blue;
         border-left-width: 3px;
         .driver {
             margin-left: -3px;
+
+            .name {
+                color: $selected-border-blue;
+            }
         }
     }
     
