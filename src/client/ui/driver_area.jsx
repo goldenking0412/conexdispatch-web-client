@@ -14,7 +14,7 @@ export default class DriverArea extends React.Component {
         this.viewType = 1 - this.viewType;
         this.props.changeViewType(this.viewType);
         if (this.viewType === 1) {
-            this.buttonText = "meaning view";
+            this.buttonText = "expanded view";
         }
         else
             this.buttonText = "standard view";
