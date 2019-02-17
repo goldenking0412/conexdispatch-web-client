@@ -34,7 +34,7 @@ class Tabs extends Component {
 
         return (
             <div className="ptabs float-left auto-scroll">
-                <ol className="ptab-list cell">
+                <ol className="ptab-list">
                     {children.map((child) => {
                         const { label } = child.props;
 

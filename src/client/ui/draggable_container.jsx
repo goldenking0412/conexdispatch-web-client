@@ -14,10 +14,11 @@ export default class DraggableContainer extends React.Component {
     }
 
     guidGenerator() {
-        const S4 = function() {
-            return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
-        };
-        return `${S4()}${S4()}-${S4()}-${S4()}-${S4()}-${S4()}${S4()}${S4()}`;
+        return `${this.S4()}${this.S4()}-${this.S4()}-${this.S4()}-${this.S4()}-${this.S4()}${this.S4()}${this.S4()}`;
+    }
+
+    S4() {
+        return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
     }
 
     showMore(e) {
@@ -28,6 +29,7 @@ export default class DraggableContainer extends React.Component {
         $(`#${this.more_cont_id}`).width(parent_width);
         console.log(`#${this.more_cont_id}`);
     }
+
     hideMore(e) {
         e.stopPropagation();
         $(`#${this.more_cont_id}`).css("display", "none");
@@ -37,6 +39,30 @@ export default class DraggableContainer extends React.Component {
         console.log("Add New Dispatch?");
         alert("Add New Dispatch?");
         e.stopPropagation();
+    }
+
+    showMoreDialog(more_content) {
+        return (
+            <div 
+              className="show-more-container" 
+              ref={this.more_cont}
+              id={this.more_cont_id}
+            >
+                <div className="draggable-container">
+                    {more_content}
+                </div>
+
+                <div 
+                  className="float-right" 
+                  key={this.more_cont_id}
+                >
+                    <input 
+                      type="button" 
+                      value="cancel" 
+                      onClick={this.hideMore}
+                    />
+                </div>
+            </div>);
     }
 
     render() {
@@ -98,26 +124,7 @@ export default class DraggableContainer extends React.Component {
                         {content}
                     </div>
                     {additional_content}
-                    <div 
-                      className="show-more-container" 
-                      ref={this.more_cont}
-                      id={this.more_cont_id}
-                    >
-                        <div className="draggable-container">
-                            {more_content}
-                        </div>
-
-                        <div 
-                          className="float-right" 
-                          key={this.more_cont_id}
-                        >
-                            <input 
-                              type="button" 
-                              value="cancel" 
-                              onClick={this.hideMore}
-                            />
-                        </div>
-                    </div>
+                    {this.showMoreDialog(more_content)}
                 </div>);
         }
         

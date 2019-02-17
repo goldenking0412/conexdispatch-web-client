@@ -22,7 +22,7 @@ class Tab extends Component {
             },
         } = this;
 
-        let className = 'ptab-list-item cell';
+        let className = 'ptab-list-item';
 
         if (activeTab === label) {
             className += ' ptab-list-active';

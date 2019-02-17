@@ -1,7 +1,7 @@
 .daily-container {
     height: 100%;
     padding: 5px;
-    font-size: 0.75vw;
+    font-size: 0.75rem;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -24,7 +24,7 @@
                 color: #FFFF00;
             }
             .dispatch-details {
-                font-size: 0.7vw;
+                font-size: 0.7rem;
                 margin-top: -3px;
                 opacity: 0.6;
             }
@@ -38,7 +38,7 @@
         }
 
         .draggable-item:hover {
-            cursor: move;
+            cursor: pointer;
         }
 
         .draggable-item:not(:first-child) {
