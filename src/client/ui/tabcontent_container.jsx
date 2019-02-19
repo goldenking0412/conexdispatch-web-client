@@ -28,23 +28,29 @@ class TabcontentContainer extends React.Component {
     render() {
         const content = [];
         const { activeSelected } = this.state;
-        for (let i = 0; i < this.props.drivers.length; i+=1) {
-            const classname = classnames({
-                'driver-wrapper' : true, 
-                'selected' : activeSelected === this.props.drivers[i].name
-            });
-            content.push(
-                <div 
-                  className={classname}
-                  key={i}
-                  onClick={() => this.setState({ activeSelected : activeSelected === this.props.drivers[i].name ? '' : this.props.drivers[i].name })} 
-                >
-                    <DriverContainer 
-                      driver={this.props.drivers[i]} 
-                      update_draggable_container_list={this.props.update_draggable_container_list}
-                    />
-                </div>
-            )
+        if (this.props.drivers !== undefined) {
+            for (let i = 0; i < this.props.drivers.length; i+=1) {
+                const classname = classnames({
+                    'driver-wrapper' : true, 
+                    'selected' : activeSelected === this.props.drivers[i].name
+                });
+                content.push(
+                    <div 
+                      className={classname}
+                      key={i}
+                      onClick={() => this.setState({ 
+                          activeSelected : activeSelected === this.props.drivers[i].name ? '' : this.props.drivers[i].name }
+                      )}
+                    >
+                        <DriverContainer 
+                          driver={this.props.drivers[i]} 
+                          update_draggable_container_list={
+                            this.props.update_draggable_container_list
+                          }
+                        />
+                    </div>
+                )
+            }
         }
         return (<div>{content}</div>);
     }

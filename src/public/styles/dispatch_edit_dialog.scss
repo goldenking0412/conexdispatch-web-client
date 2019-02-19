@@ -1,0 +1,21 @@
+
+#dispatch-edit-dialog {
+    padding: 5px;
+    input {
+        border-radius: 2px;
+        margin-bottom: 2px;
+    }
+    .row {
+        display: flex;
+        flex-direction: row;
+        .left-description {
+            flex: 2;
+        }
+        .right-content {
+            flex: 2;
+            input {
+                height: 1.2rem;
+            }
+        }
+    }
+}

@@ -75,6 +75,36 @@ UnassignedContainer.propTypes = {
             params: PropTypes.object
         })
     }),
+    // invoices: PropTypes.arrayOf(
+    //     PropTypes.shape({
+    //         assigned: PropTypes.bool, 
+    //         ready: PropTypes.bool,  
+    //         location_id: PropTypes.number, 
+    //         driver: PropTypes.number, 
+    //         invoice_creator: PropTypes.number,
+    //         date: PropTypes.string,
+    //         invoice_no: PropTypes.string,
+    //         payment_status: PropTypes.string, 
+    //         payment_gateway: PropTypes.string,
+    //         title: PropTypes.string,
+    //         description: PropTypes.string,
+    //         line_item: PropTypes.string,
+    //         expected_delivery_time: PropTypes.string,
+    //         expected_ext_time: PropTypes.string,
+    //         delivery_address: PropTypes.string,
+    //         color: PropTypes.string,
+    //         delivery_progress: PropTypes.number,
+    //         on_site_contact: PropTypes.string,
+    //         total_order: PropTypes.string,
+    //         customer_info: PropTypes.string,
+    //         sales_rep: PropTypes.number, 
+    //         notes: PropTypes.string ,
+    //         quote_url: PropTypes.string,
+    //         total_order: PropTypes.string,
+    //         latest_invoice_url: PropTypes.string,
+    //         po_number: PropTypes.string
+    //     })
+    // ),
     data: PropTypes.arrayOf(
         PropTypes.shape({
             date: PropTypes.string,
@@ -97,7 +127,8 @@ UnassignedContainer.propTypes = {
 
 function map_state_props(state) {
     return {
-        full_calendar: state.ui.full_calendar
+        full_calendar: state.ui.full_calendar,
+        invoices: state.invoices
     };
 }
 

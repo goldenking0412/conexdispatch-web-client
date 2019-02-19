@@ -10,7 +10,7 @@ export default class DraggableDispatch extends React.Component {
 
     handleClick(e){
         e.stopPropagation();
-        alert("Please open modify dialog");
+        $("#dispatch-edit-dialog").foundation("open");
         console.log("Please open modify dialog", e);
     }
 

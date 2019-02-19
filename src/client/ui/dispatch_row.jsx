@@ -45,23 +45,7 @@ class DispatchRow extends React.Component {
         for (; start_day.format("MM/DD/YYYY") !== end_day_string; start_day.add(1, "days")) {
             let i;
             const compare_string = start_day.format("MM/DD/YYYY");
-            for (i = 0; i < data.length; i+=1) {
-                if (data[i].date === compare_string) {
-                    content.push(
-                        <th 
-                          className={day_dispatch_container_classes} 
-                          key={compare_string}
-                          style={style}
-                        >
-                            <DraggableContainer 
-                              dispatches={this.props.data[i].daily_dispatches} 
-                              view_type={this.props.view_type}
-                            />
-                        </th>);
-                    break;
-                }
-            }
-            if (i === data.length) {
+            if (data === undefined) {
                 content.push(
                     <th 
                       className={day_dispatch_container_classes} 
@@ -72,6 +56,36 @@ class DispatchRow extends React.Component {
                           view_type={this.props.view_type}
                         />
                     </th>);
+            }
+            else {
+                for (i = 0; i < data.length; i+=1) {
+                    if (data[i].date === compare_string) {
+                        content.push(
+                            <th 
+                              className={day_dispatch_container_classes} 
+                              key={compare_string}
+                              style={style}
+                            >
+                                <DraggableContainer 
+                                  dispatches={this.props.data[i].daily_dispatches} 
+                                  view_type={this.props.view_type}
+                                />
+                            </th>);
+                        break;
+                    }
+                }
+                if (i === data.length) {
+                    content.push(
+                        <th 
+                          className={day_dispatch_container_classes} 
+                          key={compare_string}
+                          style={style}
+                        >
+                            <DraggableContainer 
+                              view_type={this.props.view_type}
+                            />
+                        </th>);
+                }
             }
         }
         return (

@@ -6,7 +6,6 @@ import DraggableDispatch from './draggable_dispatch';
 export default class DraggableContainer extends React.Component {
     constructor(props) {
         super(props);
-        // this.more_cont = React.createRef();
         this.more_cont_id = this.guidGenerator();
         this.showMore = this.showMore.bind(this);
         this.hideMore = this.hideMore.bind(this);
@@ -37,15 +36,14 @@ export default class DraggableContainer extends React.Component {
 
     addNewDispatch(e) {
         console.log("Add New Dispatch?");
-        alert("Add New Dispatch?");
         e.stopPropagation();
+        $("#dispatch-edit-dialog").foundation("open");
     }
 
-    showMoreDialog(more_content) {
+    _render_showMoreDialog(more_content) {
         return (
             <div 
               className="show-more-container" 
-              ref={this.more_cont}
               id={this.more_cont_id}
             >
                 <div className="draggable-container">
@@ -124,7 +122,7 @@ export default class DraggableContainer extends React.Component {
                         {content}
                     </div>
                     {additional_content}
-                    {this.showMoreDialog(more_content)}
+                    {this._render_showMoreDialog(more_content)}
                 </div>);
         }
         

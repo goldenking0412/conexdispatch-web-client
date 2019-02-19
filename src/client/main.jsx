@@ -34,6 +34,9 @@ import { async_load_sources } from "./actions/sources";
 import { async_load_layers } from "./actions/layers";
 import { get_full_calendar_view, update_full_calendar_view } from "./actions/ui";
 import { async_load_user, async_patch_user } from "./actions/user";
+import { async_load_locations } from "./actions/locations";
+import { async_load_drivers } from "./actions/drivers";
+import { async_load_matches } from "./actions/matches";
 
 import reducer from "./reducers";
 
@@ -115,6 +118,19 @@ function main() {
     const fc_calendar = new Calendar();
     const store = create_redux_store(thunk, fc_calendar.middleware.bind(fc_calendar));
 
+    // load location data
+    store
+        .dispatch(async_load_locations())
+        .then(() => {
+            store
+                .dispatch(async_load_drivers())
+                .then(() => {
+                    store.dispatch(async_load_matches());
+                });
+        });
+    // store.dispatch(async_load_drivers());
+    // store.dispatch(async_load_matches());
+
     const _render_promise = new Promise(resolve => {
         const root_element = document.getElementsByClassName("root")[0];
         render(
@@ -129,6 +145,8 @@ function main() {
     const _load_user_promise = guessed_timezone
         ? store.dispatch(async_patch_user({ timezone: user_config.timezone }, false))
         : store.dispatch(async_load_user());
+
+    setTimeout(() => console.log(store.getState()), 2000);
 
     bluebird
         .all([_render_promise, _load_user_promise])
