@@ -16,12 +16,17 @@ import { EVENTS_NS } from "../config";
 import { deselect_event } from "../actions/events";
 import { toggle_sidebar } from "../actions/ui";
 import CalendarToolbar from "./calendar_toolbar";
-import EventTooltip from "./event_tooltip/base";
+// import EventTooltip from "./event_tooltip/base";
 import SettingsModal from "./settings_modal/base";
 import Tabs from "./tabs";
 import TabcontentContainer from "./tabcontent_container";
 import UnassignedContainer from "./unassigned_container";
 import DispatchDialog from "./dispatch_dialog";
+
+import { 
+    match_prop_type, 
+    driver_prop_type
+} from "../prop_types";
 
 class App extends React.Component {
     constructor(props) {
@@ -55,7 +60,6 @@ class App extends React.Component {
     }
 
     _render_main() {
-        console.log("Location Loaded", this.props.locations.length);
         const main_content = [];
         if (this.props.matches.length === 0) {
             for (let i =  0; i < this.props.data.assigned_data.length; i+=1) {
@@ -69,14 +73,13 @@ class App extends React.Component {
                 )
             }
         }
-        else {
-            console.log("match_length",this.props.matches);
+        if (this.props.matches.length !== 0) {
             for (let i =  1; i < this.props.matches.length; i+=1) {
-                console.log("match_location_name", this.props.matches[i].location_name);
                 main_content.push(
                     <div label={this.props.matches[i].location_name} key={i}>
                         <TabcontentContainer 
                           drivers={this.props.matches[i].drivers} 
+                          match={this.props.matches[i]}
                           update_draggable_container_list={this.dragulaDecorator}
                         />
                     </div>
@@ -133,7 +136,7 @@ class App extends React.Component {
                 </Tabs>
 
                 <div className={content_classes}>
-                    <EventTooltip />
+                    
                     <SettingsModal />
                     <DispatchDialog />
                 </div>
@@ -147,61 +150,8 @@ App.propTypes = {
     sidebar: PropTypes.shape({
         show: PropTypes.bool
     }),
-    locations: PropTypes.arrayOf(
-        PropTypes.shape({
-            id: PropTypes.number,
-            name: PropTypes.string
-        })
-    ),
-    drivers: PropTypes.arrayOf(
-        PropTypes.shape({
-            user_id: PropTypes.number,
-            name: PropTypes.string,
-            phone_number: PropTypes.string
-        })
-    ),
-    matches: PropTypes.arrayOf(
-        PropTypes.shape({
-            id: PropTypes.number,
-            location_name: PropTypes.string,
-            drivers: PropTypes.arrayOf(
-                PropTypes.shape({
-                    name: PropTypes.string,
-                    phone_number: PropTypes.string
-                })
-            )
-        })
-    ),
-    // invoices: PropTypes.arrayOf(
-    //     PropTypes.shape({
-    //         assigned: PropTypes.bool, 
-    //         ready: PropTypes.bool,  
-    //         location_id: PropTypes.number, 
-    //         driver: PropTypes.number, 
-    //         invoice_creator: PropTypes.number,
-    //         date: PropTypes.string,
-    //         invoice_no: PropTypes.string,
-    //         payment_status: PropTypes.string, 
-    //         payment_gateway: PropTypes.string,
-    //         title: PropTypes.string,
-    //         description: PropTypes.string,
-    //         line_item: PropTypes.string,
-    //         expected_delivery_time: PropTypes.string,
-    //         expected_ext_time: PropTypes.string,
-    //         delivery_address: PropTypes.string,
-    //         color: PropTypes.string,
-    //         delivery_progress: PropTypes.number,
-    //         on_site_contact: PropTypes.string,
-    //         total_order: PropTypes.string,
-    //         customer_info: PropTypes.string,
-    //         sales_rep: PropTypes.number, 
-    //         notes: PropTypes.string ,
-    //         quote_url: PropTypes.string,
-    //         total_order: PropTypes.string,
-    //         latest_invoice_url: PropTypes.string,
-    //         po_number: PropTypes.string
-    //     })
-    // ),
+    drivers: PropTypes.arrayOf(driver_prop_type),
+    matches: PropTypes.arrayOf(match_prop_type),
     data: PropTypes.shape({
         unassigned_data: PropTypes.arrayOf(
             PropTypes.shape({
@@ -254,7 +204,6 @@ App.propTypes = {
 function map_state_props(state) {
     return {
         sidebar: state.ui.sidebar,
-        locations: state.locations,
         drivers: state.drivers,
         matches: state.matches
     };

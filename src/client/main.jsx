@@ -37,6 +37,7 @@ import { async_load_user, async_patch_user } from "./actions/user";
 import { async_load_locations } from "./actions/locations";
 import { async_load_drivers } from "./actions/drivers";
 import { async_load_matches } from "./actions/matches";
+import { async_load_events } from "./actions/events";
 
 import reducer from "./reducers";
 
@@ -126,6 +127,7 @@ function main() {
                 .dispatch(async_load_drivers())
                 .then(() => {
                     store.dispatch(async_load_matches());
+                    store.dispatch(async_load_events());
                 });
         });
     // store.dispatch(async_load_drivers());
@@ -146,7 +148,7 @@ function main() {
         ? store.dispatch(async_patch_user({ timezone: user_config.timezone }, false))
         : store.dispatch(async_load_user());
 
-    setTimeout(() => console.log(store.getState()), 2000);
+    // setTimeout(() => console.log(store.getState()), 2000);
 
     bluebird
         .all([_render_promise, _load_user_promise])

@@ -6,6 +6,7 @@
 
 import "whatwg-fetch";
 import bluebird from "bluebird";
+import moment from "moment-timezone";
 import _ from "lodash";
 
 import {
@@ -16,13 +17,27 @@ import {
     fetch_options,
     user_config
 } from "../utils";
+import { patch_layer } from "./layers";
 import { toggle_color_picker_tooltip } from "./ui";
 
 /**
  * Private helpers functions
  */
-const _event_to_redux = event => {
+const _event_to_redux = (timezone, event) => {
     /* eslint-disable no-param-reassign */
+    event.allDay = _.has(event, "start.date") || _.has(event, "end.date");
+
+    _.forEach(["start", "end"], prop => {
+        if (!_.isEmpty(event[prop])) {
+            if (!_.isEmpty(event[prop].date)) {
+                event[prop] = moment(event[prop].date);
+            } else {
+                event[prop] = moment(event[prop].date_time).tz(timezone);
+            }
+        } else {
+            event[prop] = null;
+        }
+    });
 
     return event;
     /* eslint-disable no-param-reassign */
@@ -94,7 +109,7 @@ export const select_event = (event_id, creating = false, force = false) => {
 
 export const create_event = event => {
     return dispatch => {
-        const redux_event = _event_to_redux(event);
+        const redux_event = _event_to_redux(user_config.timezone, event);
         dispatch(add_events([redux_event], true));
         dispatch(select_event(redux_event.id, true));
     };
@@ -116,26 +131,60 @@ export const set_dirty_selected_event = dirty => {
 /**
  * Async actions creators
  */
-export const async_load_events = () => {
-    return (dispatch) => {
+export const async_load_events = layer_id => {
+    return (dispatch, get_state) => {
+        const sync_token = _.get(get_state(), ["layers", layer_id, "sync_token"]);
+        const full_sync = _.isNil(sync_token);
+        const qs = {};
+        if (!full_sync) {
+            qs.sync_token = sync_token;
+        }
 
-        return fetch(api_url(`/dispatches/events`), fetch_options())
+        return fetch(api_url(`/layers/${escape(layer_id)}/events`, qs), fetch_options())
             .then(fetch_check)
             .catch(fetch_check_simple_status)
             .catch(_.partial(fetch_check_advanced_status, dispatch))
             .then(json_res => {
-                // const redux_events = _(json_res)
-                //     .map(_.partial(_event_to_redux, user_config.timezone))
-                //     .value();
-                dispatch(add_events(json_res));
+                const redux_events = _(json_res.events)
+                    .filter(event => event.status !== "cancelled")
+                    .map(_.partial(_event_to_redux, user_config.timezone))
+                    .value();
+
+                const is_incremental = _.get(json_res, "sync_type") === "incremental";
+                let deleted_events_ids = [];
+                if (is_incremental) {
+                    deleted_events_ids = _(json_res.events)
+                        .filter(event => event.status === "cancelled")
+                        .map("id")
+                        .value();
+                } else {
+                    // We need to "remove" all the events that we currently have that are not in the new set
+                    const state = get_state();
+                    const layer = state.layers[layer_id];
+                    deleted_events_ids = _.difference(layer.events, _.map(redux_events, "id"));
+                }
+                if (!_.isEmpty(deleted_events_ids)) {
+                    dispatch(delete_events(deleted_events_ids));
+                }
+
+                dispatch(add_events(redux_events));
+                dispatch(
+                    patch_layer(layer_id, {
+                        loaded: true,
+                        sync_token: json_res.next_sync_token
+                    })
+                );
             });
     };
 };
 
-export const async_create_event = (event) => {
+export const async_create_event = (layer_id, event, notify_attendees = false) => {
     return (dispatch, get_state) => {
+        const qs = {
+            notify: notify_attendees
+        };
         return fetch(
-            api_url(`/dispatches/event/add`),
+            api_url(`/layers/${escape(layer_id)}/events`, qs),
             fetch_options({
                 method: "POST",
                 body: JSON.stringify(event)
@@ -156,7 +205,7 @@ export const async_create_event = (event) => {
     };
 };
 
-export const async_save_event = (event_id, event_patch) => {
+export const async_save_event = (event_id, event_patch, notify_attendees = false) => {
     return (dispatch, get_state) => {
         const state = get_state();
         const event = state.events[event_id];
@@ -172,8 +221,11 @@ export const async_save_event = (event_id, event_patch) => {
             ])
         );
 
+        const qs = {
+            notify: notify_attendees
+        };
         return fetch(
-            api_url(`/events/`),
+            api_url(`/events/${escape(event_id)}`, qs),
             fetch_options({
                 method: "PATCH",
                 body: JSON.stringify(event_patch)
@@ -183,7 +235,7 @@ export const async_save_event = (event_id, event_patch) => {
             .catch(fetch_check_simple_status)
             .catch(_.partial(fetch_check_advanced_status, dispatch))
             .then(json_res => {
-                const redux_event = _event_to_redux(json_res.event);
+                const redux_event = _event_to_redux(user_config.timezone, json_res.event);
                 dispatch(add_events([redux_event]));
                 dispatch(deselect_event());
             })
@@ -207,7 +259,7 @@ export const async_delete_event = event_id => {
         const event = state.events[event_id];
         if (!_.isNil(event)) {
             return fetch(
-                api_url(`/dispatches/events/delete`),
+                api_url(`/events/${escape(event_id)}`),
                 fetch_options({
                     method: "DELETE",
                     body: JSON.stringify({

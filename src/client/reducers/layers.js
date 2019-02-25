@@ -24,7 +24,7 @@ const reducer = (layers = {}, action) => {
                 $merge: action.patch
             }
         });
-    case "ADD_EVENTS": {
+    case "ADD_EVENTS_": {
         if (action.creating) {
             return layers;
         }

@@ -93,7 +93,7 @@ const map_state_props = state => {
         colors: {}
     };
     const event_id = state.selected_event.id;
-    if (!_.isNull(event_id)) {
+    if (!_.isNull(event_id) && event_id !== undefined) {
         // TODO: how can we come here if we have a null event_id?
         const [source_id, short_layer_id] = split_merged_id(event_id); // eslint-disable-line array-bracket-spacing
         const layer_id = merge_ids(source_id, short_layer_id);

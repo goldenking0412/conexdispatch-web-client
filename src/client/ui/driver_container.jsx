@@ -4,6 +4,8 @@ import React from "react";
 import DispatchRow from "./dispatch_row";
 import DriverArea from "./driver_area";
 
+import { driver_prop_type } from "../prop_types";
+
 class DriverContainer extends React.Component {
     constructor(props) {
         super(props);
@@ -31,6 +33,8 @@ class DriverContainer extends React.Component {
                 <DispatchRow 
                   height={100} 
                   data={this.props.driver.dispatches} 
+                  driver_id={this.props.driver.user_id}
+                  location_id={this.props.location_id}
                   view_type={this.state.view_type} 
                   update_draggable_container_list={this.props.update_draggable_container_list}
                 />
@@ -40,28 +44,8 @@ class DriverContainer extends React.Component {
 }
 
 DriverContainer.propTypes = {
-    driver: PropTypes.shape({
-        name: PropTypes.string,
-        default_color: PropTypes.string,
-        phone_number: PropTypes.string,
-        dispatches: PropTypes.arrayOf(
-            PropTypes.shape({
-                date: PropTypes.string,
-                daily_dispatches: PropTypes.arrayOf(
-                    PropTypes.shape({
-                        title: PropTypes.string,
-                        invoice_no: PropTypes.string,
-                        line_item: PropTypes.string,
-                        expected_delivery_time: PropTypes.string,
-                        expected_ext_time: PropTypes.string,
-                        delivery_address: PropTypes.string,
-                        color: PropTypes.string,
-                        delivery_progress: PropTypes.string
-                    })
-                )
-            })
-        )
-    }),
+    driver: driver_prop_type,
+    location_id: PropTypes.number,
     update_draggable_container_list: PropTypes.func
 }
 

@@ -4,6 +4,7 @@ import classnames from "classnames";
 import React from "react";
 
 import DriverContainer from "./driver_container";
+import { match_prop_type } from "../prop_types";
 
 class TabcontentContainer extends React.Component {
     constructor(props) {
@@ -28,7 +29,32 @@ class TabcontentContainer extends React.Component {
     render() {
         const content = [];
         const { activeSelected } = this.state;
-        if (this.props.drivers !== undefined) {
+        if (this.props.match !== undefined) {
+            for (let i = 0; i < this.props.match.drivers.length; i+=1) {
+                const classname = classnames({
+                    'driver-wrapper' : true, 
+                    'selected' : activeSelected === this.props.match.drivers[i].name
+                });
+                content.push(
+                    <div 
+                      className={classname}
+                      key={i}
+                      onClick={() => this.setState({ 
+                          activeSelected : activeSelected === this.props.match.drivers[i].name ? '' : this.props.match.drivers[i].name }
+                      )}
+                    >
+                        <DriverContainer 
+                          driver={this.props.match.drivers[i]} 
+                          update_draggable_container_list={
+                            this.props.update_draggable_container_list
+                          }
+                          location_id={this.props.match.location_id}
+                        />
+                    </div>
+                )
+            }
+        }
+        else if (this.props.drivers !== undefined && this.props.drivers.length !== 0) {
             for (let i = 0; i < this.props.drivers.length; i+=1) {
                 const classname = classnames({
                     'driver-wrapper' : true, 
@@ -64,6 +90,7 @@ TabcontentContainer.propTypes = {
             params: PropTypes.object
         })
     }),
+    match: match_prop_type,
     drivers: PropTypes.arrayOf(
         PropTypes.shape({
             name: PropTypes.string,

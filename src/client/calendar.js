@@ -222,7 +222,14 @@ export default class Calendar {
             const state = store.getState();
             const reducer_fn = _.get(this._reducer, action.type);
             if (_.isFunction(reducer_fn)) {
-                reducer_fn.call(this, state, action);
+                // reducer_fn.call(this, state, action);
+                // if (action.type === "ADD_EVENTS") {
+                //     console.log("ADD EVENTS action", action.events);
+                // }
+                // else
+                if (state.events.length === 0) {
+                    console.log("0");
+                }
             }
             next(action);
         };

@@ -342,7 +342,9 @@ export function merge_ids(...args) {
 }
 
 export function split_merged_id(merged_id) {
-    return merged_id.split(":");
+    if (typeof merged_id === 'string')
+        return merged_id.split(":");
+    return [merged_id];
 }
 
 export function get_source_id(provider_name, provider_user_id) {

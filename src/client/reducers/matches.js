@@ -8,10 +8,11 @@ import update from "react/lib/update";
 import _ from "lodash";
 
 const reducer = (matches = [], action) => {
+
     switch (action.type) {
     case "ADD_MATCHES":
         return update(matches, {
-            $merge: _.keyBy(action.matches, "id")
+            $merge: _.keyBy(action.matches, "location_id")
         });
     default:
         return matches;
