@@ -159,10 +159,10 @@ export const async_create_event = (event) => {
 };
 
 export const async_save_event = (event_id, event_patch) => {
-    return (dispatch, get_state) => {
-        const state = get_state();
-        const event = state.events[event_id];
-        event_patch.etag = event.etag;
+    return (dispatch) => {
+        // const state = get_state();
+        // const event = state.events[event_id];
+        // event_patch.etag = event.etag;
 
         dispatch(deselect_event());
         dispatch(
@@ -175,7 +175,7 @@ export const async_save_event = (event_id, event_patch) => {
         );
 
         return fetch(
-            api_url(`/event/update`),
+            api_url(`/dispatches/event/update`),
             fetch_options({
                 method: "POST",
                 body: JSON.stringify(event_patch)
@@ -185,9 +185,12 @@ export const async_save_event = (event_id, event_patch) => {
             .catch(fetch_check_simple_status)
             .catch(_.partial(fetch_check_advanced_status, dispatch))
             .then(json_res => {
-                const redux_event = _event_to_redux(json_res.event);
-                dispatch(add_events([redux_event]));
-                dispatch(deselect_event());
+                // const redux_event = _event_to_redux(json_res.event);
+                console.log("response from server saved", json_res);
+                if (json_res.InsertId !== undefined) {
+                    dispatch(patch_events([event_patch]));
+                    dispatch(deselect_event());
+                }
             })
             .catch(err => {
                 dispatch(
@@ -209,18 +212,17 @@ export const async_delete_event = event_id => {
         const event = state.events[event_id];
         if (!_.isNil(event)) {
             return fetch(
-                api_url(`/dispatches/events/delete`),
+                api_url(`/dispatches/event/delete`),
                 fetch_options({
-                    method: "DELETE",
-                    body: JSON.stringify({
-                        etag: event.etag
-                    })
+                    method: "POST",
+                    body: JSON.stringify({ event_id })
                 })
             )
                 .then(fetch_check)
                 .catch(fetch_check_simple_status)
                 .catch(_.partial(fetch_check_advanced_status, dispatch))
-                .then(() => {
+                .then(json_res => {
+                    console.log("response from server delete", json_res);
                     dispatch(deselect_event());
                     dispatch(delete_events([event_id]));
                 });

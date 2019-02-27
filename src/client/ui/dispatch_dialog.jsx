@@ -13,7 +13,8 @@ import {
     delete_events, 
     patch_events,
     async_create_event,
-    async_save_event
+    async_save_event,
+    async_delete_event
     // add_events
 } from "../actions/events";
 import { 
@@ -162,7 +163,7 @@ class DispatchDialog extends React.Component {
             this.props.dispatch(async_create_event(updatedEvent));
         }
         else
-            this.props.dispatch(async_save_event(updatedEvent));
+            this.props.dispatch(async_save_event(this.props.selected_event.id, updatedEvent));
     }
 
     onCloseClick() {
@@ -175,6 +176,7 @@ class DispatchDialog extends React.Component {
 
     onDeleteClick() {
         $(this.modal).foundation("close");
+        this.props.dispatch(async_delete_event(this.props.selected_event.id));
         this.props.dispatch(deselect_event());
         this.props.dispatch(delete_events(this.props.selected_event.id));
     }
