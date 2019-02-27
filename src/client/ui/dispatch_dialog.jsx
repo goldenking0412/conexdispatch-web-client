@@ -8,6 +8,7 @@ import classnames from "classnames";
 import { connect } from "react-redux";
 import PropTypes from 'prop-types';
 import React from "react";
+import _ from "lodash";
 import { 
     deselect_event, 
     delete_events, 
@@ -19,7 +20,8 @@ import {
 import { 
     event_prop_type,
     location_prop_type,
-    driver_prop_type 
+    driver_prop_type,
+    match_prop_type
 } from "../prop_types";
 
 class DispatchDialog extends React.Component {
@@ -50,6 +52,7 @@ class DispatchDialog extends React.Component {
         this.onChangeQuoteURL = this.onChangeQuoteURL.bind(this);
         this.onChangeLatestInvoiceURL = this.onChangeLatestInvoiceURL.bind(this);
         this.onChangePONumber = this.onChangePONumber.bind(this);
+        this.getAssignedDriverList = this.getAssignedDriverList.bind(this);
 
         this.state = {
             id: -1,
@@ -77,7 +80,9 @@ class DispatchDialog extends React.Component {
             notes: "",
             quote_url: "",
             latest_invoice_url: "",
-            po_number: ""
+            po_number: "",
+
+            allowed_driver_list: []
         };
     }
 
@@ -88,6 +93,13 @@ class DispatchDialog extends React.Component {
     componentWillReceiveProps(newProps) {
         console.log("selected event data",this.props.selected_event_data);
         if (newProps.selected_event.id && newProps.selected_event_data) {
+
+            if (newProps.selected_event_data.assigned) {
+                $("#__location_id").val(newProps.selected_event_data.location_id);
+                $("#__driver_id").val(newProps.selected_event_data.driver_id);
+            }
+
+            const selected_location_id = Number(newProps.selected_event_data.location_id);
             this.setState({
                 id: newProps.selected_event_data.id,
                 assigned: newProps.selected_event_data.assigned,
@@ -114,13 +126,9 @@ class DispatchDialog extends React.Component {
                 notes: newProps.selected_event_data.notes,
                 quote_url: newProps.selected_event_data.quote_url,
                 latest_invoice_url: newProps.selected_event_data.latest_invoice_url,
-                po_number: newProps.selected_event_data.po_number
+                po_number: newProps.selected_event_data.po_number,
+                allowed_driver_list: this.getAssignedDriverList(selected_location_id)
             });
-
-            if (newProps.selected_event_data.assigned) {
-                $("#__location_id").val(newProps.selected_event_data.location_id);
-                $("#__driver_id").val(newProps.selected_event_data.driver_id);
-            }
         }
     }
 
@@ -185,8 +193,10 @@ class DispatchDialog extends React.Component {
     }
 
     onChangeLocation() {
+        const selected_location_id = Number($("#__location_id").val());
         this.setState({
-            location_id: $("#__location_id").val()
+            location_id: $("#__location_id").val(),
+            allowed_driver_list: this.getAssignedDriverList(selected_location_id)
         });
     }
 
@@ -316,6 +326,18 @@ class DispatchDialog extends React.Component {
             po_number: event.target.value
         });
     }
+
+    getAssignedDriverList(location_id) {
+        const res = [];
+        this.props.matches.map((match) => {
+            if (match !== undefined && match.location_id === location_id) {
+                res.push(_.find(this.props.drivers, {"id": match.driver_id}));
+                return true;
+            }
+            return false;
+        });
+        return res;
+    }
     
 
     _render_location_list() {
@@ -338,9 +360,17 @@ class DispatchDialog extends React.Component {
     }
 
     _render_driver_list() {
-        const res = this.props.drivers.map((driver) => {
-            return (<option value={driver.id} key={driver.id}>{driver.name}</option>);
-        });
+        let res = [];
+        if (this.state.location_id) {
+            res = this.state.allowed_driver_list.map((driver) => {
+                return (<option value={driver.id} key={driver.id}>{driver.name}</option>);
+            });
+        }
+        else {
+            res = this.props.drivers.map((driver) => {
+                return (<option value={driver.id} key={driver.id}>{driver.name}</option>);
+            });
+        }
         return (
             <select 
               id="__driver_id" 
@@ -692,7 +722,8 @@ DispatchDialog.propTypes = {
     }),
     selected_event_data: event_prop_type,
     locations: PropTypes.arrayOf(location_prop_type),
-    drivers: PropTypes.arrayOf(driver_prop_type)
+    drivers: PropTypes.arrayOf(driver_prop_type),
+    matches: PropTypes.arrayOf(match_prop_type)
 };
 
 const map_state_props = state => {
@@ -700,7 +731,8 @@ const map_state_props = state => {
         selected_event: state.selected_event,
         selected_event_data: state.events[state.selected_event.id],
         locations: state.locations,
-        drivers: state.drivers
+        drivers: state.drivers,
+        matches: state.matches
     };
 }
 
