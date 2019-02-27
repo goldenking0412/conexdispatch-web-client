@@ -97,7 +97,7 @@ export const event_prop_type = PropTypes.shape({
     ready: PropTypes.number,
     location: PropTypes.number,
     driver: PropTypes.number,
-    invoice_creator: PropTypes.number,
+    event_creator: PropTypes.number,
     date: PropTypes.date,
     invoice_no: PropTypes.string,
     payment_status: PropTypes.string,

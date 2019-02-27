@@ -13,8 +13,7 @@ import {
     fetch_check,
     fetch_check_simple_status,
     fetch_check_advanced_status,
-    fetch_options,
-    user_config
+    fetch_options
 } from "../utils";
 import { toggle_color_picker_tooltip } from "./ui";
 
@@ -145,13 +144,16 @@ export const async_create_event = (event) => {
             .catch(fetch_check_simple_status)
             .catch(_.partial(fetch_check_advanced_status, dispatch))
             .then(json_res => {
+                console.log("response from server", json_res);
                 // TODO: handle error smoothly
                 const state = get_state();
                 dispatch(delete_events([state.selected_event.id])); // still contains the "creation" id
 
-                const redux_event = _event_to_redux(user_config.timezone, json_res.event);
-                dispatch(add_events([redux_event]));
+                // const redux_event = _event_to_redux(user_config.timezone, json_res.event);
+                event.id = json_res.insertId;
+                dispatch(add_events(event));
                 dispatch(deselect_event());
+
             });
     };
 };
@@ -173,9 +175,9 @@ export const async_save_event = (event_id, event_patch) => {
         );
 
         return fetch(
-            api_url(`/events/`),
+            api_url(`/event/update`),
             fetch_options({
-                method: "PATCH",
+                method: "POST",
                 body: JSON.stringify(event_patch)
             })
         )

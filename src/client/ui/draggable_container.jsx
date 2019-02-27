@@ -6,7 +6,11 @@ import _ from "lodash";
 
 
 import DraggableDispatch from './draggable_dispatch';
-import { create_event } from "../actions/events";
+import { 
+    async_create_event, 
+    create_event, 
+    select_event 
+} from "../actions/events";
 import { event_prop_type } from "../prop_types";
 
 class DraggableContainer extends React.Component {
@@ -44,8 +48,8 @@ class DraggableContainer extends React.Component {
         e.stopPropagation();
         this.props.selected_event.creating = true;
         $("#dispatch-edit-dialog").foundation("open");
-        console.log(this.props.location_id);
-        console.log(this.props.driver_id);
+        console.log("AAAAA",this.props.location_id);
+        console.log("BBBBB",this.props.driver_id);
 
         const assigned_value = this.props.unassigned ? 0 : 1;
 
@@ -53,9 +57,9 @@ class DraggableContainer extends React.Component {
             id: this.props.events.length,
             assigned: assigned_value,
             ready: 0,
-            location_id: this.props.location_id,
-            driver_id: this.props.driver_id,
-            invoice_creator: 0,
+            location_id: this.props.location_id === undefined ? -1 : this.props.location_id,
+            driver_id: this.props.driver_id === undefined ? -1 : this.props.driver_id,
+            event_creator: 0,
             date: this.props.date,
             invoice_no: "",
             payment_status: "",
@@ -66,7 +70,7 @@ class DraggableContainer extends React.Component {
             expected_delivery_time: "",
             expected_ext_time: "",
             delivery_address: "",
-            color: "",
+            color: "#00B430",
             delivery_progress: 0,
             on_site_contact: "",
             total_order: "",
@@ -80,7 +84,9 @@ class DraggableContainer extends React.Component {
         // FC feeds us a moment in local tz, we "format" it to loose
         // any timezone information it has and re-parse it with the
         // user's current tz.
+        this.props.dispatch(async_create_event(event));
         this.props.dispatch(create_event(event));
+        this.props.dispatch(select_event(event.id, true));
     }
 
     _render_showMoreDialog(more_content) {

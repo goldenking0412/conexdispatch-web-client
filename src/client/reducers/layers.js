@@ -51,7 +51,7 @@ const reducer = (layers = {}, action) => {
 
         return update(layers, layers_update);
     }
-    case "DELETE_EVENTS": {
+    case "DELETE_EVENTS_": {
         const layers_update = _(action.ids)
                 .groupBy(event_id => {
                     const [source_id, short_layer_id] = split_merged_id(event_id); // eslint-disable-line array-bracket-spacing
