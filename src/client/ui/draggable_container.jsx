@@ -22,6 +22,29 @@ class DraggableContainer extends React.Component {
         this.addNewEvent = this.addNewEvent.bind(this);
     }
 
+    componentDidUpdate() {
+        console.log("Changed State Event Triggered!");
+    }
+
+    getFilteredEvents() {
+        let filters;
+        if (this.props.unassigned) {
+            filters = {
+                'date': this.props.date,
+                'assigned': 0
+            };
+        }
+        else {
+            filters = {
+                'date': this.props.date,
+                'driver_id': this.props.driver_id, 
+                'location_id': this.props.location_id,
+                'assigned': 1
+            };
+        }
+        return _.filter(this.props.events, filters);
+    }
+
     guidGenerator() {
         return `${this.S4()}${this.S4()}-${this.S4()}-${this.S4()}-${this.S4()}-${this.S4()}${this.S4()}${this.S4()}`;
     }
@@ -48,8 +71,6 @@ class DraggableContainer extends React.Component {
         e.stopPropagation();
         this.props.selected_event.creating = true;
         $("#dispatch-edit-dialog").foundation("open");
-        console.log("AAAAA",this.props.location_id);
-        console.log("BBBBB",this.props.driver_id);
 
         const assigned_value = this.props.unassigned ? 0 : 1;
 
@@ -112,22 +133,7 @@ class DraggableContainer extends React.Component {
     }
 
     render() {
-        let filters;
-        if (this.props.unassigned) {
-            filters = {
-                'date': this.props.date,
-                'assigned': 0
-            };
-        }
-        else {
-            filters = {
-                'date': this.props.date,
-                'driver_id': this.props.driver_id, 
-                'location_id': this.props.location_id,
-                'assigned': 1
-            };
-        }
-        const events = _.filter(this.props.events, filters);
+        const events = this.getFilteredEvents();
         
         if (events.length === 0) {
             return (

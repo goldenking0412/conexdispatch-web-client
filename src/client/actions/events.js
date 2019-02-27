@@ -174,6 +174,7 @@ export const async_save_event = (event_id, event_patch) => {
                 if (json_res.insertId !== undefined) {
                     dispatch(delete_events(event_id));
                     dispatch(add_events([event_patch]));
+                    // dispatch(patch_events([event_patch]));
                     dispatch(deselect_event());
                 }
             })

@@ -116,6 +116,11 @@ class DispatchDialog extends React.Component {
                 latest_invoice_url: newProps.selected_event_data.latest_invoice_url,
                 po_number: newProps.selected_event_data.po_number
             });
+
+            if (newProps.selected_event_data.assigned) {
+                $("#__location_id").val(newProps.selected_event_data.location_id);
+                $("#__driver_id").val(newProps.selected_event_data.driver_id);
+            }
         }
     }
 
@@ -180,9 +185,15 @@ class DispatchDialog extends React.Component {
     }
 
     onChangeLocation() {
+        this.setState({
+            location_id: $("#__location_id").val()
+        });
     }
 
     onChangeDriver() {
+        this.setState({
+            driver_id: $("#__driver_id").val()
+        });
     }
 
     onChangeDate(event) {
@@ -309,7 +320,13 @@ class DispatchDialog extends React.Component {
 
     _render_location_list() {
         const res = this.props.locations.map((location) => {
-            return (<option value={location.id} key={location.id}>{location.name}</option>);
+            return (
+                <option 
+                  value={location.id} 
+                  key={location.id}
+                >
+                    {location.name}
+                </option>);
         });
         return (
             <select 
@@ -324,7 +341,13 @@ class DispatchDialog extends React.Component {
         const res = this.props.drivers.map((driver) => {
             return (<option value={driver.id} key={driver.id}>{driver.name}</option>);
         });
-        return (<select id="__driver_id">{res}</select>);
+        return (
+            <select 
+              id="__driver_id" 
+              onChange={this.onChangeDriver}
+            >
+                {res}
+            </select>);
     }
 
     render() {
