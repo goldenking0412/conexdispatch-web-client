@@ -11,7 +11,6 @@ import React from "react";
 import { 
     deselect_event, 
     delete_events, 
-    patch_events,
     async_create_event,
     async_save_event,
     async_delete_event
@@ -128,8 +127,8 @@ class DispatchDialog extends React.Component {
 
     onApplyClick() {
         // this.props.dispatch(patch_events([]));
+        console.log("On Apply Clicked!");
         $(this.modal).foundation("close");
-        this.props.dispatch(deselect_event());
         const updatedEvent = {
             id: this.state.id,
             assigned: this.state.assigned,
@@ -158,7 +157,6 @@ class DispatchDialog extends React.Component {
             latest_invoice_url: this.state.latest_invoice_url,
             po_number: this.state.po_number,
         }
-        this.props.dispatch(patch_events(updatedEvent));
         if (this.props.selected_event.creating) {
             this.props.dispatch(async_create_event(updatedEvent));
         }

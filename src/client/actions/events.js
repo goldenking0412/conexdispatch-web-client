@@ -144,7 +144,6 @@ export const async_create_event = (event) => {
             .catch(fetch_check_simple_status)
             .catch(_.partial(fetch_check_advanced_status, dispatch))
             .then(json_res => {
-                console.log("response from server", json_res);
                 // TODO: handle error smoothly
                 const state = get_state();
                 dispatch(delete_events([state.selected_event.id])); // still contains the "creation" id
@@ -160,19 +159,6 @@ export const async_create_event = (event) => {
 
 export const async_save_event = (event_id, event_patch) => {
     return (dispatch) => {
-        // const state = get_state();
-        // const event = state.events[event_id];
-        // event_patch.etag = event.etag;
-
-        dispatch(deselect_event());
-        dispatch(
-            patch_events([
-                {
-                    id: event_id,
-                    syncing: true
-                }
-            ])
-        );
 
         return fetch(
             api_url(`/dispatches/event/update`),
@@ -185,10 +171,9 @@ export const async_save_event = (event_id, event_patch) => {
             .catch(fetch_check_simple_status)
             .catch(_.partial(fetch_check_advanced_status, dispatch))
             .then(json_res => {
-                // const redux_event = _event_to_redux(json_res.event);
-                console.log("response from server saved", json_res);
-                if (json_res.InsertId !== undefined) {
-                    dispatch(patch_events([event_patch]));
+                if (json_res.insertId !== undefined) {
+                    dispatch(delete_events(event_id));
+                    dispatch(add_events([event_patch]));
                     dispatch(deselect_event());
                 }
             })

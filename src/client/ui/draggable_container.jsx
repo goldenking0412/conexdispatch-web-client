@@ -7,7 +7,7 @@ import _ from "lodash";
 
 import DraggableDispatch from './draggable_dispatch';
 import { 
-    async_create_event, 
+    // async_create_event, 
     create_event, 
     select_event 
 } from "../actions/events";
@@ -84,7 +84,6 @@ class DraggableContainer extends React.Component {
         // FC feeds us a moment in local tz, we "format" it to loose
         // any timezone information it has and re-parse it with the
         // user's current tz.
-        this.props.dispatch(async_create_event(event));
         this.props.dispatch(create_event(event));
         this.props.dispatch(select_event(event.id, true));
     }

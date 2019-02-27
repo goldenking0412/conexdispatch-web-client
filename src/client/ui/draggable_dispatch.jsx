@@ -30,9 +30,9 @@ class DraggableDispatch extends React.Component {
             borderColor: event.color,
             background: `-webkit-linear-gradient(left, 
                 ${event.color} 0%, 
-                ${event.color} ${event.delivery_progress}, 
-                #ffffff ${event.delivery_progress}, 
-                #ffffff ${event.delivery_progress}, 
+                ${event.color} ${event.delivery_progress}%, 
+                #ffffff ${event.delivery_progress}%, 
+                #ffffff ${event.delivery_progress}%, 
                 #ffffff 100%)`
         }
 
