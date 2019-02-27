@@ -54,3 +54,23 @@ $default-cell-height: 50px;
 .display-flex {
     display: flex;
 }
+
+#newLocationBtn {
+    position: fixed;
+    bottom: 1px;
+    left: 1px;
+    border-radius: 3px;
+}
+
+#newDriverBtn {
+    position: fixed;
+    bottom: 1px;
+    left: 110px;
+    border-radius: 3px;
+}
+
+#NewLocationDialog {
+    input {
+        border-radius: 3px;
+    }
+}

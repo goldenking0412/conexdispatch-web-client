@@ -95,8 +95,8 @@ export const event_prop_type = PropTypes.shape({
     id: PropTypes.number,
     assigned: PropTypes.number,
     ready: PropTypes.number,
-    location: PropTypes.number,
-    driver: PropTypes.number,
+    location_id: PropTypes.number,
+    driver_id: PropTypes.number,
     event_creator: PropTypes.number,
     date: PropTypes.date,
     invoice_no: PropTypes.string,
@@ -132,7 +132,7 @@ export const driver_prop_type = PropTypes.shape({
 });
 
 export const match_prop_type = PropTypes.shape({
+    id: PropTypes.number,
     location_id: PropTypes.number,
-    location_name: PropTypes.string,
-    drivers: PropTypes.arrayOf(driver_prop_type)
+    driver_id: PropTypes.number
 });

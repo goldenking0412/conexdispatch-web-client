@@ -16,6 +16,23 @@ class Tabs extends Component {
         };  
     }
 
+    componentWillReceiveProps(newProps) {
+        let flag = 0;
+        for (let i = newProps.children.length - 1; i >= 0; i-=1) {
+            if (this.state.activeTab === newProps.children[i].props.label) {
+                flag = 1;
+            }
+        }
+        if (flag === 0) {
+            this.setState({
+                activeTab: newProps.children[0].props.label
+            });
+        }
+    }
+
+    componentDidUpdate() {
+    }
+
     onClickTabItem = (tab) => {
         this.setState({ activeTab: tab });
     }

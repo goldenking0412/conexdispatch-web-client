@@ -39,3 +39,29 @@ export const async_load_drivers = () => {
             });
     };
 };
+
+export const async_add_driver = driver => {
+    return (dispatch) => {
+        return fetch(
+            api_url("/dispatches/users/driver/add"), 
+            fetch_options({
+                method: "POST",
+                body: JSON.stringify(driver)
+            })
+        )
+            .then(fetch_check)
+            .catch(fetch_check_simple_status)
+            .catch(_.partial(fetch_check_advanced_status, dispatch))
+            .then(json_res => {
+                console.log("response from server", json_res);
+                const newDriver = { 
+                    id: json_res.insertId, 
+                    name: driver.name,
+                    phone_number: driver.phone_number,
+                    role: 4
+                };
+                console.log("adding driver", newDriver);
+                dispatch(add_drivers([newDriver]));
+            });
+    };
+};

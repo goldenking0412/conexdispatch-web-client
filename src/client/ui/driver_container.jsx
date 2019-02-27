@@ -1,5 +1,7 @@
 import PropTypes from 'prop-types';
 import React from "react";
+import _ from "lodash";
+import { connect } from "react-redux";
 
 import DispatchRow from "./dispatch_row";
 import DriverArea from "./driver_area";
@@ -14,8 +16,14 @@ class DriverContainer extends React.Component {
         }
         this.changeViewType = this.changeViewType.bind(this);
     }
+
     componentDidUpdate() {
     }
+
+    getDriverData(){
+        return _.find(this.props.drivers, {'id': this.props.driver_id});
+    }
+
     changeViewType(view_type) {
         console.log(view_type);
         this.setState({ view_type });
@@ -23,17 +31,17 @@ class DriverContainer extends React.Component {
     }
 
     render() {
+        const driver = this.getDriverData();
         return (
             <div>
                 <DriverArea 
-                  name={this.props.driver.name} 
-                  phone={this.props.driver.phone_number}
+                  name={driver.name} 
+                  phone={driver.phone_number}
                   changeViewType={this.changeViewType}
                 />
                 <DispatchRow 
                   height={100} 
-                  data={this.props.driver.dispatches} 
-                  driver_id={this.props.driver.user_id}
+                  driver_id={this.props.driver_id}
                   location_id={this.props.location_id}
                   view_type={this.state.view_type} 
                   update_draggable_container_list={this.props.update_draggable_container_list}
@@ -44,9 +52,18 @@ class DriverContainer extends React.Component {
 }
 
 DriverContainer.propTypes = {
-    driver: driver_prop_type,
+    driver_id: PropTypes.number,
     location_id: PropTypes.number,
-    update_draggable_container_list: PropTypes.func
+    update_draggable_container_list: PropTypes.func,
+    drivers: PropTypes.arrayOf(driver_prop_type)
 }
 
-export default DriverContainer;
+function map_state_props(state) {
+    return {
+        drivers: state.drivers
+    };
+}
+
+const DriverContainerWrapper = connect(map_state_props)(DriverContainer);
+
+export default DriverContainerWrapper;

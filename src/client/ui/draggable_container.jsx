@@ -23,7 +23,6 @@ class DraggableContainer extends React.Component {
     }
 
     componentDidUpdate() {
-        console.log("Changed State Event Triggered!");
     }
 
     getFilteredEvents() {

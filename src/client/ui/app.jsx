@@ -22,10 +22,13 @@ import Tabs from "./tabs";
 import TabcontentContainer from "./tabcontent_container";
 import UnassignedContainer from "./unassigned_container";
 import DispatchDialog from "./dispatch_dialog";
+import NewLocationDialog from "./new_location";
+import NewDriverDialog from "./new_driver";
 
 import { 
     match_prop_type, 
-    driver_prop_type
+    driver_prop_type,
+    location_prop_type
 } from "../prop_types";
 
 class App extends React.Component {
@@ -33,6 +36,9 @@ class App extends React.Component {
         super(props);
         this.keydown_handler = this.keydown_handler.bind(this);
         this.toggle_sidebar = this.toggle_sidebar.bind(this);
+        this.onClickNewLocation = this.onClickNewLocation.bind(this);
+        this.onClickNewDriver = this.onClickNewDriver.bind(this);
+        this._render_main = this._render_main.bind(this);
     }
 
     componentDidMount() {
@@ -43,9 +49,11 @@ class App extends React.Component {
     onDrop(el) {
         console.log(el);
     }
-
-    componentWillUnMount() {
-        $(document).off(`keydown.${EVENTS_NS}`);
+    onClickNewLocation() {
+        $("#NewLocationDialog").foundation("open");
+    }
+    onClickNewDriver() {
+        $("#NewDriverDialog").foundation("open");
     }
 
     keydown_handler(event) {
@@ -59,32 +67,31 @@ class App extends React.Component {
         this.props.dispatch(toggle_sidebar(!this.props.sidebar.show));
     }
 
+    componentWillUnMount() {
+        $(document).off(`keydown.${EVENTS_NS}`);
+    }
+
     _render_main() {
         const main_content = [];
-        if (this.props.matches.length === 0) {
-            for (let i =  0; i < this.props.data.assigned_data.length; i+=1) {
-                main_content.push(
-                    <div label={this.props.data.assigned_data[i].location} key={i}>
-                        <TabcontentContainer 
-                          drivers={this.props.data.assigned_data[i].drivers} 
-                          update_draggable_container_list={this.dragulaDecorator}
-                        />
-                    </div>
-                )
+        if (this.props.locations.length !== 0 && 
+            this.props.matches.length !== 0 &&
+            this.props.drivers.length !== 0) {
+            for (let i =  0; i < this.props.locations.length; i+=1) {
+                if (this.props.locations[i] !== undefined) {
+                    main_content.push(
+                        <div label={this.props.locations[i].name} key={i}>
+                            <TabcontentContainer 
+                              location_id={this.props.locations[i].id}
+                              update_draggable_container_list={this.dragulaDecorator}
+                            />
+                        </div>
+                    )
+                }
             }
         }
-        if (this.props.matches.length !== 0) {
-            for (let i =  1; i < this.props.matches.length; i+=1) {
-                main_content.push(
-                    <div label={this.props.matches[i].location_name} key={i}>
-                        <TabcontentContainer 
-                          drivers={this.props.matches[i].drivers} 
-                          match={this.props.matches[i]}
-                          update_draggable_container_list={this.dragulaDecorator}
-                        />
-                    </div>
-                )
-            }
+        else {
+            main_content.push(<div label="TTT" key="1"><div /></div>);
+            main_content.push(<div label="AAA" key="2"><div /></div>);
         }
 
         return main_content;
@@ -125,7 +132,6 @@ class App extends React.Component {
                     <div className="upper-content">
                         <div id="calendar" />
                         <UnassignedContainer 
-                          data={this.props.data.unassigned_data} 
                           update_draggable_container_list={this.dragulaDecorator} 
                         />
                     </div>
@@ -134,9 +140,22 @@ class App extends React.Component {
                 <Tabs>
                     {this._render_main()}
                 </Tabs>
+                <input 
+                  type="button" 
+                  value="New Location" 
+                  id="newLocationBtn" 
+                  onClick={this.onClickNewLocation}
+                />
+                <input 
+                  type="button" 
+                  value="New Driver" 
+                  id="newDriverBtn" 
+                  onClick={this.onClickNewDriver}
+                />
 
                 <div className={content_classes}>
-                    
+                    <NewDriverDialog />
+                    <NewLocationDialog />
                     <SettingsModal />
                     <DispatchDialog />
                 </div>
@@ -152,60 +171,15 @@ App.propTypes = {
     }),
     drivers: PropTypes.arrayOf(driver_prop_type),
     matches: PropTypes.arrayOf(match_prop_type),
-    data: PropTypes.shape({
-        unassigned_data: PropTypes.arrayOf(
-            PropTypes.shape({
-                date: PropTypes.string,
-                daily_dispatches: PropTypes.arrayOf(
-                    PropTypes.shape({
-                        ready: PropTypes.string,
-                        payment_status: PropTypes.string,
-                        payment_gateway: PropTypes.string,
-                        title: PropTypes.string,
-                        invoice_no: PropTypes.string,
-                        line_item: PropTypes.string,
-                        color: PropTypes.string
-                    })
-                )
-            })
-        ),
-        assigned_data: PropTypes.arrayOf(
-            PropTypes.shape({
-                location: PropTypes.string,
-                drivers: PropTypes.arrayOf(
-                    PropTypes.shape({
-                        name: PropTypes.string,
-                        default_color: PropTypes.string,
-                        phone_number: PropTypes.string,
-                        dispatches: PropTypes.arrayOf(
-                            PropTypes.shape({
-                                date: PropTypes.string,
-                                daily_dispatches: PropTypes.arrayOf(
-                                    PropTypes.shape({
-                                        title: PropTypes.string,
-                                        invoice_no: PropTypes.string,
-                                        line_item: PropTypes.string,
-                                        expected_delivery_time: PropTypes.string,
-                                        expected_ext_time: PropTypes.string,
-                                        delivery_address: PropTypes.string,
-                                        color: PropTypes.string,
-                                        delivery_progress: PropTypes.string
-                                    })
-                                )
-                            })
-                        )
-                    })
-                )
-            })
-        )
-    })
+    locations: PropTypes.arrayOf(location_prop_type)
 };
 
 function map_state_props(state) {
     return {
         sidebar: state.ui.sidebar,
         drivers: state.drivers,
-        matches: state.matches
+        matches: state.matches,
+        locations: state.locations
     };
 }
 

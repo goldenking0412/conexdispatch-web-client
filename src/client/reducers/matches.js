@@ -12,7 +12,7 @@ const reducer = (matches = [], action) => {
     switch (action.type) {
     case "ADD_MATCHES":
         return update(matches, {
-            $merge: _.keyBy(action.matches, "location_id")
+            $merge: _.keyBy(action.matches, "id")
         });
     default:
         return matches;
