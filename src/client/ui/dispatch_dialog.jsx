@@ -338,7 +338,6 @@ class DispatchDialog extends React.Component {
         });
         return res;
     }
-    
 
     _render_location_list() {
         const res = this.props.locations.map((location) => {

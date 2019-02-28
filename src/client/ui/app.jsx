@@ -24,6 +24,7 @@ import UnassignedContainer from "./unassigned_container";
 import DispatchDialog from "./dispatch_dialog";
 import NewLocationDialog from "./new_location";
 import NewDriverDialog from "./new_driver";
+import NewMatchDialog from "./new_match";
 
 import { 
     match_prop_type, 
@@ -38,6 +39,7 @@ class App extends React.Component {
         this.toggle_sidebar = this.toggle_sidebar.bind(this);
         this.onClickNewLocation = this.onClickNewLocation.bind(this);
         this.onClickNewDriver = this.onClickNewDriver.bind(this);
+        this.onClickNewMatch = this.onClickNewMatch.bind(this);
         this._render_main = this._render_main.bind(this);
     }
 
@@ -49,11 +51,17 @@ class App extends React.Component {
     onDrop(el) {
         console.log(el);
     }
+
     onClickNewLocation() {
         $("#NewLocationDialog").foundation("open");
     }
+
     onClickNewDriver() {
         $("#NewDriverDialog").foundation("open");
+    }
+
+    onClickNewMatch() {
+        $("#NewMatchDialog").foundation("open");
     }
 
     keydown_handler(event) {
@@ -152,8 +160,15 @@ class App extends React.Component {
                   id="newDriverBtn" 
                   onClick={this.onClickNewDriver}
                 />
+                <input 
+                  type="button" 
+                  value="New Assign" 
+                  id="newMatchBtn" 
+                  onClick={this.onClickNewMatch}
+                />
 
                 <div className={content_classes}>
+                    <NewMatchDialog />
                     <NewDriverDialog />
                     <NewLocationDialog />
                     <SettingsModal />

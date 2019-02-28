@@ -69,7 +69,16 @@ $default-cell-height: 50px;
     border-radius: 3px;
 }
 
-#NewLocationDialog {
+#newMatchBtn {
+    position: fixed;
+    bottom: 1px;
+    left: 202px;
+    border-radius: 3px;
+}
+
+#NewLocationDialog,
+#NewDriverDialog,
+#NewMatchDialog {
     input {
         border-radius: 3px;
     }

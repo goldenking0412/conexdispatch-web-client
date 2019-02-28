@@ -12,7 +12,6 @@ class DraggableDispatch extends React.Component {
     }
 
     componentDidMount() {
-        console.log(this.props.event);
     }
 
     handleClick(e){

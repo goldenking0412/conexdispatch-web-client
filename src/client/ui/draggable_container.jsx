@@ -91,7 +91,7 @@ class DraggableContainer extends React.Component {
             expected_ext_time: "",
             delivery_address: "",
             color: "#00B430",
-            delivery_progress: 0,
+            delivery_progress: "0",
             on_site_contact: "",
             total_order: "",
             customer_info: "",

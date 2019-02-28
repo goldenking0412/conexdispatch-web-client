@@ -39,8 +39,8 @@ class TabcontentContainer extends React.Component {
         return res;
     }
 
-    handleClick(event) {
-        console.log(event);
+    handleClick() {
+        // console.log(event);
     }
 
     render() {

@@ -39,3 +39,27 @@ export const async_load_matches = () => {
             });
     };
 };
+
+export const async_add_match = match => {
+    return (dispatch) => {
+        return fetch(
+            api_url("/dispatches/match/add"), 
+            fetch_options({
+                method: "POST",
+                body: JSON.stringify(match)
+            })
+        )
+            .then(fetch_check)
+            .catch(fetch_check_simple_status)
+            .catch(_.partial(fetch_check_advanced_status, dispatch))
+            .then(json_res => {
+                console.log("response from server", json_res);
+                const newMatch = { 
+                    id: json_res.insertId, 
+                    location_id: match.location_id,
+                    driver_id: match.driver_id
+                };
+                dispatch(add_matches([newMatch]));
+            });
+    };
+}
