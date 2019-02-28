@@ -8,8 +8,8 @@ import _ from "lodash";
 import DraggableDispatch from './draggable_dispatch';
 import { 
     // async_create_event, 
-    create_event, 
-    select_event 
+    create_event
+    // select_event 
 } from "../actions/events";
 import { event_prop_type } from "../prop_types";
 
@@ -20,6 +20,19 @@ class DraggableContainer extends React.Component {
         this.showMore = this.showMore.bind(this);
         this.hideMore = this.hideMore.bind(this);
         this.addNewEvent = this.addNewEvent.bind(this);
+        this.getFilteredEvents = this.getFilteredEvents.bind(this);
+
+        this.state = {
+            events: []
+        }
+    }
+
+    componentWillReceiveProps(newProps) {
+        if (newProps.events.length !== 0) {
+            this.setState({
+                events: this.getFilteredEvents()
+            })
+        }
     }
 
     componentDidUpdate() {
@@ -42,6 +55,17 @@ class DraggableContainer extends React.Component {
             };
         }
         return _.filter(this.props.events, filters);
+    }
+
+    getAvailableID(events) {
+        let max_id = 0;
+        events.map(event => {
+            if (event !== undefined && max_id < event.id) {
+                max_id = event.id;
+            }
+            return false;
+        });
+        return max_id+1;
     }
 
     guidGenerator() {
@@ -68,14 +92,13 @@ class DraggableContainer extends React.Component {
 
     addNewEvent(e) {
         e.stopPropagation();
-        this.props.selected_event.creating = true;
         $("#dispatch-edit-dialog").foundation("open");
 
-        const assigned_value = this.props.unassigned ? 0 : 1;
+        const available_id = this.getAvailableID(this.props.events);
 
         const event = {
-            id: this.props.events.length,
-            assigned: assigned_value,
+            id: available_id,
+            assigned: this.props.unassigned ? 0 : 1,
             ready: 0,
             location_id: this.props.location_id === undefined ? -1 : this.props.location_id,
             driver_id: this.props.driver_id === undefined ? -1 : this.props.driver_id,
@@ -91,7 +114,7 @@ class DraggableContainer extends React.Component {
             expected_ext_time: "",
             delivery_address: "",
             color: "#00B430",
-            delivery_progress: "0",
+            delivery_progress: 0,
             on_site_contact: "",
             total_order: "",
             customer_info: "",
@@ -101,11 +124,8 @@ class DraggableContainer extends React.Component {
             latest_invoice_url: "",
             po_number: ""
         };
-        // FC feeds us a moment in local tz, we "format" it to loose
-        // any timezone information it has and re-parse it with the
-        // user's current tz.
+        this.props.selected_event.creating = true;
         this.props.dispatch(create_event(event));
-        this.props.dispatch(select_event(event.id, true));
     }
 
     _render_showMoreDialog(more_content) {
@@ -132,9 +152,7 @@ class DraggableContainer extends React.Component {
     }
 
     render() {
-        const events = this.getFilteredEvents();
-        
-        if (events.length === 0) {
+        if (this.state.events.length === 0) {
             return (
                 <div className="daily-container">
                     <div className="draggable-container" onClick={this.addNewEvent} />
@@ -143,13 +161,13 @@ class DraggableContainer extends React.Component {
 
         const content = [];
 
-        for (let i = 0; i < events.length; i+=1) {
+        for (let i = 0; i < this.state.events.length; i+=1) {
             content.push(
                 <DraggableDispatch 
                   key={i}
                   unassigned={this.props.unassigned}
-                  dispatch={events[i]}
-                  event={events[i]}
+                  dispatch={this.state.events[i]}
+                  event={this.state.events[i]}
                   view_type={this.props.view_type}
                 />
             )

@@ -91,7 +91,9 @@ class DispatchDialog extends React.Component {
     }
 
     componentWillReceiveProps(newProps) {
-        console.log("selected event data",this.props.selected_event_data);
+        console.log("prior selected event data", this.props.selected_event_data);
+        console.log("selected event data",newProps.selected_event_data);
+        console.log("selected event data id",newProps.selected_event.id);
         if (newProps.selected_event.id && newProps.selected_event_data) {
 
             if (newProps.selected_event_data.assigned) {
@@ -160,7 +162,7 @@ class DispatchDialog extends React.Component {
             expected_ext_time: this.state.expected_ext_time,
             delivery_address: this.state.delivery_address,
             color: this.state.color,
-            delivery_progress: this.state.delivery_progress,
+            delivery_progress: Number(this.state.delivery_progress),
             on_site_contact: this.state.on_site_contact,
             total_order: this.state.total_order,
             customer_info: this.state.customer_info,
@@ -728,7 +730,7 @@ DispatchDialog.propTypes = {
 const map_state_props = state => {
     return {
         selected_event: state.selected_event,
-        selected_event_data: state.events[state.selected_event.id],
+        selected_event_data: _.find(state.events, {"id": state.selected_event.id}),
         locations: state.locations,
         drivers: state.drivers,
         matches: state.matches

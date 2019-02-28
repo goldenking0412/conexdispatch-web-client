@@ -20,12 +20,12 @@ import { toggle_color_picker_tooltip } from "./ui";
 /**
  * Private helpers functions
  */
-const _event_to_redux = event => {
-    /* eslint-disable no-param-reassign */
+// const _event_to_redux = event => {
+//      eslint-disable no-param-reassign 
 
-    return event;
-    /* eslint-disable no-param-reassign */
-};
+//     return event;
+//     /* eslint-disable no-param-reassign */
+// };
 
 /**
  * Others Action creators
@@ -93,9 +93,8 @@ export const select_event = (event_id, creating = false, force = false) => {
 
 export const create_event = event => {
     return dispatch => {
-        const redux_event = _event_to_redux(event);
-        dispatch(add_events([redux_event], true));
-        dispatch(select_event(redux_event.id, true));
+        dispatch(add_events([event], true));
+        dispatch(select_event(event.id, true));
     };
 };
 
@@ -146,10 +145,11 @@ export const async_create_event = (event) => {
             .then(json_res => {
                 // TODO: handle error smoothly
                 const state = get_state();
-                dispatch(delete_events([state.selected_event.id])); // still contains the "creation" id
+                dispatch(delete_events(state.selected_event.id)); // still contains the "creation" id
 
                 // const redux_event = _event_to_redux(user_config.timezone, json_res.event);
-                event.id = json_res.insertId;
+                const nEvent = event;
+                nEvent.id = json_res.insertId;
                 dispatch(add_events(event));
                 dispatch(deselect_event());
 
@@ -172,30 +172,28 @@ export const async_save_event = (event_id, event_patch) => {
             .catch(_.partial(fetch_check_advanced_status, dispatch))
             .then(json_res => {
                 if (json_res.insertId !== undefined) {
-                    dispatch(delete_events(event_id));
                     dispatch(add_events([event_patch]));
-                    // dispatch(patch_events([event_patch]));
                     dispatch(deselect_event());
                 }
-            })
-            .catch(err => {
-                dispatch(
-                    patch_events([
-                        {
-                            id: event_id,
-                            syncing: false
-                        }
-                    ])
-                );
-                throw err;
             });
+            // .catch(err => {
+            //     dispatch(
+            //         patch_events([
+            //             {
+            //                 id: event_id,
+            //                 syncing: false
+            //             }
+            //         ])
+            //     );
+            //     throw err;
+            // });
     };
 };
 
 export const async_delete_event = event_id => {
     return (dispatch, get_state) => {
         const state = get_state();
-        const event = state.events[event_id];
+        const event = _.find(state.events, {"id": event_id});
         if (!_.isNil(event)) {
             return fetch(
                 api_url(`/dispatches/event/delete`),
@@ -210,7 +208,7 @@ export const async_delete_event = event_id => {
                 .then(json_res => {
                     console.log("response from server delete", json_res);
                     dispatch(deselect_event());
-                    dispatch(delete_events([event_id]));
+                    dispatch(delete_events(event_id));
                 });
         }
         return bluebird.reject(new Error("event is already deleted"));
