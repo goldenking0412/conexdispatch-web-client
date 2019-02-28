@@ -21,9 +21,7 @@ const add_event = (origin_events, guest_events) => {
             }
         }
         if (exist) {
-            // update origin_events[index] by guest_events[i]
             result_events[index] = guest_events[i];
-            // result_events.push(origin_events[i]);
         }
         else {
             result_events.push(guest_events[i]);
@@ -51,8 +49,8 @@ const reducer = (events = [], action) => {
     switch (action.type) {
     case "ADD_EVENTS":
         temp_events = add_event(events, action.events);
+        console.log("Latest Events", temp_events);
         return update(temp_events, {});
-        // return temp_events;
     case "PATCH_EVENTS":
         temp_events = events;
         ind = _.findIndex(temp_events, {id: action.events.id});

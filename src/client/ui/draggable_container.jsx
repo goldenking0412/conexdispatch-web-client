@@ -7,9 +7,7 @@ import _ from "lodash";
 
 import DraggableDispatch from './draggable_dispatch';
 import { 
-    // async_create_event, 
     create_event
-    // select_event 
 } from "../actions/events";
 import { event_prop_type } from "../prop_types";
 
@@ -155,7 +153,14 @@ class DraggableContainer extends React.Component {
         if (this.state.events.length === 0) {
             return (
                 <div className="daily-container">
-                    <div className="draggable-container" onClick={this.addNewEvent} />
+                    <div 
+                      className="draggable-container" 
+                      onClick={this.addNewEvent} 
+                      data-Unassigned={this.props.unassigned}
+                      data-LocationID={this.props.location_id}
+                      data-DriverID={this.props.driver_id}
+                      data-Date={this.props.date}
+                    />
                 </div>);
         }
 
@@ -177,6 +182,10 @@ class DraggableContainer extends React.Component {
                 <div 
                   className='draggable-container' 
                   onClick={this.addNewEvent}
+                  data-Unassigned={this.props.unassigned}
+                  data-LocationID={this.props.location_id}
+                  data-DriverID={this.props.driver_id}
+                  data-Date={this.props.date}
                 >
                     {content}
                 </div>

@@ -9,11 +9,11 @@ import PropTypes from 'prop-types';
 import React from "react";
 import { connect } from "react-redux";
 import Calendar from "react-calendar";
-import Dragula from 'react-dragula';
+import Dragula from "react-dragula";
 
 import { EVENTS_NS } from "../config";
 
-import { deselect_event } from "../actions/events";
+import { deselect_event, async_save_event } from "../actions/events";
 import { toggle_sidebar } from "../actions/ui";
 import CalendarToolbar from "./calendar_toolbar";
 // import EventTooltip from "./event_tooltip/base";
@@ -29,7 +29,8 @@ import NewMatchDialog from "./new_match";
 import { 
     match_prop_type, 
     driver_prop_type,
-    location_prop_type
+    location_prop_type,
+    event_prop_type
 } from "../prop_types";
 
 class App extends React.Component {
@@ -40,7 +41,13 @@ class App extends React.Component {
         this.onClickNewLocation = this.onClickNewLocation.bind(this);
         this.onClickNewDriver = this.onClickNewDriver.bind(this);
         this.onClickNewMatch = this.onClickNewMatch.bind(this);
+        this.onDrop = this.onDrop.bind(this);
+        this.getEventByID = this.getEventByID.bind(this);
         this._render_main = this._render_main.bind(this);
+
+        this.state = {
+            drake: null
+        };
     }
 
     componentDidMount() {
@@ -48,8 +55,36 @@ class App extends React.Component {
         $(document).on(`keydown.${EVENTS_NS}`, this.keydown_handler);
     }
 
-    onDrop(el) {
-        console.log(el);
+    componentWillReceiveProps(newProps) {
+        if (newProps.full_calendar !== this.props.full_calendar) {
+            console.log("aaaa");
+        }
+        this.render();
+        console.log("On app receive props");
+    }
+
+    onDrop(el, target) {
+        const event = this.getEventByID(Number(el.dataset.id));
+        console.log("events length", this.props.events.length);
+        console.log("dropped event", event);
+        if (event !== undefined) {
+            if (target.dataset.unassigned) {
+                event.assigned = 0;
+                event.date = target.dataset.date;
+            }
+            else {
+                event.assigned = 1;
+                event.location_id = Number(target.dataset.locationid);
+                event.driver_id = Number(target.dataset.driverid);
+                event.date = target.dataset.date;
+            }
+            this.props.dispatch(async_save_event(event.id, event));
+        }
+        console.log("element id",el.dataset.id);
+        console.log("target",target);
+        el.setAttribute("style", `${el.style.cssText};display:none;`);
+        this.state.drake.cancel(true);
+        // this.render();
     }
 
     onClickNewLocation() {
@@ -62,6 +97,17 @@ class App extends React.Component {
 
     onClickNewMatch() {
         $("#NewMatchDialog").foundation("open");
+    }
+
+    getEventByID(id) {
+        if (this.props.events.length !== 0) {
+            for (let i = 0; i < this.props.events.length; i+=1) {
+                if (this.props.events[i].id === id) {
+                    return this.props.events[i];
+                }
+            }
+        }
+        return undefined;
     }
 
     keydown_handler(event) {
@@ -107,9 +153,17 @@ class App extends React.Component {
 
     dragulaDecorator = () => {
         const options = {
-            isContainer(el) { return el.classList.contains('dragula-container'); },
-            moves() { return true; },
-            accepts() { return true; },
+            isContainer(el) { 
+                return el.classList.contains('dragula-container'); 
+            },
+            moves() { 
+                console.log("On A"); 
+                return true; 
+            },
+            accepts() { 
+                console.log("On B"); 
+                return true; 
+            },
             invalid() { return false; },
             direction: 'vertical',             // Y axis is considered when determining where an element would be dropped
             copy: false,                       // elements are moved by default, not copied
@@ -119,8 +173,10 @@ class App extends React.Component {
             mirrorContainer: document.querySelector('.draggable-container'),    // set the element that gets mirror elements appended
             ignoreInputTextSelection: true     // allows users to select input text, see details below
         };
-        Dragula([...document.querySelectorAll('.draggable-container')], options)
-            .on('drop', this.onDrop);
+        this.setState({
+            drake: Dragula([...document.querySelectorAll('.draggable-container')], options)
+            .on('drop', this.onDrop)
+        });
     };
 
     render() {
@@ -180,13 +236,21 @@ class App extends React.Component {
 }
 
 App.propTypes = {
+    full_calendar: PropTypes.shape({
+        status: PropTypes.string,
+        view: PropTypes.shape({
+            name: PropTypes.string,
+            params: PropTypes.object
+        })
+    }),
     dispatch: PropTypes.func,
     sidebar: PropTypes.shape({
         show: PropTypes.bool
     }),
     drivers: PropTypes.arrayOf(driver_prop_type),
     matches: PropTypes.arrayOf(match_prop_type),
-    locations: PropTypes.arrayOf(location_prop_type)
+    locations: PropTypes.arrayOf(location_prop_type),
+    events: PropTypes.arrayOf(event_prop_type)
 };
 
 function map_state_props(state) {
@@ -194,7 +258,9 @@ function map_state_props(state) {
         sidebar: state.ui.sidebar,
         drivers: state.drivers,
         matches: state.matches,
-        locations: state.locations
+        locations: state.locations,
+        events: state.events,
+        full_calendar: state.ui.full_calendar
     };
 }
 

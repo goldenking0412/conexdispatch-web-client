@@ -98,9 +98,15 @@ class DraggableDispatch extends React.Component {
                 <span>{event.expected_delivery_time}<br /></span>
             </div>);
         }
-        return (<div className={wrapper_div_classes} style={style} onClick={this.handleClick}>
-            {content}
-        </div>);
+        return (
+            <div 
+              className={wrapper_div_classes} 
+              style={style} 
+              onClick={this.handleClick}
+              data-ID={this.props.event.id}
+            >
+                {content}
+            </div>);
     }
 }
 

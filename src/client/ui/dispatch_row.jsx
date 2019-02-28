@@ -12,6 +12,9 @@ import {
 
 class DispatchRow extends React.Component {
 
+    componentWillReceiveProps() {
+    }
+
     componentDidUpdate() {
         this.props.update_draggable_container_list();
     }
